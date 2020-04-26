@@ -1,13 +1,14 @@
 import React from 'react';
 import logo from './logo.svg';
-import PollBoard from './PollBoard'  
-import './App.css';
+import PollBoard from './PollBoard';
+import Signin from './Signin.js';
+// import './Signin.css';
 
 function App() {
   return (
     <div className = "App">
       <header className="App-header">
-        <PollBoard/>
+        <Signin/>
       </header> 
     </div>
   );
