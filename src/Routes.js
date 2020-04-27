@@ -44,12 +44,12 @@ class Routes extends Component {
                 <Router history={history}>
                     <Switch>
                         {/* "/" is the path that is rendered by default */}
-                        <Route path="/" exact component={Signin} />
+                        <Route exact path="/" component={Signin} />
                         <Route path="/SignUp" component={SignUp} />
                         <Route path="/ForgotPassword" component={ForgotPassword} />
                         {/* "Protected routes are all accessible if and only if the user has signed in*/}
                         <ProtectedRoute exact path="/Home" component={PollBoard} />
-                        <ProtectedRoute path="/Profile" component={UserComponent} />
+                        <ProtectedRoute exact path="/Profile" component={UserComponent} />
                         
                     </Switch>
                 </Router>
