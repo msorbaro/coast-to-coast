@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Map } from 'immutable';
 import PollComponent from './PollComponent';
 import './App.css';
-// import * as db from './datastore';
+import fire from './config/Fire';
+import { auth } from 'firebase';
 
 class PollBoard extends Component {
     constructor(props) {
@@ -10,7 +11,14 @@ class PollBoard extends Component {
       this.state = {polls: Map(), pollID: 0, newPollQuestion: "", newPollChoices: "", newPollCategory: "", newPollTimeSeconds: "", 
       newPollTimeMinutes: "", newPollTimeHours: "", newPollTimeDays: "", newPollTimeMonths: "", newPollTimeYears: "", newPollUser: "", StartTime: 0, TimeLeft: []};
     }
-
+    //I am adding a logout function here
+    //apologies in advance if it messes something up
+    logout = () => {
+        fire.auth().signOut();
+    }
+    routeProfile = () => {
+        this.props.history.push("/Profile");
+    }
     fetchedPolls = (allPolls) => {
         this.setState({polls: allPolls}); 
     }
@@ -159,9 +167,11 @@ class PollBoard extends Component {
         return (
             <body>
               <div>
+                        
                       <p> This is the Poll Board </p>
+                      <p onClick = {this.routeProfile}>Click here to visit my profile</p>
                       <p> Add a Poll </p>
-                     
+                    
                       <p>Enter Question</p>
                       <input placeholder= "Question?" type = "text" value={this.state.newPollQuestion} onChange={this.newPollQuestionFunction}/>
 
@@ -189,12 +199,13 @@ class PollBoard extends Component {
 
 
                       <div className = "post">
-                      <button onClick={this.savePollInfo}>Post Poll</button>
+                         <button onClick={this.savePollInfo}>Post Poll</button>
                       </div>
   
                       <div>
-                      {allPolls}
+                        {allPolls}
                       </div>  
+                      <p onClick = {this.logout}> logout </p>
                   
               </div>
             </body>
