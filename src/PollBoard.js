@@ -15,6 +15,9 @@ class PollBoard extends Component {
     logout = () => {
         fire.auth().signOut();
     }
+    routeProfile = () => {
+        this.props.history.push("/Profile");
+    }
     fetchedPolls = (allPolls) => {
         this.setState({polls: allPolls}); 
     }
@@ -74,8 +77,9 @@ class PollBoard extends Component {
               <div>
                         
                       <p> This is the Poll Board </p>
+                      <p onClick = {this.routeProfile}>Click here to visit my profile</p>
                       <p> Add a Poll </p>
-                     
+                    
                       <p>Enter Question</p>
                       <input placeholder= "Question?" type = "text" value={this.state.newPollQuestion} onChange={this.newPollQuestionFunction}/>
 

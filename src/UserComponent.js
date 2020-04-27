@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import fire from './config/Fire';
 
 class UserComponent extends Component{
     //this will essentially be the profile section

@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import { Map } from 'immutable';
 import PollComponent from './PollComponent';
 import fire from './config/Fire.js';
+import {withRouter} from 'react-router-dom';
+// import history from './history';
 
 class Signin extends Component{
-    constructor(props){
+    constructor(props){ 
         super(props);
         //binding all methods
         this.login = this.login.bind(this);
@@ -44,7 +46,9 @@ class Signin extends Component{
         }).catch((error) =>{
             console.log(error);
         });
-
+        if(fire.auth().currentUser){
+            this.props.history.push("/Home");
+        }
     }
     signUp(e){
         e.preventDefault();
