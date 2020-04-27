@@ -11,7 +11,7 @@ ReactDOM.render(
   //only routes is rendered, as a router type
   <Router>
     <div>
-      <Routes />
+      <Routes/>
     </div>
   </Router>,
   

@@ -8,6 +8,13 @@ class SignUp extends Component{
     constructor(props){
         super(props);
         this.state = {email: "", password: ""}
+
+        //bind methods 
+        this.inputEmail = this.inputEmail.bind(this);
+        this.inputPassword = this.inputPassword.bind(this);
+        this.signUp = this.signUp.bind(this);
+        
+
     }
     inputPassword = (event) => {
         this.setState({password: event.target.value})

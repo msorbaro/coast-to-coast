@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Router, Switch, Route } from "react-router-dom";
+import { Router, Switch, Route, BrowserRouter } from "react-router-dom";
 import fire from './config/Fire.js';
 import {ProtectedRoute} from './ProtectedRoute';
 import history from './history';
@@ -41,18 +41,20 @@ class Routes extends Component {
     render() {
         return (
             <div className = "App">
-                <Router history={history}>
-                    <Switch>
-                        {/* "/" is the path that is rendered by default */}
-                        <Route exact path="/" component={Signin} />
-                        <Route path="/SignUp" component={SignUp} />
-                        <Route path="/ForgotPassword" component={ForgotPassword} />
-                        {/* "Protected routes are all accessible if and only if the user has signed in*/}
-                        <ProtectedRoute exact path="/Home" component={PollBoard} />
-                        <ProtectedRoute exact path="/Profile" component={UserComponent} />
-                        
-                    </Switch>
-                </Router>
+                <BrowserRouter history = {history}>
+                    {/* <Router history={history}> */}
+                        <Switch>
+                            {/* "/" is the path that is rendered by default */}
+                            <Route exact path="/" component={Signin} />
+                            <Route path="/SignUp" component={SignUp} />
+                            <Route path="/ForgotPassword" component={ForgotPassword} />
+                            {/* "Protected routes are all accessible if and only if the user has signed in*/}
+                            <ProtectedRoute exact path="/Home" component={PollBoard} />
+                            <ProtectedRoute exact path="/Profile" component={UserComponent} />
+                            
+                        </Switch>
+                    {/* </Router> */}
+                </BrowserRouter>
             </div>
         )
     }

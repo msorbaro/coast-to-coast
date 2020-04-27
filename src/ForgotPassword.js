@@ -8,6 +8,11 @@ class ForgotPassword extends Component{
     constructor(props){
         super(props);
         this.state = {email: "", password: ""}
+
+        //bind methods 
+        this.inputPassword = this.inputPassword.bind(this);
+        this.inputEmail = this.inputEmail.bind(this);
+        this.signUp = this.signUp.bind(this);
     }
     inputPassword = (event) => {
         this.setState({password: event.target.value})
@@ -16,7 +21,7 @@ class ForgotPassword extends Component{
         this.setState({email: event.target.value})
     }
 
-    signUp(e){
+    signUp = (e) =>{
         e.preventDefault();
         fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).catch((error) =>{
             console.log(error);

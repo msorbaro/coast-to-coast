@@ -41,7 +41,7 @@ class Signin extends Component{
     }
 
     //auth based login function 
-    login(e){
+    login = (e) => {
         e.preventDefault();
         //authenticate the user with firebases methods
         fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((u) =>{
@@ -52,7 +52,7 @@ class Signin extends Component{
             this.props.history.push("/Home");
         }
     }
-    signUp(e){
+    signUp = (e) =>{
         //sign the user up using firebase methods
         e.preventDefault();
         fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).catch((error) =>{

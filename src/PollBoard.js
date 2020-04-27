@@ -9,6 +9,22 @@ class PollBoard extends Component {
     constructor(props) {
       super(props);
       this.state = {polls: Map(), pollID: 0, newPollQuestion: "", newPollChoices: "", newPollCategory: "", newPollTimeLimit: "", newPollUser: ""};
+
+        //bind all methods 
+        this.logout = this.logout.bind(this);
+        this.routeProfile = this.routeProfile.bind(this);
+        this.fetchedPolls = this.fetchedPolls.bind(this);
+        this.newPollQuestionFunction = this.newPollQuestionFunction.bind(this);
+        this.newPollChoicesFunction = this.newPollChoicesFunction.bind(this);
+        this.newPollCategoryFunction = this.newPollCategoryFunction.bind(this);
+        this.newPollTimeLimitFunction = this.newPollTimeLimitFunction.bind(this);
+        this.newPollUserFunction = this.newPollUserFunction.bind(this);
+        this.savePollInfo = this.savePollInfo.bind(this);
+        this.delete = this.delete.bind(this);
+        this.save = this.save.bind(this);
+
+        this.render = this.render.bind(this);
+
     }
     //I am adding a logout function here
     //apologies in advance if it messes something up
@@ -66,16 +82,14 @@ class PollBoard extends Component {
     }
 
     render() {
-        const allPolls = this.state.polls.entrySeq().map(
-            ([id, poll]) => {
+        const allPolls = this.state.polls.entrySeq().map(([id, poll]) => {
                 console.log(poll)
                 return <PollComponent save = {this.save} delete = {this.delete} PollQuestion={poll.PollQuestion} PollChoices = {poll.PollChoices} PollCategory = {poll.PollCategory} PollTimeLimit = {poll.PollTimeLimit} PollUser = {poll.PollUser} id={id}/>
             }
         )
         return (
-            <body>
-              <div>
-                        
+            // <body>
+              <div>  
                       <p> This is the Poll Board </p>
                       <p onClick = {this.routeProfile}>Click here to visit my profile</p>
                       <p> Add a Poll </p>
@@ -103,9 +117,8 @@ class PollBoard extends Component {
                         {allPolls}
                       </div>  
                       <p onClick = {this.logout}> logout </p>
-                  
               </div>
-            </body>
+            // </body>
         )
     }
   }
