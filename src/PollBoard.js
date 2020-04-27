@@ -104,9 +104,9 @@ class PollBoard extends Component {
 
 
         
-        // var EndTime = StartTime + 1000 * newPollTimeSeconds + 60000 * newPollTimeMinutes + 60000 * 60 * newPollTimeHours + 60000 * 60 * 24 * newPollTimeDays
-        // + 60000 * 60 * 24 * 30 * newPollTimeMonths + 60000 * 60 * 24 * 30 * 12 * newPollTimeYears; 
-        // this.setState({newEndTime: EndTime})
+        var EndTime = StartTime + 1000 * newPollTimeSeconds + 60000 * newPollTimeMinutes + 60000 * 60 * newPollTimeHours + 60000 * 60 * 24 * newPollTimeDays
+        + 60000 * 60 * 24 * 30 * newPollTimeMonths + 60000 * 60 * 24 * 30 * 12 * newPollTimeYears; 
+        this.setState({newEndTime: EndTime})
     }
 
     checkTime = (pollID, EndTime) => {
