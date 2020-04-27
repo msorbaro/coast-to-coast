@@ -50,7 +50,9 @@ class ForgotPassword extends Component{
                 </div>
             )
         return(
-            {userDisplay}
+            <div>
+                {userDisplay}
+            </div>
         );
     }
 

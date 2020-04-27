@@ -8,14 +8,13 @@ import * as serviceWorker from './serviceWorker';
 
 
 ReactDOM.render(
+  //only routes is rendered, as a router type
   <Router>
     <div>
       <Routes />
     </div>
   </Router>,
-  // <React.StrictMode>
-  //   <App/>
-  // </React.StrictMode>,
+  
   document.getElementById('root')
 );
 

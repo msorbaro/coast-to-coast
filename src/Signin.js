@@ -3,7 +3,7 @@ import { Map } from 'immutable';
 import PollComponent from './PollComponent';
 import fire from './config/Fire.js';
 import {withRouter} from 'react-router-dom';
-// import history from './history';
+
 
 class Signin extends Component{
     constructor(props){ 
@@ -16,7 +16,6 @@ class Signin extends Component{
         this.changeForgotPassword = this.changeForgotPassword.bind(this);
         this.signUp = this.signUp.bind(this);
 
-        // this.handleChange = this.handleChange.bind(this);
         //for now just four essential variables as well as mypolls (not sure how to incorporate that)
         this.state = {
             forgotpassword:false, 
@@ -33,15 +32,18 @@ class Signin extends Component{
         this.setState({email: event.target.value})
     }
     createNewProfile = (event) => {
-        this.setState({newprofile: true})
+        // this.setState({newprofile: true})
+        this.props.history.push("/SignUp");
     }
     changeForgotPassword = (event) => {
-        this.setState({forgotpassword:true})
+        // this.setState({forgotpassword:true})
+        this.props.history.push("/ForgotPassword");
     }
 
     //auth based login function 
     login(e){
         e.preventDefault();
+        //authenticate the user with firebases methods
         fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((u) =>{
         }).catch((error) =>{
             console.log(error);
@@ -51,15 +53,12 @@ class Signin extends Component{
         }
     }
     signUp(e){
+        //sign the user up using firebase methods
         e.preventDefault();
         fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).catch((error) =>{
             console.log(error);
         })
     }
-
-    // handleChange(e){
-    //     this.setState({ [e.target.name] : [e.target.value]});
-    // }
 
     render(){
         
@@ -86,29 +85,29 @@ class Signin extends Component{
                 <p onClick ={this.createNewProfile}>Create a new account</p>
             </div>
         );
-        if(this.state.newprofile){
-            userDisplay = (
-                <div>
-                    <h1> DartPoll</h1>
-                    <p>Create a new account</p>
-                    {emailBox}
-                    {passwordBox}
-                    <button onClick = {this.signUp}> Create</button>
-                </div>
-            )
-        }
-        if(this.state.forgotpassword){
-            userDisplay = (
-                <div>
-                    <h1> DartPoll</h1>
-                    <p>Enter in your email</p>
-                    {emailBox}
-                    <p> Enter in the new password you would like to use</p>
-                    {passwordBox}
-                    <button> Change Password</button>
-                </div>
-            )
-        }
+        // if(this.state.newprofile){
+        //     userDisplay = (
+        //         <div>
+        //             <h1> DartPoll</h1>
+        //             <p>Create a new account</p>
+        //             {emailBox}
+        //             {passwordBox}
+        //             <button onClick = {this.signUp}> Create</button>
+        //         </div>
+        //     )
+        // }
+        // if(this.state.forgotpassword){
+        //     userDisplay = (
+        //         <div>
+        //             <h1> DartPoll</h1>
+        //             <p>Enter in your email</p>
+        //             {emailBox}
+        //             <p> Enter in the new password you would like to use</p>
+        //             {passwordBox}
+        //             <button> Change Password</button>
+        //         </div>
+        //     )
+        // }
         return (
             <div>
                 {userDisplay}

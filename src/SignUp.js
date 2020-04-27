@@ -50,7 +50,9 @@ class SignUp extends Component{
                 </div>
             )
         return(
-            {userDisplay}
+            <div>
+                 {userDisplay}
+            </div>
         );
     }
 }
