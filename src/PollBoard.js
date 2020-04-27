@@ -2,13 +2,19 @@ import React, { Component } from 'react';
 import { Map } from 'immutable';
 import PollComponent from './PollComponent';
 import './App.css';
+import fire from './config/Fire';
+import { auth } from 'firebase';
 
 class PollBoard extends Component {
     constructor(props) {
       super(props);
       this.state = {polls: Map(), pollID: 0, newPollQuestion: "", newPollChoices: "", newPollCategory: "", newPollTimeLimit: "", newPollUser: ""};
     }
-
+    //I am adding a logout function here
+    //apologies in advance if it messes something up
+    logout = () => {
+        fire.auth().signOut();
+    }
     fetchedPolls = (allPolls) => {
         this.setState({polls: allPolls}); 
     }
@@ -66,6 +72,7 @@ class PollBoard extends Component {
         return (
             <body>
               <div>
+                        
                       <p> This is the Poll Board </p>
                       <p> Add a Poll </p>
                      
@@ -85,12 +92,13 @@ class PollBoard extends Component {
                       <input placeholder= "User?" type = "text" value={this.state.newPollUser} onChange={this.newPollUserFunction}/>
   
                       <div className = "post">
-                      <button onClick={this.savePollInfo}>Post Poll</button>
+                         <button onClick={this.savePollInfo}>Post Poll</button>
                       </div>
   
                       <div>
-                      {allPolls}
+                        {allPolls}
                       </div>  
+                      <p onClick = {this.logout}> logout </p>
                   
               </div>
             </body>

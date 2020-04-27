@@ -1,16 +1,29 @@
 import React, { Component } from 'react';
 import { Map } from 'immutable';
 import PollComponent from './PollComponent';
+import fire from './config/Fire.js';
 
 class Signin extends Component{
     constructor(props){
         super(props);
+        //binding all methods
+        this.login = this.login.bind(this);
+        this.inputPassword = this.inputPassword.bind(this);
+        this.inputEmail = this.inputEmail.bind(this);
+        this.createNewProfile = this.createNewProfile.bind(this);
+        this.changeForgotPassword = this.changeForgotPassword.bind(this);
+        this.signUp = this.signUp.bind(this);
+
+        // this.handleChange = this.handleChange.bind(this);
         //for now just four essential variables as well as mypolls (not sure how to incorporate that)
-        this.state = {forgotpassword:false, newprofile: false, username: "", passwords: "", email: "", classyear: ""};
+        this.state = {
+            forgotpassword:false, 
+            newprofile: false, 
+            password: "", 
+            email: "", 
+        };
     }
-    inputUsername = (event) => { 
-        this.setState({username: event.target.value})
-    }
+    
     inputPassword = (event) => {
         this.setState({password: event.target.value})
     }
@@ -24,16 +37,31 @@ class Signin extends Component{
         this.setState({forgotpassword:true})
     }
 
+    //auth based login function 
+    login(e){
+        e.preventDefault();
+        fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((u) =>{
+        }).catch((error) =>{
+            console.log(error);
+        });
+
+    }
+    signUp(e){
+        e.preventDefault();
+        fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).catch((error) =>{
+            console.log(error);
+        })
+    }
+
+    // handleChange(e){
+    //     this.setState({ [e.target.name] : [e.target.value]});
+    // }
+
     render(){
         
-        var usernameBox = null;
         var passwordBox = null;
         var emailBox = null;
-        usernameBox= (
-            <div>
-                <input value = {this.state.username} onChange ={this.inputUsername} />
-            </div>
-        )
+       
         passwordBox = (
             <div>
                 <input value = {this.state.password} onChange ={this.inputPassword} />
@@ -47,9 +75,9 @@ class Signin extends Component{
         var userDisplay = (
             <div>
                 <h1> DartPoll</h1>
-                {usernameBox}
+                {emailBox}
                 {passwordBox}
-                <button> Login</button>
+                <button onClick = {this.login}> Login</button>
                 <p onClick = {this.changeForgotPassword}>Forgot password</p>
                 <p onClick ={this.createNewProfile}>Create a new account</p>
             </div>
@@ -59,9 +87,9 @@ class Signin extends Component{
                 <div>
                     <h1> DartPoll</h1>
                     <p>Create a new account</p>
-                    {usernameBox}
+                    {emailBox}
                     {passwordBox}
-                    <button> Create</button>
+                    <button onClick = {this.signUp}> Create</button>
                 </div>
             )
         }
