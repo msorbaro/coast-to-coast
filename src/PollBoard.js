@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PureComponent } from 'react';
 import { Map } from 'immutable';
 import PollComponent from './PollComponent';
 import './App.css';
