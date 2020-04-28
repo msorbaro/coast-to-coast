@@ -42,13 +42,20 @@ class UserComponent extends Component{
             displayedScreen = basicProfile;
         }
         const data = [
-            { name: 'Group A', value: 400 },
-            { name: 'Group B', value: 300 },
-            { name: 'Group C', value: 300 },
+            { name: 'Group A', value: 200},
+            { name: 'Group B', value: 800 },
+            { name: 'Group C', value: 400 },
             { name: 'Group D', value: 200 },
+            {name: 'Group E', value: 100}
+          ];
+
+          const data01 = [
+            { name: 'Group A', value: 700},
+            { name: 'Group B', value: 100 },
+            { name: 'Group C', value: 350 },
           ];
           
-        const COLORS = ["#878BB6", "#FFEA88", "#FF8153", "#4ACAB4", "#c0504d", "#8064a2", "#772c2a", "#f2ab71", "#2ab881", "#4f81bd", "#2c4d75"]; 
+        const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', "#8884d8"]; 
         // Many Possible Colors for our chart-- chart.js will only use the first n we have, where n = number of answer choices we have 
 
         const RADIAN = Math.PI / 180;
@@ -69,13 +76,63 @@ class UserComponent extends Component{
         return(
             <div>
                 {displayedScreen}
-                <div style={{display: 'flex', justifyContent:'center', height: '100vh'}}>
+                <div style={{display: 'flex', justifyContent:'center', flewFlow: 'row wrap', height: '100vh'}}>
+                    
+                    <h1> Question 1: How are you doing today? </h1>
                     <PieChart width={500} height={500}>
                     <Pie data={data} cx={200} cy={200} labelLine={false} label={renderCustomizedLabel} outerRadius={200} fill="#8884d8" dataKey="value">
                     {data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)}
                     </Pie>
                     </PieChart>
-                    myPieChart.draw(); 
+
+                    <h1> Question 2: Why? </h1>
+                    <PieChart width={500} height={500}>
+                    <Pie data={data01} cx={200} cy={200} labelLine={false} label={renderCustomizedLabel} outerRadius={200} fill="#8884d8" dataKey="value">
+                    {data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)}
+                    </Pie>
+                    </PieChart>
+
+                    <h1> Question 3: When's the latest you think we will return to campus? </h1>
+                    <PieChart width={500} height={500}>
+                    <Pie data={data01} cx={200} cy={200} labelLine={false} label={renderCustomizedLabel} outerRadius={200} fill="#8884d8" dataKey="value">
+                    {data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)}
+                    </Pie>
+                    </PieChart>
+
+                    <h1> Question 4: When's the earliest you think we will return to campus? </h1>
+                    <PieChart width={500} height={500}>
+                    <Pie data={data01} cx={200} cy={200} labelLine={false} label={renderCustomizedLabel} outerRadius={200} fill="#8884d8" dataKey="value">
+                    {data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)}
+                    </Pie>
+                    </PieChart>
+
+                    <h1> Question 5: Who is the best professor at Dartmouth? </h1>
+                    <PieChart width={500} height={500}>
+                    <Pie data={data} cx={200} cy={200} labelLine={false} label={renderCustomizedLabel} outerRadius={200} fill="#8884d8" dataKey="value">
+                    {data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)}
+                    </Pie>
+                    </PieChart>
+
+                    <h1> Question 5: Who is the best professor at Dartmouth? </h1>
+                    <PieChart width={500} height={500}>
+                    <Pie data={data} cx={200} cy={200} labelLine={false} label={renderCustomizedLabel} outerRadius={200} fill="#8884d8" dataKey="value">
+                    {data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)}
+                    </Pie>
+                    </PieChart>
+
+                    <h1> Question 5: Who is the best professor at Dartmouth? </h1>
+                    <PieChart width={500} height={500}>
+                    <Pie data={data} cx={200} cy={200} labelLine={false} label={renderCustomizedLabel} outerRadius={200} fill="#8884d8" dataKey="value">
+                    {data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)}
+                    </Pie>
+                    </PieChart>
+                    
+                    <h1> Question 5: Who is the best professor at Dartmouth? </h1>
+                    <PieChart width={500} height={500}>
+                    <Pie data={data} cx={200} cy={200} labelLine={false} label={renderCustomizedLabel} outerRadius={200} fill="#8884d8" dataKey="value">
+                    {data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)}
+                    </Pie>
+                    </PieChart>
                 </div>
             </div>
         );
