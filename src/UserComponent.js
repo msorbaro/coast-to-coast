@@ -30,7 +30,8 @@ class UserComponent extends Component{
             <div>
                 <h1>My Polls</h1>
                 <p onClick ={this.changeDisplay}>My Profile</p>
-                {/* need some way of pulling all of the users previous polls form the db */}
+                {/* need some way of pulling all of the users previous polls from the db-- can mostly likely do this with associated 
+                user tag on each poll */}
             </div>
         );
         var displayedScreen = null;
@@ -47,10 +48,11 @@ class UserComponent extends Component{
             { name: 'Group D', value: 200 },
           ];
           
-        const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+        const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042']; // Possible Colors for our chart 
 
         const RADIAN = Math.PI / 180;
-        const renderCustomizedLabel = ({
+
+        const renderCustomizedLabel = ({ // Determines styles of chart -- DONT TOUCH 
         cx, cy, midAngle, innerRadius, outerRadius, percent, index,}) => {
         const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
         const x = cx + radius * Math.cos(-midAngle * RADIAN);
