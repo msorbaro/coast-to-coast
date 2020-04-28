@@ -11,8 +11,7 @@ var config = {
   measurementId: "G-YE7VEVJSFY"
 };
 
-firebase.initializeApp(config);
-ourDB = firebase.database();
+var ourDB = firebase.database();
 
 export function addPoll(PollQuestion, PollChoices, PollCategory, PollTimeSeconds, PollTimeMinutes, PollTimeHours, PollTimeDays, PollTimeMonths, PollTimeYears, PollUser, StartTime) {
     ourDB.ref('PollBoard/').push({

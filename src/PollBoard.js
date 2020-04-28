@@ -3,7 +3,7 @@ import { Map } from 'immutable';
 import PollComponent from './PollComponent';
 import './App.css';
 import fire from './config/Fire';
-import * as db from './datastore.js';
+import * as db from './config/datastore';
 
 class PollBoard extends Component {
     constructor(props) {
@@ -172,7 +172,7 @@ class PollBoard extends Component {
             this.state.newPollTimeMonths,
             this.state.newPollTimeYears,
             this.state.newPollUser,
-            this.state.setStartTime
+            this.state.StartTime
         );
         this.setState({
             newPollQuestion: "", 
@@ -186,7 +186,7 @@ class PollBoard extends Component {
             newPollTimeYears: "", 
             newPollUser: "", 
         });
-        db.fetchedPolls(this.fetchedPolls);
+        db.fetchPolls(this.fetchedPolls);
     }
     // savePokemonInfo = () => {
     //     db.addPokemon(this.state.newPokemonName, this.state.newPokemonType, this.state.newPokemonImage);
@@ -216,8 +216,8 @@ class PollBoard extends Component {
     }
 
     save = (id, field) => {
-        db.updateName(id, field);
-        db.fetchPolls(this.fetchedPolls);
+        // db.updateName(id, field);
+        // db.fetchPolls(this.fetchedPolls);
     }
 
     render() {
@@ -235,11 +235,11 @@ class PollBoard extends Component {
                     return <PollComponent
                         save ={this.save}
                         delete ={this.delete}
-                        PollQuestion={this.state.PollQuestion} 
-                        PollChoices = {this.state.PollChoices}
-                        PollCategory = {this.state.PollCategory} 
-                        PollTimeLimit = {this.state.PollTimeLimit} 
-                        PollUser = {this.state.PollUser} 
+                        PollQuestion={info.PollQuestion} 
+                        PollChoices = {info.PollChoices}
+                        PollCategory = {info.PollCategory} 
+                        PollTimeLimit = {info.PollTimeLimit} 
+                        PollUser = {info.PollUser} 
                         id={id}
                     />
                 }
