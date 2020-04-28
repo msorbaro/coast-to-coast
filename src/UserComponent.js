@@ -48,11 +48,12 @@ class UserComponent extends Component{
             { name: 'Group D', value: 200 },
           ];
           
-        const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042']; // Possible Colors for our chart 
+        const COLORS = ["#878BB6", "#FFEA88", "#FF8153", "#4ACAB4", "#c0504d", "#8064a2", "#772c2a", "#f2ab71", "#2ab881", "#4f81bd", "#2c4d75"]; 
+        // Many Possible Colors for our chart-- chart.js will only use the first n we have, where n = number of answer choices we have 
 
         const RADIAN = Math.PI / 180;
 
-        const renderCustomizedLabel = ({ // Determines styles of chart -- DONT TOUCH 
+        const renderCustomizedLabel = ({ // Determines styles of chart -- DONT TOUCH (unless you know how to navigate this)
         cx, cy, midAngle, innerRadius, outerRadius, percent, index,}) => {
         const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
         const x = cx + radius * Math.cos(-midAngle * RADIAN);
@@ -74,6 +75,7 @@ class UserComponent extends Component{
                     {data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)}
                     </Pie>
                     </PieChart>
+                    myPieChart.draw(); 
                 </div>
             </div>
         );
