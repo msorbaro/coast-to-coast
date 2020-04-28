@@ -18,5 +18,7 @@
   const fire = firebase.initializeApp(config);
   firebase.analytics();
 
+
   export default fire;
+
 
