@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, PureComponent } from 'react';
 import { Map } from 'immutable';
 import PollComponent from './PollComponent';
 import './App.css';
 import fire from './config/Fire';
 import { auth } from 'firebase';
+import {PieChart, Pie, Legend, Tooltip,} from 'recharts';
 
 class PollBoard extends Component {
     constructor(props) {
@@ -44,8 +45,6 @@ class PollBoard extends Component {
         this.delete = this.delete.bind(this);
         this.save = this.save.bind(this);
         this.render = this.render.bind(this);
-
-        
     }
     //I am adding a logout function here
     //apologies in advance if it messes something up
@@ -137,9 +136,6 @@ class PollBoard extends Component {
         //     endMinutes -= 60;
         //     addHours += 1;
         // }
-
-
-        
         var EndTime = StartTime + 1000 * this.state.newPollTimeSeconds + 60000 * this.state.newPollTimeMinutes + 60000 * 60 * this.state.newPollTimeHours + 60000 * 60 * 24 * this.state.newPollTimeDays
         + 60000 * 60 * 24 * 30 * this.state.newPollTimeMonths + 60000 * 60 * 24 * 30 * 12 * this.state.newPollTimeYears; 
         this.setState({newEndTime: EndTime})
@@ -197,8 +193,7 @@ class PollBoard extends Component {
         const allPolls = this.state.polls.entrySeq().map(([id, poll]) => {
                 console.log(poll)
                 return <PollComponent save = {this.save} delete = {this.delete} PollQuestion={poll.PollQuestion} PollChoices = {poll.PollChoices} PollCategory = {poll.PollCategory} PollTimeLimit = {poll.PollTimeLimit} PollUser = {poll.PollUser} id={id}/>
-            }
-        )
+            })
         return (
             // <body>
               <div>  
