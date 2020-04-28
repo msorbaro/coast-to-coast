@@ -4,9 +4,13 @@ import PollComponent from './PollComponent';
 import './App.css';
 import fire from './config/Fire';
 import * as db from './config/datastore';
+import {DropdownButton} from 'react-bootstrap';
+import {Dropdown} from 'react-bootstrap';
+import {Button} from 'react-bootstrap';
+import {ButtonGroup} from 'react-bootstrap';
 
 class PollBoard extends Component {
-    constructor(props) {
+    constructor(props) {    
       super(props);
       //state vars 
       this.state = {
@@ -14,7 +18,7 @@ class PollBoard extends Component {
         pollID: 0, 
         newPollQuestion: "", 
         newPollChoices: "", 
-        newPollCategory: "", 
+        newPollCategory: "Default", 
         newPollTimeSeconds: "", 
         newPollTimeMinutes: "", 
         newPollTimeHours: "", 
@@ -69,7 +73,7 @@ class PollBoard extends Component {
     }
 
     newPollCategoryFunction = (event) => {
-        this.setState({newPollCategory: event.target.value})
+        this.setState({newPollCategory: event.target.innerText})
     } 
 
     // newPollTimeLimitFunction = (event) => {
@@ -259,8 +263,19 @@ class PollBoard extends Component {
                       <input placeholder= "Answer Choices?" type = "text" value={this.state.newPollChoices} onChange={this.newPollChoicesFunction}/>
 
                       <p>Enter Poll Category</p>
-                      <input placeholder= "Category?" type = "text" value={this.state.newPollCategory} onChange={this.newPollCategoryFunction}/>
-                      
+                      <Dropdown as={ButtonGroup}>
+                        <Button variant="success"> {this.state.newPollCategory} </Button>
+
+                        <Dropdown.Toggle split variant="success" id="dropdown-split-basic" />
+
+                        <Dropdown.Menu style={{display: 'block'}}>
+                            <Dropdown.Item style={{display: 'block'}} onClick ={this.newPollCategoryFunction}>Action</Dropdown.Item>
+                            <Dropdown.Item style={{display: 'block'}} onClick = {this.newPollCategoryFunction}>Another action</Dropdown.Item>
+                            <Dropdown.Item style={{display: 'block'}} onClick = {this.newPollCategoryFunction}>Something else</Dropdown.Item>
+                        </Dropdown.Menu>
+                      </Dropdown>
+                      {/* just skipping some lines */}
+                                         
                       <p>Enter Time Length</p>
                       <input placeholder="Seconds" type = "text" value={this.state.newPollTimeSeconds} onChange={this.newPollTimeLimitFunctionSeconds}/>
                       <br></br>
