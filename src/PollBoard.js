@@ -3,15 +3,14 @@ import { Map } from 'immutable';
 import PollComponent from './PollComponent';
 import './App.css';
 import fire from './config/Fire';
-import { auth } from 'firebase';
-import {PieChart, Pie, Legend, Tooltip,} from 'recharts';
+import * as db from './config/datastore';
 
 class PollBoard extends Component {
     constructor(props) {
       super(props);
       //state vars 
       this.state = {
-        polls: Map(), 
+        polls: null, 
         pollID: 0, 
         newPollQuestion: "", 
         newPollChoices: "", 
@@ -22,40 +21,43 @@ class PollBoard extends Component {
         newPollTimeDays: "", 
         newPollTimeMonths: "", 
         newPollTimeYears: "", 
-        newPollTimeLimitSeconds: "", 
-        newPollTimeLimitMinutes: "", 
-        newPollTimeLimitHours: "", 
-        newPollTimeLimitDays: "", 
-        newPollTimeLimitMonths: "", 
-        newPollTimeLimitYears: "", 
-        newPollUser: "", 
+        newPollUser: null, 
         StartTime: 0, 
         TimeLeft: []
     };
 
-        //bind all methods 
-        this.logout = this.logout.bind(this);   
-        this.routeProfile = this.routeProfile.bind(this);
-        this.fetchedPolls = this.fetchedPolls.bind(this);
-        this.newPollQuestionFunction = this.newPollQuestionFunction.bind(this);
-        this.newPollChoicesFunction = this.newPollChoicesFunction.bind(this);
-        this.newPollCategoryFunction = this.newPollCategoryFunction.bind(this);
-        this.newPollTimeLimitFunction = this.newPollTimeLimitFunction.bind(this);
-        this.savePollInfo = this.savePollInfo.bind(this);
-        this.delete = this.delete.bind(this);
-        this.save = this.save.bind(this);
-        this.render = this.render.bind(this);
+    //assign user auth to newPollUSer
+    if(fire.auth().currentUser){
+        this.setState({newPollUser: fire.auth().currentUser});
+    }
+
+    //bind all methods 
+    this.logout = this.logout.bind(this);   
+    this.routeProfile = this.routeProfile.bind(this);
+    this.fetchedPolls = this.fetchedPolls.bind(this);
+    this.newPollQuestionFunction = this.newPollQuestionFunction.bind(this);
+    this.newPollChoicesFunction = this.newPollChoicesFunction.bind(this);
+    this.newPollCategoryFunction = this.newPollCategoryFunction.bind(this);
+    // this.newPollTimeLimitFunction = this.newPollTimeLimitFunction.bind(this);
+    this.savePollInfo = this.savePollInfo.bind(this);
+    this.delete = this.delete.bind(this);
+    this.save = this.save.bind(this);
+        
     }
     //I am adding a logout function here
     //apologies in advance if it messes something up
+    componentDidMount(){
+        db.fetchPolls(this.fetchedPolls);
+    }
     logout = () => {
         fire.auth().signOut();
     }
     routeProfile = () => {
         this.props.history.push("/Profile");
     }
+
     fetchedPolls = (allPolls) => {
-        this.setState({polls: allPolls}); 
+        this.setState({polls: allPolls})
     }
     
     newPollQuestionFunction = (event) => {
@@ -70,32 +72,32 @@ class PollBoard extends Component {
         this.setState({newPollCategory: event.target.value})
     } 
 
-    newPollTimeLimitFunction = (event) => {
-        this.setState({newPollTimeLimit: event.target.value})
-    }
+    // newPollTimeLimitFunction = (event) => {
+    //     this.setState({newPollTimeLimit: event.target.value})
+    // }
 
     newPollTimeLimitFunctionSeconds = (event) => {
-        this.setState({newPollTimeLimitSeconds: parseInt(event.target.value)})
+        this.setState({newPollTimeSeconds: parseInt(event.target.value)})
     }
 
     newPollTimeLimitFunctionMinutes = (event) => {
-        this.setState({newPollTimeLimitMinutes: parseInt(event.target.value)})
+        this.setState({newPollTimeMinutes: parseInt(event.target.value)})
     }
 
     newPollTimeLimitFunctionHours = (event) => {
-        this.setState({newPollTimeLimitHours: parseInt(event.target.value)})
+        this.setState({newPollTimeHours: parseInt(event.target.value)})
     }
 
     newPollTimeLimitFunctionDays = (event) => {
-        this.setState({newPollTimeLimitDays: parseInt(event.target.value)})
+        this.setState({newPollTimeDays: parseInt(event.target.value)})
     }
 
     newPollTimeLimitFunctionMonths = (event) => {
-        this.setState({newPollTimeLimitMonths: parseInt(event.target.value)})
+        this.setState({newPollTimeMonths: parseInt(event.target.value)})
     }
 
     newPollTimeLimitFunctionYears = (event) => {
-        this.setState({newPollTimeLimitYears: parseInt(event.target.value)})
+        this.setState({newPollTimeYears: parseInt(event.target.value)})
     }
 
 
@@ -135,7 +137,7 @@ class PollBoard extends Component {
         // while (endMinutes < 60) {
         //     endMinutes -= 60;
         //     addHours += 1;
-        // }
+        // }        
         var EndTime = StartTime + 1000 * this.state.newPollTimeSeconds + 60000 * this.state.newPollTimeMinutes + 60000 * 60 * this.state.newPollTimeHours + 60000 * 60 * 24 * this.state.newPollTimeDays
         + 60000 * 60 * 24 * 30 * this.state.newPollTimeMonths + 60000 * 60 * 24 * 30 * 12 * this.state.newPollTimeYears; 
         this.setState({newEndTime: EndTime})
@@ -160,28 +162,57 @@ class PollBoard extends Component {
     }
 
     savePollInfo = () => {
-        var pollData = {
-            PollQuestion: this.state.newPollQuestion,
-            PollChoices: this.state.newPollChoices, 
-            PollCategory: this.state.newPollCategory, 
-            PollTimeSeconds: this.state.newPollTimeSeconds, 
-            PollTimeMinutes: this.state.newPollTimeMinutes,
-            PollTimeHours: this.state.newPollTimeHours,
-            PollTimeDays: this.state.newPollTimeDays,
-            PollTimeMonths: this.state.newPollTimeMonths,
-            PollTimeYears: this.state.newPollTimeYears,
-            PollUser: this.state.newPollUser,
-            StartTime: this.state.setStartTime
-        }
+        db.addPoll(this.state.newPollQuestion,
+            this.state.newPollChoices,
+            this.state.newPollCategory,
+            this.state.newPollTimeSeconds, 
+            this.state.newPollTimeMinutes,
+            this.state.newPollTimeHours,
+            this.state.newPollTimeDays,
+            this.state.newPollTimeMonths,
+            this.state.newPollTimeYears,
+            this.state.newPollUser,
+            this.state.StartTime
+        );
         this.setState({
-            polls: this.state.polls.set(this.state.ID, pollData),
-            pollID: this.state.pollID +1,
-        })
+            newPollQuestion: "", 
+            newPollChoices: "", 
+            newPollCategory: "", 
+            newPollTimeSeconds: "", 
+            newPollTimeMinutes: "", 
+            newPollTimeHours: "", 
+            newPollTimeDays: "", 
+            newPollTimeMonths: "", 
+            newPollTimeYears: "", 
+            newPollUser: "", 
+        });
+        db.fetchPolls(this.fetchedPolls);
     }
+    // savePokemonInfo = () => {
+    //     db.addPokemon(this.state.newPokemonName, this.state.newPokemonType, this.state.newPokemonImage);
+    //     //we can instead write
+    //     this.setState({
+    //         //showpokrmon var 
+    //         newPokemonName: "",
+    //         newPokemonType: "",
+    //         newPokemonImage: "",
+    //     })
+    //     db.fetchPokemon(this.fetchedPokemon);
+    // }
+
+    // deletePokemon = (id) => {
+    //     db.removePokemon(id);
+    //     db.fetchPokemon(this.fetchedPokemon); 
+    // }
+
+    // savePokemon = (id, field) => {
+    //     db.updateName(id, field);
+    //     db.fetchPokemon(this.fetchedPokemon);
+    // }
 
     delete = (pollID) => {
-        // db.removePoll(pollID);
-        // db.fetchPolls(this.fetchedPolls);
+        db.removePoll(pollID);
+        db.fetchPolls(this.fetchedPolls);
     }
 
     save = (id, field) => {
@@ -190,10 +221,30 @@ class PollBoard extends Component {
     }
 
     render() {
-        const allPolls = this.state.polls.entrySeq().map(([id, poll]) => {
-                console.log(poll)
-                return <PollComponent save = {this.save} delete = {this.delete} PollQuestion={poll.PollQuestion} PollChoices = {poll.PollChoices} PollCategory = {poll.PollCategory} PollTimeLimit = {poll.PollTimeLimit} PollUser = {poll.PollUser} id={id}/>
-            })
+        // const allPolls = this.state.polls.entrySeq().map(([id, poll]) => {
+        //         console.log(poll)
+        //         return <PollComponent save = {this.save} delete = {this.delete} PollQuestion={poll.PollQuestion} PollChoices = {poll.PollChoices} PollCategory = {poll.PollCategory} PollTimeLimit = {poll.PollTimeLimit} PollUser = {poll.PollUser} id={id}/>
+        //     }
+        // )
+        let allPolls = null;
+        console.log(this.state.polls);
+        if(this.state.polls != null){
+                allPolls = Object.keys(this.state.polls).map((id) => {
+                    const info = this.state.polls[id];
+                    console.log(info);
+                    return <PollComponent
+                        save ={this.save}
+                        delete ={this.delete}
+                        PollQuestion={info.PollQuestion} 
+                        PollChoices = {info.PollChoices}
+                        PollCategory = {info.PollCategory} 
+                        PollTimeLimit = {info.PollTimeLimit} 
+                        PollUser = {info.PollUser} 
+                        id={id}
+                    />
+                }
+            )
+        }
         return (
             // <body>
               <div>  
