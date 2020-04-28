@@ -76,11 +76,11 @@ class UserComponent extends Component{
         return(
             <div>
                 {displayedScreen}
-                <div style={{display: 'flex', justifyContent:'center', flewFlow: 'row wrap', height: '100vh'}}>
+                <div style={{display: 'flex', justifyContent:'center', flexWrap: 'wrap', height: '100vh'}}>
                     
                     <h1> Question 1: How are you doing today? </h1>
                     <PieChart width={500} height={500}>
-                    <Pie data={data} cx={200} cy={200} labelLine={false} label={renderCustomizedLabel} outerRadius={200} fill="#8884d8" dataKey="value">
+                    <Pie data={data} cx={200} cy={200} labelLine={false} label={renderCustomizedLabel}  outerRadius={200} fill="#8884d8" dataKey="value">
                     {data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)}
                     </Pie>
                     </PieChart>
@@ -106,27 +106,6 @@ class UserComponent extends Component{
                     </Pie>
                     </PieChart>
 
-                    <h1> Question 5: Who is the best professor at Dartmouth? </h1>
-                    <PieChart width={500} height={500}>
-                    <Pie data={data} cx={200} cy={200} labelLine={false} label={renderCustomizedLabel} outerRadius={200} fill="#8884d8" dataKey="value">
-                    {data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)}
-                    </Pie>
-                    </PieChart>
-
-                    <h1> Question 5: Who is the best professor at Dartmouth? </h1>
-                    <PieChart width={500} height={500}>
-                    <Pie data={data} cx={200} cy={200} labelLine={false} label={renderCustomizedLabel} outerRadius={200} fill="#8884d8" dataKey="value">
-                    {data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)}
-                    </Pie>
-                    </PieChart>
-
-                    <h1> Question 5: Who is the best professor at Dartmouth? </h1>
-                    <PieChart width={500} height={500}>
-                    <Pie data={data} cx={200} cy={200} labelLine={false} label={renderCustomizedLabel} outerRadius={200} fill="#8884d8" dataKey="value">
-                    {data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)}
-                    </Pie>
-                    </PieChart>
-                    
                     <h1> Question 5: Who is the best professor at Dartmouth? </h1>
                     <PieChart width={500} height={500}>
                     <Pie data={data} cx={200} cy={200} labelLine={false} label={renderCustomizedLabel} outerRadius={200} fill="#8884d8" dataKey="value">
