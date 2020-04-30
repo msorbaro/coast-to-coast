@@ -4,7 +4,6 @@ import PollComponent from './PollComponent';
 import fire from './config/Fire.js';
 import {withRouter} from 'react-router-dom';
 
-
 class Signin extends Component{
     constructor(props){ 
         super(props);
@@ -85,29 +84,7 @@ class Signin extends Component{
                 <p onClick ={this.createNewProfile}>Create a new account</p>
             </div>
         );
-        // if(this.state.newprofile){
-        //     userDisplay = (
-        //         <div>
-        //             <h1> DartPoll</h1>
-        //             <p>Create a new account</p>
-        //             {emailBox}
-        //             {passwordBox}
-        //             <button onClick = {this.signUp}> Create</button>
-        //         </div>
-        //     )
-        // }
-        // if(this.state.forgotpassword){
-        //     userDisplay = (
-        //         <div>
-        //             <h1> DartPoll</h1>
-        //             <p>Enter in your email</p>
-        //             {emailBox}
-        //             <p> Enter in the new password you would like to use</p>
-        //             {passwordBox}
-        //             <button> Change Password</button>
-        //         </div>
-        //     )
-        // }
+
         return (
             <div>
                 {userDisplay}

@@ -8,6 +8,7 @@ import {DropdownButton} from 'react-bootstrap';
 import {Dropdown} from 'react-bootstrap';
 import {Button} from 'react-bootstrap';
 import {ButtonGroup} from 'react-bootstrap';
+import TopNavBar from './TopNavBar';
 
 class PollBoard extends Component {
     constructor(props) {    
@@ -25,7 +26,7 @@ class PollBoard extends Component {
         newPollTimeDays: "", 
         newPollTimeMonths: "", 
         newPollTimeYears: "", 
-        newPollUser: null, 
+        newPollUser: "", 
         StartTime: 0, 
         TimeLeft: [],
         addpollbutton: false
@@ -33,7 +34,10 @@ class PollBoard extends Component {
 
     //assign user auth to newPollUSer
     if(fire.auth().currentUser){
-        this.setState({newPollUser: fire.auth().currentUser});
+        var email = fire.auth().currentUser.email; 
+        this.setState({newPollUser: email});
+        console.log(this.state.newPollUser);
+        console.log(fire.auth().currentUser);
     }
 
     //bind all methods 
@@ -196,27 +200,6 @@ class PollBoard extends Component {
         });
         db.fetchPolls(this.fetchedPolls);
     }
-    // savePokemonInfo = () => {
-    //     db.addPokemon(this.state.newPokemonName, this.state.newPokemonType, this.state.newPokemonImage);
-    //     //we can instead write
-    //     this.setState({
-    //         //showpokrmon var 
-    //         newPokemonName: "",
-    //         newPokemonType: "",
-    //         newPokemonImage: "",
-    //     })
-    //     db.fetchPokemon(this.fetchedPokemon);
-    // }
-
-    // deletePokemon = (id) => {
-    //     db.removePokemon(id);
-    //     db.fetchPokemon(this.fetchedPokemon); 
-    // }
-
-    // savePokemon = (id, field) => {
-    //     db.updateName(id, field);
-    //     db.fetchPokemon(this.fetchedPokemon);
-    // }
 
     delete = (pollID) => {
         db.removePoll(pollID);
@@ -229,11 +212,7 @@ class PollBoard extends Component {
     }
 
     render() {
-        // const allPolls = this.state.polls.entrySeq().map(([id, poll]) => {
-        //         console.log(poll)
-        //         return <PollComponent save = {this.save} delete = {this.delete} PollQuestion={poll.PollQuestion} PollChoices = {poll.PollChoices} PollCategory = {poll.PollCategory} PollTimeLimit = {poll.PollTimeLimit} PollUser = {poll.PollUser} id={id}/>
-        //     }
-        // )
+      
         let allPolls = null;
         console.log(this.state.polls);
         if(this.state.polls != null){
@@ -260,8 +239,8 @@ class PollBoard extends Component {
         var display = null;
         board =(
             <div>
+                <TopNavBar history = {this.props.history}/>
                 <h1> This is the Poll Board </h1>
-                <p onClick = {this.routeProfile}>Click here to visit my profile</p>
                 <p onClick = {this.addPollDisplayFunction}> Add a Poll </p>
                 <div>
                     {allPolls}
@@ -271,6 +250,7 @@ class PollBoard extends Component {
         );
         question = (
             <div>
+                <TopNavBar history = {this.props.history} />
                 <p>Enter Question</p>
                 <input placeholder= "Question?" type = "text" value={this.state.newPollQuestion} onChange={this.newPollQuestionFunction}/>
 
@@ -318,56 +298,6 @@ class PollBoard extends Component {
                 display = board;
             }
         return (
-            // <body>
-            //   <div>  
-            //           <p> This is the Poll Board </p>
-            //           <p onClick = {this.routeProfile}>Click here to visit my profile</p>
-            //           <p onClick = {this.addPollDisplayFunction}> Add a Poll </p>
-                    
-            //           <p>Enter Question</p>
-            //           <input placeholder= "Question?" type = "text" value={this.state.newPollQuestion} onChange={this.newPollQuestionFunction}/>
-
-            //           <p>Enter Answer Choices</p>
-            //           <input placeholder= "Answer Choices?" type = "text" value={this.state.newPollChoices} onChange={this.newPollChoicesFunction}/>
-
-            //           <p>Enter Poll Category</p>
-            //           <Dropdown as={ButtonGroup}>
-            //             <Button variant="success"> {this.state.newPollCategory} </Button>
-
-            //             <Dropdown.Toggle split variant="success" id="dropdown-split-basic" />
-
-            //             <Dropdown.Menu style={{display: 'block'}}>
-            //                 <Dropdown.Item style={{display: 'block'}} onClick ={this.newPollCategoryFunction}>Action</Dropdown.Item>
-            //                 <Dropdown.Item style={{display: 'block'}} onClick = {this.newPollCategoryFunction}>Another action</Dropdown.Item>
-            //                 <Dropdown.Item style={{display: 'block'}} onClick = {this.newPollCategoryFunction}>Something else</Dropdown.Item>
-            //             </Dropdown.Menu>
-            //           </Dropdown>
-            //           {/* just skipping some lines */}
-                                         
-            //           <p>Enter Time Length</p>
-            //           <input placeholder="Seconds" type = "text" value={this.state.newPollTimeSeconds} onChange={this.newPollTimeLimitFunctionSeconds}/>
-            //           <br></br>
-            //           <input placeholder="Minutes" type = "text" value={this.state.newPollTimeMinutes} onChange={this.newPollTimeLimitFunctionMinutes}/>
-            //           <br></br>
-            //           <input placeholder="Hours" type = "text" value={this.state.newPollTimeHours} onChange={this.newPollTimeLimitFunctionHours}/>
-            //           <br></br>
-            //           <input placeholder="Days" type = "text" value={this.state.newPollTimeDays} onChange={this.newPollTimeLimitFunctionDays}/>
-            //           <br></br>
-            //           <input placeholder="Months" type = "text" value={this.state.newPollTimeMonths} onChange={this.newPollTimeLimitFunctionMonths}/>
-            //           <br></br>
-            //           <input placeholder="Years" type = "text" value={this.state.newPollTimeYears} onChange={this.newPollTimeLimitFunctionYears}/>
-
-
-            //           <div className = "post">
-            //              <button onClick={this.savePollInfo}>Post Poll</button>
-            //           </div>
-  
-            //           <div>
-            //             {allPolls}
-            //           </div>  
-            //           <p onClick = {this.logout}> logout </p>
-            //   </div>
-            // </body>
             <div>
                 {display}
             </div>

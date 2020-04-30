@@ -1,6 +1,7 @@
 import React, { Component, PureComponent } from 'react';
 import {PieChart, Pie, Sector, Cell, Tooltip} from 'recharts';
 import fire from './config/Fire';
+import TopNavBar from './TopNavBar'
 
 class UserComponent extends Component{
     //this will essentially be the profile section
@@ -18,6 +19,7 @@ class UserComponent extends Component{
     render(){
         var basicProfile = (
             <div>
+                <TopNavBar history = {this.props.history}/>
                 <h1>Profile</h1>
                 <p>Email: {this.state.email}</p>
                 <p>Username: {this.state.username}</p>
