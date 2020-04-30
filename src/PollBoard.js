@@ -239,9 +239,18 @@ class PollBoard extends Component {
         var display = null;
         board =(
             <div>
+                <div className="split left">
+                    <div>
+                        <img src={require('./DartmouthLogo.png')} className="topLeftLogo"/>
+                    </div>
+                    <h1 className="dartPollSecondTitle">DartPoll</h1>
+                    <p className="createAPoll">Create A Poll</p>
+                    <p onClick = {this.addPollDisplayFunction}> Add a Poll </p>
+                </div>
+                <div className="split right">
+                    <p>RightSide</p>
+                </div>
                 <TopNavBar history = {this.props.history}/>
-                <h1> This is the Poll Board </h1>
-                <p onClick = {this.addPollDisplayFunction}> Add a Poll </p>
                 <div>
                     {allPolls}
                 </div>  
@@ -254,7 +263,7 @@ class PollBoard extends Component {
                 <p>Enter Question</p>
                 <input placeholder= "Question?" type = "text" value={this.state.newPollQuestion} onChange={this.newPollQuestionFunction}/>
 
-                <p>Enter Answer Choices</p>
+                <p>Enbter Answer Choices</p>
                 <input placeholder= "Answer Choices?" type = "text" value={this.state.newPollChoices} onChange={this.newPollChoicesFunction}/>
 
                 <p>Enter Poll Category</p>

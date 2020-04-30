@@ -3,6 +3,7 @@ import { Map } from 'immutable';
 import PollComponent from './PollComponent';
 import fire from './config/Fire.js';
 import {withRouter} from 'react-router-dom';
+import './PollBoard.css';
 
 class SignUp extends Component{
     constructor(props){
@@ -49,8 +50,8 @@ class SignUp extends Component{
         )
         var userDisplay = (
                 <div>
-                    <h1> DartPoll</h1>
-                    <p>Create a new account</p>
+                    <h1 className="dartPollTitle"> DartPoll</h1>
+                    <p className="createANewAccountText">Create a new account</p>
                     {emailBox}
                     {passwordBox}
                     <button onClick = {this.signUp}> Create</button>

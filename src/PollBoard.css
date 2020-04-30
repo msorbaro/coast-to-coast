@@ -1,0 +1,88 @@
+html {
+    background: #065713;
+    background-size: cover;
+}
+
+
+.loginButton {
+    background-color: white;
+    color: black;
+    border: black;
+    text-align: center;
+    padding: 4px 28px;
+    font-size: 16px;
+}
+
+.showDiv {
+    background-color: red;
+}
+
+.forgotPassword {
+    font-family: Poly;
+    font-size: 15px;
+    color: white;
+}
+
+.dartPollTitle {
+    font-family: Poly;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 61px;
+    color: white;
+}
+
+.createANewAccountButton {
+    background-color: white;
+    color: black;
+    border: black;
+    padding: 4px 28px;
+    font-size: 16px;
+}
+
+.createANewAccountText {
+    font-family: Poly;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    color: white;
+}
+
+.topLeftLogo {
+    position: absolute;
+    max-width: 15%;
+    top: 0;
+    left: 0;
+}
+
+/* Split the screen in half */
+.split {
+    height: 100%;
+    width: 50%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    overflow-x: hidden;
+    padding-top: 20px;
+  }
+  
+  /* Control the left side */
+  .left {
+    left: 0;
+    background-color: #FFFFFF;
+  }
+  
+  /* Control the right side */
+  .right {
+    right: 0;;
+  }
+
+  .dartPollSecondTitle {
+    vertical-align: top;
+    font: Poly;
+  }
+
+  .createAPoll {
+    font-size: 20px;
+    text-decoration: underline;
+  }
+
