@@ -2,6 +2,8 @@ import React, { Component, PureComponent } from 'react';
 import {PieChart, Pie, Sector, Cell, Tooltip} from 'recharts';
 import fire from './config/Fire';
 import TopNavBar from './TopNavBar'
+import './PollBoard.css';
+
 
 class UserComponent extends Component{
     //this will essentially be the profile section
@@ -25,24 +27,28 @@ class UserComponent extends Component{
                 <p>Username: {this.state.username}</p>
                 <p>Password: {this.state.password}</p>
                 <p>Class Year: {this.state.classyear}</p>
-                <h1 onClick ={this.changeDisplay}>View My Polls</h1>
+                <button onClick ={this.changeDisplay} className = "toggleButtons">View My Polls</button>
             </div>
         );
+
         var myPolls =(
             <div>
+                <button onClick ={this.changeDisplay} className = "toggleButtons">Back to Profile</button>
                 <h1>My Polls</h1>
-                <p onClick ={this.changeDisplay}>My Profile</p>
                 {/* need some way of pulling all of the users previous polls from the db-- can mostly likely do this with associated 
                 user tag on each poll */}
             </div>
         );
-        var displayedScreen = null;
-        if(!this.state.displayProfile){
-            displayedScreen = myPolls;
+
+        var displayedScreen = null;       
+        if(this.state.displayProfile == false){
+                displayedScreen = myPolls;
         }
         else{
-            displayedScreen = basicProfile;
+                displayedScreen = basicProfile;
         }
+
+
         const data = [
             { name: 'Group A', value: 200},
             { name: 'Group B', value: 800 },
@@ -75,7 +81,6 @@ class UserComponent extends Component{
         const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
         const x = cx + radius * Math.cos(-midAngle * RADIAN);
         const y = cy + radius * Math.sin(-midAngle * RADIAN);
-
         return (
             <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
               {`${(percent * 100).toFixed(0)}%`}
@@ -85,31 +90,32 @@ class UserComponent extends Component{
 
         return(
             <div>
-                {displayedScreen}
-                <div style={{display: 'flex', justifyContent:'center', flexWrap: 'wrap', height: '100vh'}}>
+            {displayedScreen}
+                <div className = "pollBackground">
+                        <h1> Question 1: Who is the best professor at Dartmouth? </h1>
+                        <div style={{ justifyContent: 'center'}}> 
+                        <PieChart width={500} height={500}>
+                        <Pie dataKey="value" isAnimationActive={false} data={data01} cx={200} cy={200} outerRadius={200} label = {renderCustomizedLabel}>
+                        {data01.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} label/>)}
+                        </Pie>
+                        <Tooltip />
+                        </PieChart>
+                        </div>
 
-                    <h1> Question 1: Who is the best professor at Dartmouth? </h1>
-                    <PieChart width={500} height={500}>
-                   <Pie dataKey="value" isAnimationActive={false} data={data01} cx={200} cy={200} outerRadius={200} label = {renderCustomizedLabel}>
-                    {data01.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)}
-                    </Pie>
-                    <Tooltip />
-                    </PieChart>
+                        <h1> Question 2: When do you think we will return to campus? </h1>
+                        <PieChart width={500} height={500}>
+                        <Pie dataKey="value" isAnimationActive={false} data={data02} cx={200} cy={200} outerRadius={200} label = {renderCustomizedLabel}>
+                        {data02.map((entry, index) => <Cell key={`cell-${"hello"}`} fill={COLORS[index % COLORS.length]} />)}
+                        </Pie>
+                        <Tooltip />
+                        </PieChart>
 
-                    <h1> Question 2: When do you think we will return to campus? </h1>
-                    <PieChart width={500} height={500}>
-                   <Pie dataKey="value" isAnimationActive={false} data={data02} cx={200} cy={200} outerRadius={200} label = {renderCustomizedLabel}>
-                    {data02.map((entry, index) => <Cell key={`cell-${entry.time}`} fill={COLORS[index % COLORS.length]} />)}
-                    </Pie>
-                    <Tooltip />
-                    </PieChart>
-                    
-                    <h1> We aren't using this chart anymore </h1>
-                    <PieChart width={500} height={500}>
-                    <Pie data={data} cx={200} cy={200} labelLine={false} label={renderCustomizedLabel}  outerRadius={200} fill="#8884d8" dataKey="value">
-                    {data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)}
-                    </Pie>
-                    </PieChart>
+                        <h1> We aren't using this chart anymore </h1>
+                        <PieChart width={500} height={500}>
+                        <Pie data={data} cx={200} cy={200} labelLine={false} label={renderCustomizedLabel}  outerRadius={200} fill="#8884d8" dataKey="value">
+                        {data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)}
+                        </Pie>
+                        </PieChart>
                 </div>
             </div>
         );

@@ -86,3 +86,20 @@ html {
     text-decoration: underline;
   }
 
+  .pollBackground{
+    background-color: white;
+    display: 'flex';
+    justify-content:'center'; 
+    align-items: 'center';
+    flex-flow: 'row wrap';
+    height: '100vh'
+  }
+
+  .myPollsButton {
+    background-color: white;
+    color: white;
+    border: black;
+    padding: 4px 28px;
+    font-size: 16px;
+}
+
