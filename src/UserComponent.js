@@ -1,9 +1,9 @@
 import React, { Component, PureComponent } from 'react';
-import {PieChart, Pie, Sector, Cell, Tooltip} from 'recharts';
 import fire from './config/Fire';
-import TopNavBar from './TopNavBar'
+import TopNavBar from './TopNavBar';
 import './PollBoard.css';
-
+import Chart from 'chart.js';
+import {Pie, Doughnut} from 'react-chartjs-2';
 
 class UserComponent extends Component{
     //this will essentially be the profile section
@@ -48,50 +48,36 @@ class UserComponent extends Component{
                 displayedScreen = basicProfile;
         }
 
+        // Colors that can accomodate for up to 10 answer choices 
+        const Colors = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', "#8884d8", '#B21F00','#C9DE00','#2FDE00','#00A6B4','#6800B4']; 
 
-        const data = [
-            { name: 'Group A', value: 200},
-            { name: 'Group B', value: 800 },
-            { name: 'Group C', value: 400 },
-            { name: 'Group D', value: 200 },
-            {name: 'Group E', value: 100}
-          ];
+        const LabelsOne = ['Hop', 'Collis', 'KAF','Foco', 'Novak'];
 
-          const data01 = [
-            { name: 'Prof. Chakrabarty', value: 1000},
-            { name: 'Prof. Chakrabarti', value: 400 },
-            { name: 'Prof. Pierson', value: 600 },
-            { name: 'Prof. Cormen', value: 750}, 
-            { name: 'Prof. Jayanti', value: 900}
-          ];
+        const DataOne = [140, 33, 27, 21, 6]; 
 
-          const data02 = [
-            { time: '20F', value: 1000},
-            { time: '21W', value: 500 },
-            { time: 'After 21W', value: 200 }
-          ];
-
-        const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', "#8884d8"]; 
-        // Many Possible Colors for our chart-- chart.js will only use the first n we have, where n = number of answer choices we have 
-
-        const RADIAN = Math.PI / 180;
-
-        const renderCustomizedLabel = ({ // Determines styles of chart -- DONT TOUCH (unless you know how to navigate this)
-        cx, cy, midAngle, innerRadius, outerRadius, percent, index,}) => {
-        const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-        const x = cx + radius * Math.cos(-midAngle * RADIAN);
-        const y = cy + radius * Math.sin(-midAngle * RADIAN);
-        return (
-            <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
-              {`${(percent * 100).toFixed(0)}%`}
-            </text>
-          );
-        };
+        const dataOne = {
+            labels: LabelsOne,
+            datasets: [{
+                label: 'Rainfall',
+                backgroundColor: Colors, 
+                data: DataOne
+              }
+            ]
+          }
+        
+        const optionsOne = {
+            title:{display:true, text:'Question 1', fontSize:20},
+            legend:{display:true,position:'right'}
+        }
 
         return(
             <div>
             {displayedScreen}
-                <div className = "pollBackground">
+            
+            <Pie data={dataOne}
+            options={optionsOne}/>
+
+                {/* <div className = "pollBackground">
                         <h1> Question 1: Who is the best professor at Dartmouth? </h1>
                         <div style={{ justifyContent: 'center'}}> 
                         <PieChart width={500} height={500}>
@@ -104,8 +90,8 @@ class UserComponent extends Component{
 
                         <h1> Question 2: When do you think we will return to campus? </h1>
                         <PieChart width={500} height={500}>
-                        <Pie dataKey="value" isAnimationActive={false} data={data02} cx={200} cy={200} outerRadius={200} label = {renderCustomizedLabel}>
-                        {data02.map((entry, index) => <Cell key={`cell-${"hello"}`} fill={COLORS[index % COLORS.length]} />)}
+                        <Pie dataKey="value" isAnimationActive={false} data={data02} cx={200} cy={200} outerRadius={200}>
+                        {data02.map((entry, index) => <Cell key={`cell-${"hello"}`} fill={COLORS[index % COLORS.length]} label = {renderCustomizedLabel}/>)}
                         </Pie>
                         <Tooltip />
                         </PieChart>
@@ -116,7 +102,7 @@ class UserComponent extends Component{
                         {data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)}
                         </Pie>
                         </PieChart>
-                </div>
+                </div> */}
             </div>
         );
     }
