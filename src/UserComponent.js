@@ -2,7 +2,6 @@ import React, { Component, PureComponent } from 'react';
 import fire from './config/Fire';
 import TopNavBar from './TopNavBar';
 import './PollBoard.css';
-import Chart from 'chart.js';
 import {Pie, Doughnut} from 'react-chartjs-2';
 
 class UserComponent extends Component{
@@ -51,31 +50,28 @@ class UserComponent extends Component{
         // Colors that can accomodate for up to 10 answer choices 
         const Colors = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', "#8884d8", '#B21F00','#C9DE00','#2FDE00','#00A6B4','#6800B4']; 
 
-        const LabelsOne = ['Hop', 'Collis', 'KAF','Foco', 'Novak'];
+        const LabelsOne = ['Hop', 'Collis', 'KAF','Foco', 'Novak']; // get labels here
 
-        const DataOne = [140, 33, 27, 21, 6]; 
+        const DataOne = [140, 33, 27, 21, 6]; // get voting numbers
 
         const dataOne = {
             labels: LabelsOne,
             datasets: [{
-                label: 'Rainfall',
                 backgroundColor: Colors, 
                 data: DataOne
-              }
-            ]
+            }]
           }
         
         const optionsOne = {
-            title:{display:true, text:'Question 1', fontSize:20},
-            legend:{display:true,position:'right'}
+            title:{display:true, text:'Insert Question One Here', fontSize: 30, fontColor: '#FFFFFF'},
+            legend: {display:true, position:'right', labels:{fontSize: 15, fontColor: '#FFFFFF'}}
         }
 
         return(
             <div>
             {displayedScreen}
             
-            <Pie data={dataOne}
-            options={optionsOne}/>
+            <Pie data={dataOne} options={optionsOne}/>
 
                 {/* <div className = "pollBackground">
                         <h1> Question 1: Who is the best professor at Dartmouth? </h1>
