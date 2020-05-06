@@ -95,7 +95,7 @@ html {
     height: '100vh'
   }
 
-  .myPollsButton {
+  .toggleButtons {
     background-color: white;
     color: white;
     border: black;

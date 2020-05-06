@@ -13,6 +13,21 @@ class UserComponent extends Component{
     changeDisplay = () =>{
         this.setState({displayProfile: !this.state.displayProfile})
     }
+    
+    dataFunc = (labelInputs, dataInputs) => {
+        const data = {labels: labelInputs, 
+                    datasets: [{backgroundColor: ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', "#8884d8", '#B21F00','#C9DE00','#2FDE00','#00A6B4','#6800B4'], 
+                    data: dataInputs}]}
+        return(data)
+    }
+
+    optionsFunc = (titleInput) => {
+        const options = {title:{display:true, text: titleInput, fontSize: 30, fontColor: '#FFFFFF'},
+            legend: {display:true, position:'right', labels:{fontSize: 15, fontColor: '#FFFFFF'}}
+        }
+        return(options)
+    }
+    
     //methods that pull as the user information from the DB 
     //************ */
 
@@ -50,28 +65,12 @@ class UserComponent extends Component{
         // Colors that can accomodate for up to 10 answer choices 
         const Colors = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', "#8884d8", '#B21F00','#C9DE00','#2FDE00','#00A6B4','#6800B4']; 
 
-        const LabelsOne = ['Hop', 'Collis', 'KAF','Foco', 'Novak']; // get labels here
-
-        const DataOne = [140, 33, 27, 21, 6]; // get voting numbers
-
-        const dataOne = {
-            labels: LabelsOne,
-            datasets: [{
-                backgroundColor: Colors, 
-                data: DataOne
-            }]
-          }
-        
-        const optionsOne = {
-            title:{display:true, text:'Insert Question One Here', fontSize: 30, fontColor: '#FFFFFF'},
-            legend: {display:true, position:'right', labels:{fontSize: 15, fontColor: '#FFFFFF'}}
-        }
-
         return(
             <div>
             {displayedScreen}
-            
-            <Pie data={dataOne} options={optionsOne}/>
+
+            {/* Pass in Labels and Pass in Voting Numbers into Data Func; Pass in Title into Options Func  */}
+            <Pie data={this.dataFunc(['Hop', 'Collis', 'KAF','Foco', 'Novak'], [140, 33, 27, 21, 6])} options={this.optionsFunc('Best Place to Eat on Campus')}/>
 
                 {/* <div className = "pollBackground">
                         <h1> Question 1: Who is the best professor at Dartmouth? </h1>
