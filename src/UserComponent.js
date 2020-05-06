@@ -27,6 +27,11 @@ class UserComponent extends Component{
         }
         return(options)
     }
+
+    pieFunc = (labelInputs, dataInputs, titleInput) => {
+        const pie = <Pie data={this.dataFunc(labelInputs, dataInputs)} options={this.optionsFunc(titleInput)}/>
+        return(pie)
+    }
     
     //methods that pull as the user information from the DB 
     //************ */
