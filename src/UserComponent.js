@@ -2,7 +2,6 @@ import React, { Component, PureComponent } from 'react';
 import fire from './config/Fire';
 import TopNavBar from './TopNavBar'
 import './App.css';
-import TopNavBar from './TopNavBar';
 import './PollBoard.css';
 import {Pie, Doughnut} from 'react-chartjs-2';
 
