@@ -40,12 +40,12 @@ class SignUp extends Component{
        
         passwordBox = (
             <div>
-                <input value = {this.state.password} onChange ={this.inputPassword} />
+                <input placeholder="Password" value = {this.state.password} onChange ={this.inputPassword} />
             </div>
         )
         emailBox = (
             <div>
-                <input value = {this.state.email} onChange ={this.inputEmail} />
+                <input placeholder="Email" value = {this.state.email} onChange ={this.inputEmail} />
             </div>
         )
         var userDisplay = (
@@ -53,8 +53,11 @@ class SignUp extends Component{
                     <h1 className="dartPollTitle"> DartPoll</h1>
                     <p className="createANewAccountText">Create a new account</p>
                     {emailBox}
+                    <br></br>
                     {passwordBox}
-                    <button onClick = {this.signUp}> Create</button>
+                    <br></br>
+                    <br></br>
+                    <button className="createANewAccountButton" classNonClick = {this.signUp}> Create</button>
                 </div>
             )
         return(

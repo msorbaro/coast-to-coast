@@ -8,7 +8,6 @@ import {DropdownButton} from 'react-bootstrap';
 import {Dropdown} from 'react-bootstrap';
 import {Button} from 'react-bootstrap';
 import {ButtonGroup} from 'react-bootstrap';
-import TopNavBar from './TopNavBar';
 
 class PollBoard extends Component {
     constructor(props) {    
@@ -24,12 +23,10 @@ class PollBoard extends Component {
         newPollTimeMinutes: "", 
         newPollTimeHours: "", 
         newPollTimeDays: "", 
-        newPollTimeMonths: "", 
-        newPollTimeYears: "", 
         newPollUser: "", 
-        StartTime: 0, 
-        TimeLeft: [],
-        addpollbutton: false
+        StartTime: 0,
+        EndTime: 0, 
+        TimeLeft: []
     };
 
     //assign user auth to newPollUSer
@@ -47,10 +44,13 @@ class PollBoard extends Component {
     this.newPollQuestionFunction = this.newPollQuestionFunction.bind(this);
     this.newPollChoicesFunction = this.newPollChoicesFunction.bind(this);
     this.newPollCategoryFunction = this.newPollCategoryFunction.bind(this);
-    // this.newPollTimeLimitFunction = this.newPollTimeLimitFunction.bind(this);
     this.savePollInfo = this.savePollInfo.bind(this);
     this.delete = this.delete.bind(this);
     this.save = this.save.bind(this);
+    this.newPollTimeSecondsFunction = this.newPollTimeSecondsFunction.bind(this);
+    this.newPollTimeMinutesFunction = this.newPollTimeMinutesFunction.bind(this);
+    this.newPollTimeHoursFunction = this.newPollTimeHoursFunction.bind(this);
+    this.newPollTimeDaysFunction = this.newPollTimeDaysFunction.bind(this);
         
     }
     //I am adding a logout function here
@@ -80,79 +80,51 @@ class PollBoard extends Component {
     newPollCategoryFunction = (event) => {
         this.setState({newPollCategory: event.target.innerText})
     } 
-    addPollDisplayFunction = (event) => {
-        this.setState({addpollbutton: !this.state.addpollbutton})
+
+
+    
+    addPollFunction = (event) => {
+        var x = document.getElementById("addPoll");
+        if (x.style.display != "block") {
+            x.style.display = "block";
+        } 
     }
 
-    // newPollTimeLimitFunction = (event) => {
-    //     this.setState({newPollTimeLimit: event.target.value})
-    // }
+    collapsePollFunction = (event) => {
+        var x = document.getElementById("addPoll");
+        console.log("here");
+        if (x.style.display != "none") {
+            x.style.display = "none";
+        } 
+    }
 
-    newPollTimeLimitFunctionSeconds = (event) => {
+    newPollTimeSecondsFunction = (event) => {
         this.setState({newPollTimeSeconds: parseInt(event.target.value)})
     }
 
-    newPollTimeLimitFunctionMinutes = (event) => {
+    newPollTimeMinutesFunction = (event) => {
         this.setState({newPollTimeMinutes: parseInt(event.target.value)})
     }
 
-    newPollTimeLimitFunctionHours = (event) => {
+    newPollTimeHoursFunction = (event) => {
         this.setState({newPollTimeHours: parseInt(event.target.value)})
     }
 
-    newPollTimeLimitFunctionDays = (event) => {
+    newPollTimeDaysFunction = (event) => {
         this.setState({newPollTimeDays: parseInt(event.target.value)})
+        this.setStartTime();
+        this.setEndTime(this.StartTime);
+        this.currentTimeLeft(this.EndTime)
     }
-
-    newPollTimeLimitFunctionMonths = (event) => {
-        this.setState({newPollTimeMonths: parseInt(event.target.value)})
-    }
-
-    newPollTimeLimitFunctionYears = (event) => {
-        this.setState({newPollTimeYears: parseInt(event.target.value)})
-    }
-
 
     setStartTime = () => {
-        // var seconds = date.getSeconds();
-        // var minutes = date.getMinutes();
-        // var hour = date.getHours();
-        // var year = date.getFullYear();
-        // var month = date.getMonth();
-        // var day = date.getDate() ;
-        // var startTimeNow = [seconds, minutes, hour, day, month, year];
         var startTimeNow = Date.now();
         this.setState({StartTime: startTimeNow})
     }
 
-    setEndTime = (PollTimeLimit, StartTime) => {
-        // var endSeconds = PollTimeLimit[0] + StartTime[0];
-        // var addMinutes = 0;
-        // while (endSeconds < 60) {
-        //     endSeconds -= 60;
-        //     addMinutes += 1;
-        // }
-        // var endMinutes = PollTimeLimit[1] + StartTime[1] + addMinutes;
-        // var addHours = 0;
-        // while (endMinutes < 60) {
-        //     endMinutes -= 60;
-        //     addHours += 1;
-        // }
-        // var endHours = PollTimeLimit[2] + StartTime[2] + addHours;
-        // var addDays = 0;
-        // while (endHours < 24) {
-        //     endHours -= 24;
-        //     addDays += 1;
-        // }
-        // var endDays = PollTimeLimit[3] + StartTime[3] + addDays;
-        // var add = 0;
-        // while (endMinutes < 60) {
-        //     endMinutes -= 60;
-        //     addHours += 1;
-        // }        
-        var EndTime = StartTime + 1000 * this.state.newPollTimeSeconds + 60000 * this.state.newPollTimeMinutes + 60000 * 60 * this.state.newPollTimeHours + 60000 * 60 * 24 * this.state.newPollTimeDays
-        + 60000 * 60 * 24 * 30 * this.state.newPollTimeMonths + 60000 * 60 * 24 * 30 * 12 * this.state.newPollTimeYears; 
-        this.setState({newEndTime: EndTime})
+    setEndTime = (StartTime) => { 
+        var endTime = StartTime + 1000 * this.state.newPollTimeSeconds + 60000 * this.state.newPollTimeMinutes + 60000 * 60 * this.state.newPollTimeHours + 60000 * 60 * 24 * this.state.newPollTimeDays; 
+        this.setState({EndTime: endTime})
     }
 
     checkTime = (pollID, EndTime) => {
@@ -161,15 +133,13 @@ class PollBoard extends Component {
         }
     }
 
-    currentTimeLeft = (EndTime) => {
-        var totalTimeLeft = EndTime - Date.now();
+    currentTimeLeft = (StartTime, EndTime) => {
+        var totalTimeLeft = EndTime - StartTime;
         var seconds = (totalTimeLeft / 1000) % 60;
         var minutes = (totalTimeLeft / (1000 * 60)) % 60;
         var hours = (totalTimeLeft / (1000 * 60 * 60)) % 24;
         var days = (totalTimeLeft / (1000 * 60 * 60 * 24)) % 30;
-        var months = (totalTimeLeft / (1000 * 60 * 60 * 24 * 30)) % 12;
-        var years = (totalTimeLeft / (1000 * 60 * 60 * 24 * 30 * 12));
-        var timeLeft = [seconds, minutes, hours, days, months, years];
+        var timeLeft = [seconds, minutes, hours, days];
         this.setState({TimeLeft: timeLeft})
     }
 
@@ -181,9 +151,8 @@ class PollBoard extends Component {
             this.state.newPollTimeMinutes,
             this.state.newPollTimeHours,
             this.state.newPollTimeDays,
-            this.state.newPollTimeMonths,
-            this.state.newPollTimeYears,
             this.state.newPollUser,
+            this.state.EndTime,
             this.state.StartTime
         );
         this.setState({
@@ -194,9 +163,10 @@ class PollBoard extends Component {
             newPollTimeMinutes: "", 
             newPollTimeHours: "", 
             newPollTimeDays: "", 
-            newPollTimeMonths: "", 
-            newPollTimeYears: "", 
-            newPollUser: "", 
+            newPollUser: "",
+            EndTime: 0,
+            StartTime: 0,
+            TimeLeft: []
         });
         db.fetchPolls(this.fetchedPolls);
     }
@@ -211,6 +181,18 @@ class PollBoard extends Component {
         // db.fetchPolls(this.fetchedPolls);
     }
 
+
+    sendToProfile = () => {
+        if(fire.auth().currentUser){
+            this.props.history.push('/Profile');
+        }
+    }
+
+    sendToHome = () => {
+        if(fire.auth().currentUser){
+            this.props.history.push('/Home');
+        }
+    }
     render() {
       
         let allPolls = null;
@@ -225,7 +207,7 @@ class PollBoard extends Component {
                         PollQuestion={info.PollQuestion} 
                         PollChoices = {info.PollChoices}
                         PollCategory = {info.PollCategory} 
-                        PollTimeLimit = {info.PollTimeLimit} 
+                        PollTimeLeft = {info.PollTimeLeft}
                         PollUser = {info.PollUser} 
                         id={id}
                     />
@@ -233,82 +215,99 @@ class PollBoard extends Component {
             )
         }
 
+        
+
         //display for the board and display for the pollcreation 
         var board = null;
-        var question = null;
-        var display = null;
         board =(
             <div>
-                <div className="split left">
-                    <div>
-                        <img src={require('./DartmouthLogo.png')} className="topLeftLogo"/>
+                <div className="flex-container">
+                    <div className="flex-child-topBar flex-container">
+                        <div className="flex-child-Dartmouth">
+                            <img src={require('./DartmouthLogo.png')} className="topLeftLogo"/>
+                        </div>
                     </div>
-                    <h1 className="dartPollSecondTitle">DartPoll</h1>
-                    <p className="createAPoll">Create A Poll</p>
-                    <p onClick = {this.addPollDisplayFunction}> Add a Poll </p>
+                    <div className="flex-child-topBar">
+                        <h1 className="dartPollTitle"> DartPoll</h1>
+                        <input type="text" className="myInput center-block" onkeyup="myFunction()" placeholder="Filter Polls" title="Type in a name"/>
+                    </div>
+                    <div className="flex-child-topBar">
+                        <div className="signedInAs">
+                            <p className="signedInAsText">Signed in as</p>
+                        </div>
+                        <div className="flex-container">
+                            <div className="flex-child-icons iconDivs">
+                                <a onClick={this.sendToHome}>
+                                    <img src={require('./home.png')} width="50" height="50"/>
+                                    <p className="iconText">Home</p>
+                                </a>
+                            </div>
+                            <div className="flex-child-icons iconDivs">
+                                <a onClick={this.sendToProfile}>
+                                    <img src={require('./profile.png')} width="50" height="50"/>
+                                    <p className="iconText">Profile</p>
+                                </a>
+                            </div>
+                            <div className="flex-child-icons iconDivs">
+                                <a onClick={this.logout}>
+                                    <img src={require('./logout.png')} width="50" height="50"/>
+                                    <p className="iconText">Logout</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div className="split right">
-                    <p>RightSide</p>
+                <div className="flex-container">
+                    <div className="flex-child">
+                        <button onClick = {this.addPollFunction} className="createAPoll roundedButton">Create A Poll
+                            <hr className="createAPollLine"></hr>
+                            <div id="addPoll" className="hide">
+                                <p>Enter Question</p>
+                                <input placeholder= "Question?" type = "text" value={this.state.newPollQuestion} onChange={this.newPollQuestionFunction}/>
+
+                                <p>Enter Answer Choices</p>
+                                <input placeholder= "Answer Choices?" type = "text" value={this.state.newPollChoices} onChange={this.newPollChoicesFunction}/>
+
+                                <p>Enter Poll Category</p>
+                                <Dropdown as={ButtonGroup}>
+                                <Button variant="success"> {this.state.newPollCategory} </Button>
+
+                                <Dropdown.Toggle split variant="success" id="dropdown-split-basic" />
+
+                                <Dropdown.Menu style={{display: 'block'}}>
+                                    <Dropdown.Item style={{display: 'block'}} onClick ={this.newPollCategoryFunction}>Action</Dropdown.Item>
+                                    <Dropdown.Item style={{display: 'block'}} onClick = {this.newPollCategoryFunction}>Another action</Dropdown.Item>
+                                    <Dropdown.Item style={{display: 'block'}} onClick = {this.newPollCategoryFunction}>Something else</Dropdown.Item>
+                                </Dropdown.Menu>
+                                </Dropdown>
+                                {/* just skipping some lines */}
+                                                
+                                <p>Enter Time Length</p>
+                                <input placeholder="Seconds" type = "text" value={this.state.newPollTimeSeconds} onChange={this.newPollTimeSecondsFunction}/>
+                                <br></br>
+                                <input placeholder="Minutes" type = "text" value={this.state.newPollTimeMinutes} onChange={this.newPollTimeMinutesFunction}/>
+                                <br></br>
+                                <input placeholder="Hours" type = "text" value={this.state.newPollTimeHours} onChange={this.newPollTimeHoursFunction}/>
+                                <br></br>
+                                <input placeholder="Days" type = "text" value={this.state.newPollTimeDays} onChange={this.newPollTimeDaysFunction}/>
+
+                                <div className = "post">
+                                    <button onClick={this.savePollInfo}>Post Poll</button>
+                                </div>
+                                <br></br>
+                                <button className="btn-hover color-1" onClick={this.collapsePollFunction}>Return to Board</button>
+                            </div>
+                        </button>
+                    </div>
+                    <div className="flex-child">
+                        {allPolls}
+                    </div>
                 </div>
-                <TopNavBar history = {this.props.history}/>
-                <div>
-                    {allPolls}
-                </div>  
-                <p onClick = {this.logout}> logout </p>
             </div>
         );
-        question = (
-            <div>
-                <TopNavBar history = {this.props.history} />
-                <p>Enter Question</p>
-                <input placeholder= "Question?" type = "text" value={this.state.newPollQuestion} onChange={this.newPollQuestionFunction}/>
-
-                <p>Enbter Answer Choices</p>
-                <input placeholder= "Answer Choices?" type = "text" value={this.state.newPollChoices} onChange={this.newPollChoicesFunction}/>
-
-                <p>Enter Poll Category</p>
-                <Dropdown as={ButtonGroup}>
-                <Button variant="success"> {this.state.newPollCategory} </Button>
-
-                <Dropdown.Toggle split variant="success" id="dropdown-split-basic" />
-
-                <Dropdown.Menu style={{display: 'block'}}>
-                    <Dropdown.Item style={{display: 'block'}} onClick ={this.newPollCategoryFunction}>Action</Dropdown.Item>
-                    <Dropdown.Item style={{display: 'block'}} onClick = {this.newPollCategoryFunction}>Another action</Dropdown.Item>
-                    <Dropdown.Item style={{display: 'block'}} onClick = {this.newPollCategoryFunction}>Something else</Dropdown.Item>
-                </Dropdown.Menu>
-                </Dropdown>
-                {/* just skipping some lines */}
-                                
-                <p>Enter Time Length</p>
-                <input placeholder="Seconds" type = "text" value={this.state.newPollTimeSeconds} onChange={this.newPollTimeLimitFunctionSeconds}/>
-                <br></br>
-                <input placeholder="Minutes" type = "text" value={this.state.newPollTimeMinutes} onChange={this.newPollTimeLimitFunctionMinutes}/>
-                <br></br>
-                <input placeholder="Hours" type = "text" value={this.state.newPollTimeHours} onChange={this.newPollTimeLimitFunctionHours}/>
-                <br></br>
-                <input placeholder="Days" type = "text" value={this.state.newPollTimeDays} onChange={this.newPollTimeLimitFunctionDays}/>
-                <br></br>
-                <input placeholder="Months" type = "text" value={this.state.newPollTimeMonths} onChange={this.newPollTimeLimitFunctionMonths}/>
-                <br></br>
-                <input placeholder="Years" type = "text" value={this.state.newPollTimeYears} onChange={this.newPollTimeLimitFunctionYears}/>
-
-
-                <div className = "post">
-                    <button onClick={this.savePollInfo}>Post Poll</button>
-                </div>
-                <p onClick = {this.addPollDisplayFunction}>Return to Board</p>
-            </div>
-            );
-            if(this.state.addpollbutton){
-                display = question;
-            }
-            else{
-                display = board;
-            }
         return (
             <div>
-                {display}
+                {board}
             </div>
             
         )

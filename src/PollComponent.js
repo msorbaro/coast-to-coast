@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './App.css';
 
 class PollComponent extends Component {
     constructor(props) { 
@@ -43,8 +44,21 @@ render() {
     }
 
     return (
-        <div>
-            <p> {this.props.PollQuestion}, {this.props.PollChoices}, {this.props.PollCategory}, {this.props.PollTimeLimit}, {this.props.PollUser}</p>
+        <div className="polls">
+            <div>
+                <p className="pollTitle"> {this.props.PollQuestion}?</p>
+            </div>
+            <div className="flex-containee-polls">
+                <div className="flex-child-polls1">
+                    <div className="respondents">
+                        <p className="respondentsText">54 respondents</p>
+                    </div>
+                </div>
+
+            </div>
+            <p>{this.props.PollChoices}</p>
+            
+            <p>{this.props.PollCategory}, {this.props.PollTimeLeft}, {this.props.PollUser}</p>
             <button onClick= {this.deletePosting}>Delete</button>
             {editBoxOrEditButton}
         </div>

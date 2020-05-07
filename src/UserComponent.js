@@ -2,6 +2,7 @@ import React, { Component, PureComponent } from 'react';
 import {PieChart, Pie, Sector, Cell, Tooltip} from 'recharts';
 import fire from './config/Fire';
 import TopNavBar from './TopNavBar'
+import './App.css';
 
 class UserComponent extends Component{
     //this will essentially be the profile section
@@ -9,6 +10,24 @@ class UserComponent extends Component{
         super(props);
         this.state = {displayProfile: true, username: "", password: "", email: "", classyear: ""}
     }
+
+
+    sendToProfile = () => {
+        if(fire.auth().currentUser){
+            this.props.history.push('/Profile');
+        }
+    }
+
+    sendToHome = () => {
+        if(fire.auth().currentUser){
+            this.props.history.push('/Home');
+        }
+    }
+
+    logout = () => {
+        fire.auth().signOut();
+    }
+
     changeDisplay = () =>{
         this.setState({displayProfile: !this.state.displayProfile})
     }
@@ -85,7 +104,72 @@ class UserComponent extends Component{
 
         return(
             <div>
-                {displayedScreen}
+                {/* {displayedScreen} */}
+                <div className="flex-container-profile">
+                    <div className="flex-child-topBar flex-container">
+                        <div className="flex-child-Dartmouth">
+                            <img src={require('./DartmouthLogo.png')} className="topLeftLogo"/>
+                        </div>
+                    </div>
+                    <div className="flex-child-topBar">
+                        <h1 className="dartPollTitle"> DartPoll</h1>
+                    </div>
+                    <div className="flex-child-topBar">
+                        <div className="signedInAs">
+                            <p className="signedInAsText">Signed in as</p>
+                        </div>
+                        <div className="flex-container">
+                            <div className="flex-child-icons iconDivs">
+                                <a onClick={this.sendToHome}>
+                                    <img src={require('./home.png')} width="50" height="50"/>
+                                    <p className="iconText">Home</p>
+                                </a>
+                            </div>
+                            <div className="flex-child-icons iconDivs">
+                                <a onClick={this.sendToProfile}>
+                                    <img src={require('./profile.png')} width="50" height="50"/>
+                                    <p className="iconText">Profile</p>
+                                </a>
+                            </div>
+                            <div className="flex-child-icons iconDivs">
+                                <a onClick={this.logout}>
+                                    <img src={require('./logout.png')} width="50" height="50"/>
+                                    <p className="iconText">Logout</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="userInfo">
+                    <div className="userInfoBox">
+                        <div className="flex-container">
+                            <div className="flex-child-profile">
+                                <div>
+                                    <p className="userInfoText">Username</p>
+                                    <hr className="userInfoLineLeft"></hr>
+                                    <p className="userInfoText">Password</p>
+                                    <hr className="userInfoLineLeft"></hr>
+                                    <p className="userInfoText">Email</p>
+                                    <hr className="userInfoLineLeft"></hr>
+                                    <p className="userInfoText">Other Stuff</p>
+                                    <hr className="userInfoLineLeft"></hr>
+                                </div>
+                            </div>
+                            <div className="flex-child-profile">
+                                <div>
+                                    <p className="userInfoText">Dev Kapadia</p>
+                                    <hr className="userInfoLineRight"></hr>
+                                    <p className="userInfoText">deviscool</p>
+                                    <hr className="userInfoLineRight"></hr>
+                                    <p className="userInfoText">devkkapadia@gmail.com</p>
+                                    <hr className="userInfoLineRight"></hr>
+                                    <p className="userInfoText">Corresponding info</p>
+                                    <hr className="userInfoLineRight"></hr>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div style={{display: 'flex', justifyContent:'center', flexWrap: 'wrap', height: '100vh'}}>
 
                     <h1> Question 1: Who is the best professor at Dartmouth? </h1>
