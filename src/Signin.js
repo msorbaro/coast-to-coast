@@ -50,6 +50,9 @@ class Signin extends Component{
         if(fire.auth().currentUser){
             this.props.history.push("/Home");
         }
+        else{
+            this.props.history.push("/");
+        }
     }
     signUp = (e) =>{
         //sign the user up using firebase methods
