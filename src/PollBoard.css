@@ -278,3 +278,20 @@ html {
     margin-right: 100px;
 }
 
+  .pollBackground{
+    background-color: white;
+    display: 'flex';
+    justify-content:'center'; 
+    align-items: 'center';
+    flex-flow: 'row wrap';
+    height: '100vh'
+  }
+
+  .toggleButtons {
+    background-color: white;
+    color: white;
+    border: black;
+    padding: 4px 28px;
+    font-size: 16px;
+}
+
