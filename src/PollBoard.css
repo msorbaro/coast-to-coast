@@ -1,0 +1,297 @@
+html {
+    background: #065713;
+    background-size: cover;
+}
+
+
+.loginButton {
+    background-color: white;
+    color: black;
+    border: black;
+    text-align: center;
+    padding: 4px 28px;
+    font-size: 16px;
+}
+
+.showDiv {
+    background-color: red;
+}
+
+.forgotPassword {
+    font-family: Poly;
+    font-size: 15px;
+    color: white;
+}
+
+.dartPollTitle {
+    font-family: Poly;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 61px;
+    color: white;
+}
+
+.flex-child-Dartmouth {
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+.createANewAccountButton {
+    background-color: white;
+    color: black;
+    border: black;
+    padding: 4px 28px;
+    font-size: 16px;
+}
+
+.createANewAccountText {
+    font-family: Poly;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 30px;
+    color: white;
+}
+
+.flex-container-polls {
+    display: flex;
+}
+
+.flex-container-profile {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.flex-child-profile {
+    flex: auto;
+}
+
+/* Split the screen in half */
+.flex-container {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.flex-child {
+    flex: auto;
+    background-color: lightslategray;
+ }
+
+.flex-child-polls1 {
+    flex:auto;
+}
+
+.respondents {
+    position: relative;
+    width: 50%;
+    height: 30px;
+    background-color: lightslategray;
+}
+
+.respondentsText {
+    padding-top: 1px;
+}
+
+.flex-child-icons {
+    padding-top: 25px;
+    flex: 1;
+}
+
+.flex-child-topBar {
+    flex: 1;
+}
+
+.dartPollSecondTitle {
+    vertical-align: top;
+    font: Poly;
+}
+
+.createAPoll {
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.hide {
+    display:none;
+}
+
+.topBar {
+    display: table;
+}
+
+.myInput {
+    background-image: url('/css/searchicon.png');
+    background-repeat: no-repeat;
+    width: 50%;
+    font-size: 16px;
+    padding: 12px 20px 12px 40px;
+    border: 5px solid #ddd;
+    margin-bottom: 12px;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.roundedButton {
+    background-color: ghostwhite;
+    border-width: medium;
+    border-color: black;
+    color: black;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 50px;
+}
+
+.roundedButton:hover {
+    background-color: #065713;
+    border-width: medium;
+    border-color: black;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 50px;
+}
+
+.createAPollLine {
+      border-width: 2px;
+      border-color: #065713;
+}
+
+.btn-hover {
+    width: 200px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    margin: 20px;
+    height: 55px;
+    text-align:center;
+    border: none;
+    background-size: 300% 100%;
+
+    border-radius: 50px;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+.btn-hover:hover {
+    background-position: 100% 0;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+.btn-hover:focus {
+    outline: none;
+}
+
+.btn-hover.color-1 {
+    background-image: linear-gradient(to right, #25aae1, #40e495, #30dd8a, #2bb673);
+    box-shadow: 0 4px 15px 0 rgba(49, 196, 190, 0.75);
+}
+
+.polls{
+    background-color: #5b8c5a;
+    padding-top: 2px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    margin-left: 10px;
+    padding-bottom: 20px;
+    padding-right: 10px;
+    padding-left: 10px;
+    border-width: thick;
+    border: black;
+}
+
+.pollTitle {
+    font-size: xx-large;
+    overflow-wrap: break-word;
+    font-weight: bold;
+}
+
+.signedInAs {
+    padding-top: 1px;
+    background-color: #596157;
+    padding-bottom: 3px;
+    border-radius: 45px;
+}
+
+.signedInAsText {
+    color: #cfd186;
+    font-size: large;
+    font-weight: bolder;
+}
+
+.iconDivs {
+    background-color: #596157;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+.iconText {
+    color: #cfd186;
+    font-weight: bolder;
+}
+
+.userInfo {
+    padding-top: 5%;
+    padding-bottom: 5%;
+    padding-left: 25%;
+    padding-right: 25%;
+
+}
+
+.userInfoBox {
+    background-color: #596157;
+    height: 50%;
+    border-radius: 30px;
+}
+
+.userInfoText {
+    font-size: x-large;
+    color: #cfd186;
+    font-weight: bolder;
+}
+
+/* .userInfoTextBelow {
+    margin-top: 0px;
+    font-size: x-large;
+    color: #cfd186;
+    font-weight: bolder;
+} */
+
+.userInfoLineLeft {
+    margin-top: -20px;
+    margin-left: 100px;
+}
+
+.userInfoLineRight {
+    margin-top: -20px;
+    margin-right: 100px;
+}
+
+  .pollBackground{
+    background-color: white;
+    display: 'flex';
+    justify-content:'center'; 
+    align-items: 'center';
+    flex-flow: 'row wrap';
+    height: '100vh'
+  }
+
+  .toggleButtons {
+    background-color: white;
+    color: white;
+    border: black;
+    padding: 4px 28px;
+    font-size: 16px;
+}
+

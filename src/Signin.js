@@ -3,6 +3,7 @@ import { Map } from 'immutable';
 import PollComponent from './PollComponent';
 import fire from './config/Fire.js';
 import {withRouter} from 'react-router-dom';
+import './PollBoard.css';
 
 class Signin extends Component{
     constructor(props){ 
@@ -63,28 +64,40 @@ class Signin extends Component{
     }
 
     render(){
-        
         var passwordBox = null;
         var emailBox = null;
        
         passwordBox = (
             <div>
-                <input value = {this.state.password} onChange ={this.inputPassword} />
+                <input placeholder="Password" type="password" value = {this.state.password} onChange ={this.inputPassword}/>
             </div>
         )
         emailBox = (
             <div>
-                <input value = {this.state.email} onChange ={this.inputEmail} />
+                <input placeholder="Email" value = {this.state.email} onChange ={this.inputEmail} />
             </div>
         )
         var userDisplay = (
-            <div>
-                <h1> DartPoll</h1>
+            <div className="dartgreenBackground">
+                <div>
+                    <img src={require("./DartmouthLogo.png")}/>
+                </div>
+                <h1 className="dartPollTitle"> DartPoll</h1>
                 {emailBox}
-                {passwordBox}
-                <button onClick = {this.login}> Login</button>
-                <p onClick = {this.changeForgotPassword}>Forgot password</p>
-                <p onClick ={this.createNewProfile}>Create a new account</p>
+                <br></br>
+                <div>
+                    {passwordBox}
+                    <p onClick = {this.changeForgotPassword} className="forgotPassword">
+                        Forgot password?
+                    </p>
+                </div>
+                <div>
+                    <button onClick = {this.login} className="loginButton"> Login</button>
+                </div>
+                <br></br>
+                <div>
+                    <button onClick ={this.createNewProfile} className="createANewAccountButton">Create a new account</button>
+                </div>
             </div>
         );
 

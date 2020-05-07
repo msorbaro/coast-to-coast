@@ -3,6 +3,7 @@ import { Map } from 'immutable';
 import PollComponent from './PollComponent';
 import fire from './config/Fire.js';
 import {withRouter} from 'react-router-dom';
+import './PollBoard.css';
 
 class SignUp extends Component{
     constructor(props){
@@ -39,21 +40,24 @@ class SignUp extends Component{
        
         passwordBox = (
             <div>
-                <input value = {this.state.password} onChange ={this.inputPassword} />
+                <input placeholder="Password" value = {this.state.password} onChange ={this.inputPassword} />
             </div>
         )
         emailBox = (
             <div>
-                <input value = {this.state.email} onChange ={this.inputEmail} />
+                <input placeholder="Email" value = {this.state.email} onChange ={this.inputEmail} />
             </div>
         )
         var userDisplay = (
                 <div>
-                    <h1> DartPoll</h1>
-                    <p>Create a new account</p>
+                    <h1 className="dartPollTitle"> DartPoll</h1>
+                    <p className="createANewAccountText">Create a new account</p>
                     {emailBox}
+                    <br></br>
                     {passwordBox}
-                    <button onClick = {this.signUp}> Create</button>
+                    <br></br>
+                    <br></br>
+                    <button className="createANewAccountButton" classNonClick = {this.signUp}> Create</button>
                 </div>
             )
         return(
