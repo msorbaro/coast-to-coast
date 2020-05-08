@@ -3,7 +3,7 @@ import fire from './config/Fire';
 import TopNavBar from './TopNavBar'
 import './App.css';
 import './PollBoard.css';
-import {Pie, Doughnut} from 'react-chartjs-2';
+// import {Pie, Doughnut} from 'react-chartjs-2';
 
 class UserComponent extends Component{
     //this will essentially be the profile section
@@ -33,24 +33,24 @@ class UserComponent extends Component{
         this.setState({displayProfile: !this.state.displayProfile})
     }
     
-    dataFunc = (labelInputs, dataInputs) => {
-        const data = {labels: labelInputs, 
-                    datasets: [{backgroundColor: ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', "#8884d8", '#B21F00','#C9DE00','#2FDE00','#00A6B4','#6800B4'], 
-                    data: dataInputs}]}
-        return(data)
-    }
+    // dataFunc = (labelInputs, dataInputs) => {
+    //     const data = {labels: labelInputs, 
+    //                 datasets: [{backgroundColor: ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', "#8884d8", '#B21F00','#C9DE00','#2FDE00','#00A6B4','#6800B4'], 
+    //                 data: dataInputs}]}
+    //     return(data)
+    // }
 
-    optionsFunc = (titleInput) => {
-        const options = {title:{display:true, text: titleInput, fontSize: 30, fontColor: '#FFFFFF'},
-            legend: {display:true, position:'right', labels:{fontSize: 15, fontColor: '#FFFFFF'}}
-        }
-        return(options)
-    }
+    // optionsFunc = (titleInput) => {
+    //     const options = {title:{display:true, text: titleInput, fontSize: 30, fontColor: '#FFFFFF'},
+    //         legend: {display:true, position:'right', labels:{fontSize: 15, fontColor: '#FFFFFF'}}
+    //     }
+    //     return(options)
+    // }
 
-    pieFunc = (labelInputs, dataInputs, titleInput) => {
-        const pie = <Pie data={this.dataFunc(labelInputs, dataInputs)} options={this.optionsFunc(titleInput)}/>
-        return(pie)
-    }
+    // pieFunc = (labelInputs, dataInputs, titleInput) => {
+    //     const pie = <Pie data={this.dataFunc(labelInputs, dataInputs)} options={this.optionsFunc(titleInput)}/>
+    //     return(pie)
+    // }
     
     //methods that pull as the user information from the DB 
     //************ */
@@ -162,7 +162,7 @@ class UserComponent extends Component{
             {displayedScreen}
 
             {/* Pass in Labels and Pass in Voting Numbers into Data Func; Pass in Title into Options Func  */}
-            <Pie data={this.dataFunc(['Hop', 'Collis', 'KAF','Foco', 'Novak'], [140, 33, 27, 21, 6])} options={this.optionsFunc('Best Place to Eat on Campus')}/>
+            {/* <Pie data={this.dataFunc(['Hop', 'Collis', 'KAF','Foco', 'Novak'], [140, 33, 27, 21, 6])} options={this.optionsFunc('Best Place to Eat on Campus')}/> */}
 
                 {/* <div className = "pollBackground">
                         <h1> Question 1: Who is the best professor at Dartmouth? </h1>
