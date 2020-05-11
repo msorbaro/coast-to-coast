@@ -17,6 +17,9 @@ class Listofanswers extends Component {
       this.setState({questions: questions})
       //update in pollboard
       this.props.update(this.state.questions);
+      // console.log("inside list answers")
+      // console.log(questions[i]);
+      // console.log(e.target.value);
     }
   
     handleDelete = i => e => {

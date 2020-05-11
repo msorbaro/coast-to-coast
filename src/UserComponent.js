@@ -1,17 +1,22 @@
 import React, { Component, PureComponent } from 'react';
 import fire from './config/Fire';
+import firebase from 'firebase';
 import TopNavBar from './TopNavBar'
 import './App.css';
 import './PollBoard.css';
 import {Pie, Doughnut} from 'react-chartjs-2';
+import { scryRenderedDOMComponentsWithClass } from 'react-dom/test-utils';
 
 class UserComponent extends Component{
     //this will essentially be the profile section
     constructor(props){
         super(props);
-        this.state = {displayProfile: true, username: "", password: "", email: "", classyear: ""}
+        this.state = {displayProfile: true, username: "", password: "", email: "", classyear: "", dataArray: [], pollQuestionArray: []}
     }
 
+    componentDidMount = () =>{
+        this.transferData();
+    }
 
     sendToProfile = () => {
         if(fire.auth().currentUser){
@@ -52,27 +57,87 @@ class UserComponent extends Component{
         return(pie)
     }
     
-    // dataFunc = (labelInputs, dataInputs) => {
-    //     const data = {labels: labelInputs, 
-    //                 datasets: [{backgroundColor: ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', "#8884d8", '#B21F00','#C9DE00','#2FDE00','#00A6B4','#6800B4'], 
-    //                 data: dataInputs}]}
-    //     return(data)
-    // }
+    //this where I want to find all of the user posted polls and retrieve their data 
+    transferData = () => {
+        let db = firebase.database();
+        //first find out the poll IDs of all the polls the user has created
+        let pollIDset = new Set();
+        let PollDir = null;
+        db.ref('PollBoard/').on('value', (snapshot) => {
+            PollDir = snapshot.val();
+        });
+        console.log("PollDIr");
+        console.log(PollDir);
+        let pollNameArray = [];
+        if(PollDir != null){
+            Object.keys(PollDir).map((id1) => {
+                const info = PollDir[id1];
+                //check if the user who created the poll matches the current user logged in
+                console.log("the info");
+                console.log(info);
+                if(info.PollUser == fire.auth().currentUser.email){
+                    //add the pollID
+                    pollIDset.add(info.PollID);
+                    //add the name/question of the poll
+                    pollNameArray.push(info.PollQuestion);
+                }
+            });
+       }
+       console.log("the set");
+       console.log(pollIDset);
+       console.log(pollNameArray);
+       //find the specific polls from polls
+       db.ref('Polls/').on('value', (snapshot) => {
+            PollDir = snapshot.val();
+        });
 
-    // optionsFunc = (titleInput) => {
-    //     const options = {title:{display:true, text: titleInput, fontSize: 30, fontColor: '#FFFFFF'},
-    //         legend: {display:true, position:'right', labels:{fontSize: 15, fontColor: '#FFFFFF'}}
-    //     }
-    //     return(options)
-    // }
+        //now find the data of all the polls the user has created
+       let dataArray  = []; 
+       if(PollDir != null){
+        Object.keys(PollDir).map((id) => {
+            //looking at poll id level 
+            const info = PollDir[id];
+            //making sure the user has the pollID we care about
+            if(pollIDset.has(info.PollID)){
+                let labelInputs = [];
+                let dataInputs = [];
+                Object.keys(PollDir[id]).map((id2) => {
+                    labelInputs.push(PollDir[id][id2].choice);
+                    dataInputs.push(PollDir[id][id2].score);
+                });
+                //trim off the undefined end 
+                labelInputs.pop();
+                dataInputs.pop();
+                let labeldata = [labelInputs, dataInputs];
+                dataArray.push(labeldata);
+            }
+        });
+       }   
+    console.log(dataArray);
+    this.setState({dataArray: dataArray})
+    this.setState({pollQuestionArray: pollNameArray});
+    //now turn it into a display
+    let displayedCharts = null;
+    displayedCharts  = dataArray.map((choice, index) => (
+        <Pie data={this.dataFunc(dataArray[index][0], dataArray[index][1])} options={this.optionsFunc(pollNameArray[index])}/>
+    ));
+    }
 
-    // pieFunc = (labelInputs, dataInputs, titleInput) => {
-    //     const pie = <Pie data={this.dataFunc(labelInputs, dataInputs)} options={this.optionsFunc(titleInput)}/>
-    //     return(pie)
-    // }
+
+    dataFunc = (labelInputs, dataInputs) => {
+        const data = {labels: labelInputs, 
+                    datasets: [{backgroundColor: ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', "#8884d8", '#B21F00','#C9DE00','#2FDE00','#00A6B4','#6800B4'], 
+                    data: dataInputs}]}
+        return(data)
+    }
+
+    optionsFunc = (titleInput) => {
+        const options = {title:{display:true, text: titleInput, fontSize: 30, fontColor: '#FFFFFF'},
+            legend: {display:true, position:'right', labels:{fontSize: 15, fontColor: '#FFFFFF'}}
+        }
+        return(options)
+    }
     
-    //methods that pull as the user information from the DB 
-    //************ */
 
     //the profile section should essentially display either the indivials info, or their myPolls
     render(){
@@ -92,6 +157,13 @@ class UserComponent extends Component{
 
         // Colors that can accomodate for up to 10 answer choices 
         const Colors = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', "#8884d8", '#B21F00','#C9DE00','#2FDE00','#00A6B4','#6800B4']; 
+
+
+        //create the pie display 
+        let displayedCharts = null;
+        displayedCharts  = this.state.dataArray.map((choice, index) => (
+            <Pie data={this.dataFunc(this.state.dataArray[index][0], this.state.dataArray[index][1])} options={this.optionsFunc(this.state.pollQuestionArray[index])}/>
+        ));
 
         return(
             <div>
@@ -136,24 +208,24 @@ class UserComponent extends Component{
                         <div className="flex-container">
                             <div className="flex-child-profile">
                                 <div>
-                                    <p className="userInfoText">Username:</p>
+                                    <p className="userInfoText">Email:</p>
                                     <hr className="userInfoLineLeft"></hr>
                                     <p className="userInfoText">Password:</p>
                                     <hr className="userInfoLineLeft"></hr>
-                                    <p className="userInfoText">Email:</p>
-                                    <hr className="userInfoLineLeft"></hr>
+                                    {/* <p className="userInfoText">Email:</p>
+                                    <hr className="userInfoLineLeft"></hr> */}
                                     <p className="userInfoText">Other Stuff:</p>
                                     <hr className="userInfoLineLeft"></hr>
                                 </div>
                             </div>
                             <div className="flex-child-profile">
                                 <div>
-                                    <p className="userInfoText">Dev Kapadia</p>
+                                    <p className="userInfoText">{fire.auth().currentUser.email}</p>
                                     <hr className="userInfoLineRight"></hr>
-                                    <p className="userInfoText">deviscool</p>
+                                    <p className="userInfoText">hello123</p>
                                     <hr className="userInfoLineRight"></hr>
-                                    <p className="userInfoText">devkkapadia@gmail.com</p>
-                                    <hr className="userInfoLineRight"></hr>
+                                    {/* <p className="userInfoText"></p>
+                                    <hr className="userInfoLineRight"></hr> */}
                                     <p className="userInfoText">Corresponding info</p>
                                     <hr className="userInfoLineRight"></hr>
                                 </div>
@@ -162,7 +234,8 @@ class UserComponent extends Component{
                     </div>
                 </div>
                 <div style={{display: 'flex', justifyContent:'center', flexWrap: 'wrap', height: '100vh'}}>
-                <Pie data={this.dataFunc(['Hop', 'Collis', 'KAF','Foco', 'Novak'], [140, 33, 27, 21, 6])} options={this.optionsFunc('Best Place to Eat on Campus')}/>
+                {/* <Pie data={this.dataFunc(['Hop', 'Collis', 'KAF','Foco', 'Novak'], [140, 33, 27, 21, 6])} options={this.optionsFunc('Best Place to Eat on Campus')}/> */}
+                {displayedCharts}
             </div>
 
             {/* Pass in Labels and Pass in Voting Numbers into Data Func; Pass in Title into Options Func  */}

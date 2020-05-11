@@ -26,20 +26,13 @@ class PollBoard extends Component {
         newPollTimeDays: "", 
         newPollTimeMonths: "", 
         newPollTimeYears: "", 
-        newPollUser: "", 
+        newPollUser: fire.auth().currentUser.email, 
         StartTime: 0, 
         TimeLeft: [],
         addpollbutton: false,
         answers: []
     };
 
-    //assign user auth to newPollUSer
-    if(fire.auth().currentUser){
-        var email = fire.auth().currentUser.email; 
-        this.setState({newPollUser: email});
-        console.log(this.state.newPollUser);
-        console.log(fire.auth().currentUser);
-    }
 
     //bind all methods 
     this.logout = this.logout.bind(this);   
