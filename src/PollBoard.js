@@ -249,7 +249,7 @@ class PollBoard extends Component {
                     </div>
                     <div className="flex-child-topBar">
                         <div className="signedInAs">
-                            <p className="signedInAsText">Signed in as {this.username}</p>
+                            <p className="signedInAsText">Signed in as: {fire.auth().currentUser.email}</p>
                         </div>
                         <div className="flex-container">
                             <div onClick={this.routeHome} className="flex-child-icons iconDivsAtHome">

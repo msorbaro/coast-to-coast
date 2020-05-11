@@ -8,7 +8,7 @@ import './PollBoard.css';
 class SignUp extends Component{
     constructor(props){
         super(props);
-        this.state = {email: "", password: ""}
+        this.state = {email: "", password: "", status: ""}
 
         //bind methods 
         this.inputEmail = this.inputEmail.bind(this);
@@ -28,6 +28,8 @@ class SignUp extends Component{
         e.preventDefault();
         fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).catch((error) =>{
             console.log(error);
+        }).then(() => {
+            this.setState({status: "Successfully created account"})
         })
         if(fire.auth().currentUser){
             this.props.history.push("/Home");
@@ -57,7 +59,9 @@ class SignUp extends Component{
                     {passwordBox}
                     <br></br>
                     <br></br>
-                    <button className="createANewAccountButton" classNonClick = {this.signUp}> Create</button>
+                    <button className="createANewAccountButton" onClick = {this.signUp}> Create</button>
+                    <br></br>
+                    {this.state.status}
                 </div>
             )
         return(

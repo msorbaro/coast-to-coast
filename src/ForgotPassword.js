@@ -10,36 +10,31 @@ class ForgotPassword extends Component{
         this.state = {email: "", password: ""}
 
         //bind methods 
-        this.inputPassword = this.inputPassword.bind(this);
         this.inputEmail = this.inputEmail.bind(this);
-        this.signUp = this.signUp.bind(this);
+        this.forgotPassword = this.forgotPassword.bind(this);
+        this.pushHome = this.pushHome.bind(this);
     }
-    inputPassword = (event) => {
-        this.setState({password: event.target.value})
-    }
+ 
     inputEmail = (event) => {
         this.setState({email: event.target.value})
     }
 
-    signUp = (e) =>{
-        e.preventDefault();
-        fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).catch((error) =>{
+    forgotPassword = (e) => {
+        fire.auth().sendPasswordResetEmail(this.state.email).catch((error) =>{
             console.log(error);
-        })
-        if(fire.auth().currentUser){
-            this.props.history.push("/Home");
-        }
+        }).then(() => {
+            this.setState({status: "Successfully sent email. Returning to Sign in..."})
+            setTimeout(this.pushHome, 3000);
+        });
+    }
+
+    pushHome = () => {
+        this.props.history.push("/")
     }
 
     render(){
-        var passwordBox = null;
         var emailBox = null;
         
-        passwordBox = (
-            <div>
-                <input value = {this.state.password} onChange ={this.inputPassword} />
-            </div>
-        )
         emailBox = (
             <div>
                 <input value = {this.state.email} onChange ={this.inputEmail} />
@@ -50,8 +45,8 @@ class ForgotPassword extends Component{
                     <h1> DartPoll</h1>
                     <p>Forget Your Password? Simply Change It</p>
                     {emailBox}
-                    {passwordBox}
-                    <button onClick = {this.signUp}> Create</button>
+                    <button onClick = {this.forgotPassword}> Send Password Reset Email</button>
+                    {this.state.status}
                 </div>
             )
         return(

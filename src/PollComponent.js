@@ -6,7 +6,7 @@ class PollComponent extends Component {
     
 constructor(props) { 
     super(props);
-    this.state = {editing: false, newPollCategory: "", pollID: this.props.pollID, currentAnswer: "", currentAnswerIdx: 0, click: false, stateVoteArray: null}; 
+    this.state = {editing: false, newPollCategory: "", pollID: this.props.pollID, currentAnswer: "", currentAnswerIdx: 0, click: false, stateVoteArray: null, sumVotes: 0}; 
 }
 
 componentDidMount = () => {
@@ -85,6 +85,11 @@ createVoteArray = () => {
     console.log(VoteArray);
     // console.log("Vote Array: " + this.state.stateVoteArray);
     console.log(this.props.PollChoices);
+    let sum = 0;
+    for(let i = 0; i < VoteArray.length; i ++){
+        sum += VoteArray[i];
+    }
+    this.setState({sumVotes: sum});
 }
 
 //function that checks if user is allowed to vote
@@ -154,7 +159,7 @@ render() {
             <div className="flex-container-polls">
                 <div className="flex-child-polls1">
                     <div className="respondents">
-                        <p className="respondentsText">54 respondents</p>
+                        <p className="respondentsText">{this.state.sumVotes} respondents</p>
                     </div>
                 </div>
                 <div className="flex-child-polls1">
@@ -165,7 +170,7 @@ render() {
             </div>
             {/* <p id="dispchoice">{this.formatChoices(dispchoices)}</p> */}
             <p> {dispchoices} </p> 
-            <p>{this.props.PollTimeLimit}, {this.props.PollUser}</p>
+            <p>{this.props.PollTimeLimit}</p>
             <div className="flex-container-poll-edit-or-delete">
                 <div className="flex-child-poll-delete">
                     <button className="delete-poll-button" onClick= {this.deletePosting}>Delete</button>
