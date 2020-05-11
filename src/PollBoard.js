@@ -197,8 +197,11 @@ class PollBoard extends Component {
         db.updateVoteCount(answer, ansnum, pollID);
     }
 
+    updateUserVotedPolls = (pollID, useremail) => {
+        db.updateUserVotedPolls(pollID, useremail);
+    }
+
     render() {
-      
         let allPolls = null;
         console.log(this.state.polls);
         if(this.state.polls != null){
@@ -209,6 +212,7 @@ class PollBoard extends Component {
                         save ={this.save}
                         delete ={this.delete}
                         updateVote = {this.updateVoteCount}
+                        updateUVP = {this.updateUserVotedPolls}
                         PollQuestion={info.PollQuestion} 
                         PollChoices = {info.PollChoices}
                         PollCategory = {info.PollCategory} 

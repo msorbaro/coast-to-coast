@@ -97,7 +97,69 @@ export function updateVoteCount(ans, ansnum, pollID){
     anspath = "Polls/"+ pid1 +"/" + pid2;
     console.log("directory path:" +anspath);
     pollsRef.ref(anspath).set({choice, score});
+}
 
+//I suppose I could simply take in the user obj but idk exactly 
+export function updateUserVotedPolls(pollID, useremail){
+    //retreive the votedpolls already there
+    // useremail = "gokulsrin@gmail.com"
+    // pollID = "444i32";
+    // let pollID2 = "333333";
+    // let pollarray = [pollID, pollID2];
+    let locref = ourDB.ref("VotedPolls/").push({useremail});
+    // for(let i = 0; i < pollarray.length; i++){
+    //     ourDB.ref(locref).push(pollarray[i]);
+    // }
+
+    //retreival step
+    let PollDir = null;
+    ourDB.ref('VotedPolls/').on('value', (snapshot) => {
+        PollDir = snapshot.val();
+    });
+   let reconstructedarray = [];
+   let dirofpush = null;
+   if(PollDir != null){
+        Object.keys(PollDir).map((id1) => {
+            const info = PollDir[id1];
+            // console.log("inside PollDir");
+            // console.log(info);
+            if(info.useremail == useremail){
+                dirofpush = id1;
+                Object.keys(info).map((id2) => {
+                    const val = info[id2];
+                    if(val != useremail){
+                        reconstructedarray.push(val);
+                        // console.log("inside info");
+                        // console.log(val);
+                    }
+                });
+            }
+        });
+   }
+
+   //append new pollId to the reconstructedarray
+   reconstructedarray.push(pollID);
+
+   //essentially push this back to the database, the trick is we delete the previous from the database
+
+   //removal step
+    ourDB.ref('VotedPolls/').on('value', (snapshot) => {
+        PollDir = snapshot.val();
+    });
+    if(PollDir != null){
+        Object.keys(PollDir).map((id) => {
+            if(PollDir[id].useremail == useremail){
+                let ref = 'VotedPolls/' + id;
+                ourDB.ref(ref).remove();
+            }
+        });
+    }
+
+    //repushing step 
+   locref = ourDB.ref("VotedPolls/").push({useremail});
+    for(let i = 0; i < reconstructedarray.length; i++){
+        ourDB.ref(locref).push(reconstructedarray[i]);
+    }
 }
 
 export function removePoll(fbpollID, localPollID){
