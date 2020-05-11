@@ -35,10 +35,18 @@ submit = () => {
     this.props.save(this.props.id, newPollCategory); 
 }
 updateVote = (choice, index) => {
-    console.log("update vote");
-    this.props.updateVote(choice, index, this.state.pollID);
-    //update vote array
-    this.createVoteArray();
+    //check if user is eligible to update the vote 
+    let useremail = fire.auth().currentUser.email;
+
+    if(!this.checkSingleVote(this.state.pollID, useremail)){
+
+        console.log("update vote");
+        this.props.updateVote(choice, index, this.state.pollID);
+        //update vote array
+        this.createVoteArray();
+        //update the user list of voted polls
+        this.props.updateUVP(this.state.pollID, useremail);
+    }
     
 }
 createVoteArray = () => {
@@ -77,6 +85,31 @@ createVoteArray = () => {
     console.log(VoteArray);
     // console.log("Vote Array: " + this.state.stateVoteArray);
     console.log(this.props.PollChoices);
+}
+
+//function that checks if user is allowed to vote
+checkSingleVote = (pollID, useremail) => {
+    let retreivedSet = new Set();
+    let ourDB = firebase.database();
+    let PollDir = null;
+    ourDB.ref('VotedPolls/').on('value', (snapshot) => {
+        PollDir = snapshot.val();
+    });
+    
+   if(PollDir != null){
+        Object.keys(PollDir).map((id1) => {
+            const info = PollDir[id1];
+            if(info.useremail == useremail){
+                Object.keys(info).map((id2) => {
+                    const val = info[id2];
+                    if(val != useremail){
+                        retreivedSet.add(val);
+                    }
+                });
+            }
+        });
+   }
+   return retreivedSet.has(pollID);
 }
 
 render() {

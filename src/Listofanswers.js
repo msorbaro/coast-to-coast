@@ -53,7 +53,7 @@ class Listofanswers extends Component {
             </span>
           ))}
           <br></br>
-          <button className="add-answer-choice-button" onClick={this.addQuestion}>Add New Question</button>
+          <button className="add-answer-choice-button" onClick={this.addQuestion}>Add Answer Choices</button>
         </React.Fragment>
       )
     }

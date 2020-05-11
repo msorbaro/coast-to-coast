@@ -208,20 +208,11 @@ class PollBoard extends Component {
         db.updateVoteCount(answer, ansnum, pollID);
     }
 
-    sendToProfile = () => {
-        if(fire.auth().currentUser){
-            this.props.history.push('/Profile');
-        }
-    }
-
-    sendToHome = () => {
-        if(fire.auth().currentUser){
-            this.props.history.push('/Home');
-        }
+    updateUserVotedPolls = (pollID, useremail) => {
+        db.updateUserVotedPolls(pollID, useremail);
     }
 
     render() {
-      
         let allPolls = null;
         console.log(this.state.polls);
         if(this.state.polls != null){
@@ -232,6 +223,7 @@ class PollBoard extends Component {
                         save ={this.save}
                         delete ={this.delete}
                         updateVote = {this.updateVoteCount}
+                        updateUVP = {this.updateUserVotedPolls}
                         PollQuestion={info.PollQuestion} 
                         PollChoices = {info.PollChoices}
                         PollCategory = {info.PollCategory} 
@@ -306,9 +298,9 @@ class PollBoard extends Component {
                                 <Dropdown.Menu style={{display: 'block'}}>
                                     <div className="other-categories-container showDiv">
                                         <div className="other-categories">
-                                            <Dropdown.Item style={{display: 'block'}} onClick ={this.newPollCategoryFunction}>Action</Dropdown.Item>
-                                            <Dropdown.Item style={{display: 'block'}} onClick = {this.newPollCategoryFunction}>Another action</Dropdown.Item>
-                                            <Dropdown.Item style={{display: 'block'}} onClick = {this.newPollCategoryFunction}>Something else</Dropdown.Item>
+                                            <Dropdown.Item style={{display: 'block'}} onClick ={this.newPollCategoryFunction}>Academic</Dropdown.Item>
+                                            <Dropdown.Item style={{display: 'block'}} onClick = {this.newPollCategoryFunction}>Social</Dropdown.Item>
+                                            <Dropdown.Item style={{display: 'block'}} onClick = {this.newPollCategoryFunction}>Events</Dropdown.Item>
                                         </div>
                                     </div>
                                 </Dropdown.Menu>
