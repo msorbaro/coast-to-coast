@@ -5,8 +5,7 @@ import fire from './config/Fire';
 class PollComponent extends Component {
     
 constructor(props) { 
-    super(props); 
-    
+    super(props);
     this.state = {editing: false, newPollCategory: "", pollID: this.props.pollID, currentAnswer: "", currentAnswerIdx: 0, click: false, stateVoteArray: null}; 
 }
 
@@ -55,19 +54,23 @@ createVoteArray = () => {
         allPollsDir = Object.keys(PollsDir).map((id) => {
             //looking at poll id level 
             const info = PollsDir[id];
-               console.log("value of id" + id);
-               console.log("inside object map")
-               console.log(info);
-            Object.keys(PollsDir[id]).map((id2) => {
-                    const sinfo = PollsDir[id][id2];
-                    console.log("inside  answers and votes- Poll Component");
-                    console.log(sinfo);
-                    let ansval = PollsDir[id][id2].score;
-                    if(ansval != undefined){
-                        VoteArray.push(ansval);
-                    }
-                
-            })
+            console.log("value of id" + id);
+            console.log("inside object map")
+            console.log(info);
+            //make sure we are retireving the correct poll
+            console.log("the id of the poll" + info.PollID);
+            if(this.state.pollID == info.PollID){
+                Object.keys(PollsDir[id]).map((id2) => {
+                        const sinfo = PollsDir[id][id2];
+                        console.log("inside  answers and votes- Poll Component");
+                        console.log(sinfo);
+                        let ansval = PollsDir[id][id2].score;
+                        if(ansval != undefined){
+                            VoteArray.push(ansval);
+                        }
+                    
+                });
+            }
         });
     }
     this.setState({stateVoteArray: VoteArray});
@@ -98,11 +101,12 @@ render() {
     else{
         vote = this.state.stateVoteArray;
     }
+    console.log("vote:" + vote);
     if(this.props.PollChoices != null){
-      
         dispchoices  = this.props.PollChoices.map((choice, index) => (
             //change to span to eliminate error
             //if the choice is clicked, we need to increment the count or number of votes of the choice...
+            //{vote[Number(index)]}
         <button onClick = {() => this.updateVote(choice, index)}> {choice}:{vote[Number(index)]}</button>
         )
         );

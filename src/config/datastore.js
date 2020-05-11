@@ -72,19 +72,22 @@ export function updateVoteCount(ans, ansnum, pollID){
             console.log("value of id" + id);
             console.log("inside object map")
             console.log(info);
-            //looking through answer choices
-            Object.keys(PollsDir[id]).map((id2) => {
-                const sinfo = PollsDir[id][id2];
-                console.log("inside answers and votes")
-                console.log(sinfo);
-                if(PollsDir[id][id2].choice == ans){
-                    //store path of answer 
-                    pid1 = id;
-                    pid2 = id2;
-                    //retreieve current num votes
-                    ansval = PollsDir[id][id2].score;
-                }
-            })
+            //making sure the id matches the pollID we care about
+            if(info.PollID == pollID){
+                //looking through answer choices
+                Object.keys(PollsDir[id]).map((id2) => {
+                    const sinfo = PollsDir[id][id2];
+                    console.log("inside answers and votes")
+                    console.log(sinfo);
+                    if(PollsDir[id][id2].choice == ans){
+                        //store path of answer 
+                        pid1 = id;
+                        pid2 = id2;
+                        //retreieve current num votes
+                        ansval = PollsDir[id][id2].score;
+                    }
+                })
+            }
         });
     }
     //increment and push change 
@@ -100,7 +103,26 @@ export function updateVoteCount(ans, ansnum, pollID){
 export function removePoll(fbpollID, localPollID){
     //remove the poll from both poll board and polls
     ourDB.ref('PollBoard/' + fbpollID).remove();
-    ourDB.ref('Polls/' + localPollID).remove();
+    //logic for removing from polls
+    let PollsDir = null;
+    ourDB.ref('Polls/').on('value', (snapshot) => {
+        PollsDir = snapshot.val();
+    });
+    let allPollsDir = null;
+    if(PollsDir != null){
+        allPollsDir = Object.keys(PollsDir).map((id) => {
+            //looking at poll id level 
+            const info = PollsDir[id];
+            console.log("value of id" + id);
+            console.log("inside object map")
+            console.log(info);
+            //making sure the id matches the pollID we care about
+            if(info.PollID == localPollID){
+                ourDB.ref('Polls/' + id).remove();
+            }
+        });
+    }
+    
 }
 
 export function fetchPolls(callBack){
