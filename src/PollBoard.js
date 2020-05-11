@@ -65,6 +65,10 @@ class PollBoard extends Component {
         this.props.history.push("/Profile");
     }
 
+    routeHome = () => {
+        this.props.history.push("/Home"); 
+    }
+
     fetchedPolls = (allPolls) => {
         this.setState({polls: allPolls})
     }
@@ -255,14 +259,14 @@ class PollBoard extends Component {
                             <p className="signedInAsText">Signed in as {this.username}</p>
                         </div>
                         <div className="flex-container">
-                            <div onClick={this.sendToHome} className="flex-child-icons iconDivsAtHome">
-                                <a onClick={this.sendToHome}>
+                            <div onClick={this.routeHome} className="flex-child-icons iconDivsAtHome">
+                                <a onClick={this.routeHome}>
                                     <img src={require('./home.png')} width="50" height="50"/>
                                     <p className="iconText">Home</p>
                                 </a>
                             </div>
-                            <div onClick={this.sendToProfile} className="flex-child-icons iconDivs">
-                                <a onClick={this.sendToProfile}>
+                            <div onClick={this.routeProfile} className="flex-child-icons iconDivs">
+                                <a onClick={this.routeProfile}>
                                     <img src={require('./profile.png')} width="50" height="50"/>
                                     <p className="iconText">Profile</p>
                                 </a>
