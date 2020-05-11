@@ -48,10 +48,12 @@ class Listofanswers extends Component {
                 onChange={this.handleText(index)}
                 value={question}
               />
-              <button onClick={this.handleDelete(index)}>X</button>
+              <button className="delete-answer-choice-button" onClick={this.handleDelete(index)}>Delete</button>
+              <br></br>
             </span>
           ))}
-          <button onClick={this.addQuestion}>Add New Question</button>
+          <br></br>
+          <button className="add-answer-choice-button" onClick={this.addQuestion}>Add New Question</button>
         </React.Fragment>
       )
     }

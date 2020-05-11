@@ -90,7 +90,7 @@ render() {
       )
     }
     else {
-      editBoxOrEditButton = <button onClick = {this.editPollCategory}>Edit Poll Category</button>
+      editBoxOrEditButton = <button className="edit-poll-category-button" onClick = {this.editPollCategory}>Edit Poll Category</button>
     }
 
     var dispchoices = null;
@@ -103,6 +103,7 @@ render() {
     }
     console.log("vote:" + vote);
     if(this.props.PollChoices != null){
+
         dispchoices  = this.props.PollChoices.map((choice, index) => (
             //change to span to eliminate error
             //if the choice is clicked, we need to increment the count or number of votes of the choice...
@@ -113,11 +114,33 @@ render() {
     }
 
     return (
-        
-        <div>
-            <p> {this.props.PollQuestion}, {dispchoices}, {this.props.PollCategory}, {this.props.PollTimeLimit}, {this.props.PollUser}</p>
-            <button onClick= {this.deletePosting}>Delete</button>
-            {editBoxOrEditButton}
+        <div className="polls">
+            <div className="poll-title-container">
+                <p className="pollTitle"> {this.props.PollQuestion}?</p>
+            </div>
+            <div className="flex-container-polls">
+                <div className="flex-child-polls1">
+                    <div className="respondents">
+                        <p className="respondentsText">54 respondents</p>
+                    </div>
+                </div>
+                <div className="flex-child-polls1">
+                    <div className="category-div">
+                        <p className="category-text">Category: {this.props.PollCategory}</p>
+                    </div>
+                </div>
+            </div>
+            {/* <p id="dispchoice">{this.formatChoices(dispchoices)}</p> */}
+            <p> {dispchoices} </p> 
+            <p>{this.props.PollTimeLimit}, {this.props.PollUser}</p>
+            <div className="flex-container-poll-edit-or-delete">
+                <div className="flex-child-poll-delete">
+                    <button className="delete-poll-button" onClick= {this.deletePosting}>Delete</button>
+                </div>
+                <div className="flex-child-poll-edit">
+                    {editBoxOrEditButton}  
+                </div>
+            </div>
         </div>
     )
     }   

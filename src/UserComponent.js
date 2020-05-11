@@ -3,7 +3,7 @@ import fire from './config/Fire';
 import TopNavBar from './TopNavBar'
 import './App.css';
 import './PollBoard.css';
-// import {Pie, Doughnut} from 'react-chartjs-2';
+import {Pie, Doughnut} from 'react-chartjs-2';
 
 class UserComponent extends Component{
     //this will essentially be the profile section
@@ -32,6 +32,25 @@ class UserComponent extends Component{
     changeDisplay = () =>{
         this.setState({displayProfile: !this.state.displayProfile})
     }
+
+    dataFunc = (labelInputs, dataInputs) => {
+        const data = {labels: labelInputs, 
+                    datasets: [{backgroundColor: ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', "#8884d8", '#B21F00','#C9DE00','#2FDE00','#00A6B4','#6800B4'], 
+                    data: dataInputs}]}
+        return(data)
+    }
+
+    optionsFunc = (titleInput) => {
+        const options = {title:{display:true, text: titleInput, fontSize: 30, fontColor: '#FFFFFF'},
+            legend: {display:true, position:'right', labels:{fontSize: 15, fontColor: '#FFFFFF'}}
+        }
+        return(options)
+    }
+
+    pieFunc = (labelInputs, dataInputs, titleInput) => {
+        const pie = <Pie data={this.dataFunc(labelInputs, dataInputs)} options={this.optionsFunc(titleInput)}/>
+        return(pie)
+    }
     
     // dataFunc = (labelInputs, dataInputs) => {
     //     const data = {labels: labelInputs, 
@@ -57,18 +76,6 @@ class UserComponent extends Component{
 
     //the profile section should essentially display either the indivials info, or their myPolls
     render(){
-        var basicProfile = (
-            <div>
-                <TopNavBar history = {this.props.history}/>
-                <h1>Profile</h1>
-                <p>Email: {this.state.email}</p>
-                <p>Username: {this.state.username}</p>
-                <p>Password: {this.state.password}</p>
-                <p>Class Year: {this.state.classyear}</p>
-                <button onClick ={this.changeDisplay} className = "toggleButtons">View My Polls</button>
-            </div>
-        );
-
         var myPolls =(
             <div>
                 <button onClick ={this.changeDisplay} className = "toggleButtons">Back to Profile</button>
@@ -82,16 +89,13 @@ class UserComponent extends Component{
         if(this.state.displayProfile == false){
                 displayedScreen = myPolls;
         }
-        else{
-                displayedScreen = basicProfile;
-        }
 
         // Colors that can accomodate for up to 10 answer choices 
         const Colors = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', "#8884d8", '#B21F00','#C9DE00','#2FDE00','#00A6B4','#6800B4']; 
 
         return(
             <div>
-                {/* {displayedScreen} */}
+                {displayedScreen}
                 <div className="flex-container-profile">
                     <div className="flex-child-topBar flex-container">
                         <div className="flex-child-Dartmouth">
@@ -106,19 +110,19 @@ class UserComponent extends Component{
                             <p className="signedInAsText">Signed in as</p>
                         </div>
                         <div className="flex-container">
-                            <div className="flex-child-icons iconDivs">
-                                <a onClick={this.sendToHome}>
+                            <div id="homeIconDiv" onClick={this.sendToHome} className="flex-child-icons iconDivs">
+                                <a id="homeIcon" onClick={this.sendToHome}>
                                     <img src={require('./home.png')} width="50" height="50"/>
                                     <p className="iconText">Home</p>
                                 </a>
                             </div>
-                            <div className="flex-child-icons iconDivs">
+                            <div onClick={this.sendToProfile} className="flex-child-icons iconDivsAtProfile">
                                 <a onClick={this.sendToProfile}>
                                     <img src={require('./profile.png')} width="50" height="50"/>
                                     <p className="iconText">Profile</p>
                                 </a>
                             </div>
-                            <div className="flex-child-icons iconDivs">
+                            <div onClick={this.logout} className="flex-child-icons iconDivs">
                                 <a onClick={this.logout}>
                                     <img src={require('./logout.png')} width="50" height="50"/>
                                     <p className="iconText">Logout</p>
@@ -132,13 +136,13 @@ class UserComponent extends Component{
                         <div className="flex-container">
                             <div className="flex-child-profile">
                                 <div>
-                                    <p className="userInfoText">Username</p>
+                                    <p className="userInfoText">Username:</p>
                                     <hr className="userInfoLineLeft"></hr>
-                                    <p className="userInfoText">Password</p>
+                                    <p className="userInfoText">Password:</p>
                                     <hr className="userInfoLineLeft"></hr>
-                                    <p className="userInfoText">Email</p>
+                                    <p className="userInfoText">Email:</p>
                                     <hr className="userInfoLineLeft"></hr>
-                                    <p className="userInfoText">Other Stuff</p>
+                                    <p className="userInfoText">Other Stuff:</p>
                                     <hr className="userInfoLineLeft"></hr>
                                 </div>
                             </div>
@@ -158,8 +162,8 @@ class UserComponent extends Component{
                     </div>
                 </div>
                 <div style={{display: 'flex', justifyContent:'center', flexWrap: 'wrap', height: '100vh'}}>
+                <Pie data={this.dataFunc(['Hop', 'Collis', 'KAF','Foco', 'Novak'], [140, 33, 27, 21, 6])} options={this.optionsFunc('Best Place to Eat on Campus')}/>
             </div>
-            {displayedScreen}
 
             {/* Pass in Labels and Pass in Voting Numbers into Data Func; Pass in Title into Options Func  */}
             {/* <Pie data={this.dataFunc(['Hop', 'Collis', 'KAF','Foco', 'Novak'], [140, 33, 27, 21, 6])} options={this.optionsFunc('Best Place to Eat on Campus')}/> */}

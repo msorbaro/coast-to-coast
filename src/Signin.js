@@ -69,12 +69,12 @@ class Signin extends Component{
        
         passwordBox = (
             <div>
-                <input placeholder="Password" type="password" value = {this.state.password} onChange ={this.inputPassword}/>
+                <input className="username-password-box" placeholder="Password" type="password" value = {this.state.password} onChange ={this.inputPassword}/>
             </div>
         )
         emailBox = (
             <div>
-                <input placeholder="Email" value = {this.state.email} onChange ={this.inputEmail} />
+                <input className="username-password-box" placeholder="Email" value = {this.state.email} onChange ={this.inputEmail} />
             </div>
         )
         var userDisplay = (

@@ -6,15 +6,36 @@ html {
 
 .loginButton {
     background-color: white;
+    width: 100px;
+    height: 40px;
     color: black;
+    font-weight: bold;
     border: black;
     text-align: center;
     padding: 4px 28px;
     font-size: 16px;
+    outline: none;
+}
+
+.loginButton:hover {
+    background-color: #5b8c5a;
+    color: ghostwhite;
+}
+
+.createANewAccountButton:hover {
+    background-color: #5b8c5a;
+    color: ghostwhite;
 }
 
 .showDiv {
     background-color: red;
+}
+
+.username-password-box {
+    width: 200px;
+    height: 30px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 .forgotPassword {
@@ -42,6 +63,9 @@ html {
     border: black;
     padding: 4px 28px;
     font-size: 16px;
+    height: 40px;
+    outline: none;
+    font-weight: bold;
 }
 
 .createANewAccountText {
@@ -81,14 +105,38 @@ html {
 }
 
 .respondents {
-    position: relative;
-    width: 50%;
-    height: 30px;
+    width: 8em;
+    height: 20px;
     background-color: lightslategray;
+    border-color: black;
+    border-width: thin;
+    border-style: solid;
 }
 
+.category-div {
+    height: 20px;
+    background-color: lightslategray;
+    border-color: black;
+    border-width: thin;
+    border-style: solid;
+    float: right;
+    padding-right: 1em;
+    padding-left: 1em; 
+
+}
+
+
 .respondentsText {
-    padding-top: 1px;
+    margin-top: 2px;
+    font-weight: bold;
+    font-size: 0.75em;
+}
+
+.category-text {
+    margin-top: 2px;
+    font-weight: bold;
+    font-size: 0.75em;
+    text-align: right;
 }
 
 .flex-child-icons {
@@ -142,13 +190,14 @@ html {
     font-size: 16px;
     margin: 4px 2px;
     border-radius: 50px;
+    outline: none;
 }
 
 .roundedButton:hover {
-    background-color: #065713;
+    background-color: #5b8c5a;
     border-width: medium;
     border-color: black;
-    color: white;
+    color: #cfd186;
     padding: 20px;
     text-align: center;
     text-decoration: none;
@@ -164,21 +213,22 @@ html {
 }
 
 .btn-hover {
-    width: 200px;
+    width: 8em;
     font-size: 16px;
     font-weight: 600;
     color: #fff;
     cursor: pointer;
     margin: 20px;
-    height: 55px;
+    height: 3em;
+    border-width: medium;
+    border-color: rgb(12, 12, 12);
+    border-style: solid;
     text-align:center;
-    border: none;
     background-size: 300% 100%;
-
-    border-radius: 50px;
     -o-transition: all .4s ease-in-out;
     -webkit-transition: all .4s ease-in-out;
     transition: all .4s ease-in-out;
+    outline: none;
 }
 
 .btn-hover:hover {
@@ -186,6 +236,7 @@ html {
     -o-transition: all .4s ease-in-out;
     -webkit-transition: all .4s ease-in-out;
     transition: all .4s ease-in-out;
+    border-color: white;
 }
 
 .btn-hover:focus {
@@ -193,8 +244,8 @@ html {
 }
 
 .btn-hover.color-1 {
-    background-image: linear-gradient(to right, #25aae1, #40e495, #30dd8a, #2bb673);
-    box-shadow: 0 4px 15px 0 rgba(49, 196, 190, 0.75);
+    background-image: linear-gradient(to right, #065713, #40e495, #30dd8a, #2bb673);
+    box-shadow: 0 4px 15px 0 #065713;
 }
 
 .polls{
@@ -207,14 +258,20 @@ html {
     padding-bottom: 20px;
     padding-right: 10px;
     padding-left: 10px;
-    border-width: thick;
-    border: black;
+    border-width: medium;
+    border-color: black; 
+    border-style: solid;
 }
 
 .pollTitle {
     font-size: xx-large;
     overflow-wrap: break-word;
     font-weight: bold;
+}
+
+.poll-title-container {
+    margin-top: 0em;
+    margin-bottom: -1em;
 }
 
 .signedInAs {
@@ -236,23 +293,41 @@ html {
     margin: 10px;
 }
 
+.iconDivsAtHome {
+    background-color: #5b8c5a;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+.iconDivsAtProfile {
+    background-color: #5b8c5a;
+    border-radius: 10px;
+    margin: 10px;
+}
+
 .iconText {
     color: #cfd186;
     font-weight: bolder;
 }
 
 .userInfo {
-    padding-top: 5%;
-    padding-bottom: 5%;
-    padding-left: 25%;
-    padding-right: 25%;
+    padding-top: 5em;
+    padding-bottom: 1em;
+    padding-left: 5em;
+    padding-right: 5em;
+    display: inline-block;
+}
 
+.flex-child-icons:hover {
+    background-color: rgb(73, 185, 29);
 }
 
 .userInfoBox {
     background-color: #596157;
-    height: 50%;
+    height: 18em;
+    width: 30em;
     border-radius: 30px;
+    align-items: center;
 }
 
 .userInfoText {
@@ -269,13 +344,15 @@ html {
 } */
 
 .userInfoLineLeft {
-    margin-top: -20px;
-    margin-left: 100px;
+    margin-top: -1em;
+    margin-left: 1em;
+    padding-left: 0.5em;
 }
 
 .userInfoLineRight {
-    margin-top: -20px;
-    margin-right: 100px;
+    margin-top: -1em;
+    margin-right: 1em;
+    padding-right: 0.5em;
 }
 
   .pollBackground{
@@ -295,3 +372,164 @@ html {
     font-size: 16px;
 }
 
+.flex-child-poll-delete {
+    margin-right: 5px;
+}
+
+.flex-child-poll-edit {
+    margin-left: 5px;
+}
+
+.flex-container-poll-edit-or-delete {
+    display: flex;
+    justify-content: space-around;
+}
+
+.edit-poll-category-button {
+    border-style: solid;
+    border-color: black;
+    height: 30px;
+    font-weight: bold;
+    font-size: medium;
+    outline: none;
+}
+
+.edit-poll-category-button:hover {
+    background-color: rgb(73, 185, 29);
+    color: ghostwhite;
+}
+
+.delete-poll-button {
+    border-style: solid;
+    border-color: black;
+    height: 30px;
+    font-weight: bold;
+    font-size: medium;
+    outline: none;
+}
+
+.delete-poll-button:hover {
+    background-color: rgb(73, 185, 29);
+    color: ghostwhite;
+}
+
+.enter-question {
+    color: #cfd186;
+    font-weight: bold;
+}
+
+.question-input-box {
+    width: 15em;
+    height: 2em;
+    padding-left: 0.5em;
+}
+
+.enter-answer-choices {
+    color: #cfd186;
+    font-weight: bold;
+}
+
+.answer-choices-input-box {
+    width: 15em;
+    height: 2em;
+    padding-left: 0.5em;
+    /* get gokul to explain */
+}
+
+.enter-category-text {
+    color: #cfd186;
+    font-weight: bold;
+}
+
+.enter-time-length {
+    color: #cfd186;
+    font-weight: bold;
+}
+
+.time-length-input-box {
+    width: 15em;
+    height: 2em;
+    padding-left: 0.5em;
+}
+
+.delete-answer-choice-button {
+    margin: 1em;
+    width: 5em;
+    height: 2em;
+    border-radius: 1em;
+    background-color: rgb(236, 82, 82);
+    border-style: solid;
+    border-width: thin;
+    border-color: black;
+    font-weight: bold;
+    outline: none;
+}
+
+.delete-answer-choice-button:hover {
+    background-color: crimson;
+    color: ghostwhite;
+}
+
+.add-answer-choice-button {
+    background-color: lightslategray;
+    width: 10em;
+    outline: none;
+    font-weight: bold;
+    border: black;
+    border-width: medium;
+    border-style: solid;
+    font-size: 0.75em;
+}
+
+.add-answer-choice-button:hover {
+    background-color: rgb(52, 52, 52);
+    color: ghostwhite;
+}
+
+.category-button {
+    height: 2em;
+    font-size: small;
+    font-weight: bold;
+    background-color: #065713;
+    border-color: black;
+    color: ghostwhite;
+    border-style: solid;
+    border-width: thin;
+    outline: none;
+}
+
+.select-another-category-button:hover {
+    color: black;
+    background-color: rgb(73, 185, 29);
+}
+
+.select-another-category-button {
+    height: 2em;
+    font-size: small;
+    font-weight: bold;
+    background-color: #065713;
+    border-color: black;
+    color: ghostwhite;
+    border-style: solid;
+    border-width: thin;
+    outline: none;
+}
+
+
+.other-categories {
+    height: 2em;
+    font-size: small;
+    font-weight: bold;
+}
+
+.other-categories-container {
+    background-color: lightslategray;
+    border-color: black;
+    color: ghostwhite;
+    border-style: solid;
+    border-width: thin;
+    height: 4em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    display: flex;
+}
