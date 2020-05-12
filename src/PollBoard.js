@@ -142,17 +142,16 @@ class PollBoard extends Component {
         this.setState({answers: answers});
     }
 
-    // 
-    // setStartTime = () => {
-    //     var startTimeNow = Date.now();
-    //     this.setState({StartTime: startTimeNow})
-    // }
+    setStartTime = () => {
+        var startTimeNow = Date.now();
+        this.setState({StartTime: startTimeNow})
+    }
 
-    // setEndTime = (PollTimeLimit, StartTime) => {   
-    //     var EndTime = StartTime + 1000 * this.state.newPollTimeSeconds + 60000 * this.state.newPollTimeMinutes + 60000 * 60 * this.state.newPollTimeHours + 60000 * 60 * 24 * this.state.newPollTimeDays
-    //     + 60000 * 60 * 24 * 30 * this.state.newPollTimeMonths + 60000 * 60 * 24 * 30 * 12 * this.state.newPollTimeYears; 
-    //     this.setState({newEndTime: EndTime})
-    // }
+    setEndTime = (PollTimeLimit, StartTime) => {   
+        var EndTime = StartTime + 1000 * this.state.newPollTimeSeconds + 60000 * this.state.newPollTimeMinutes + 60000 * 60 * this.state.newPollTimeHours + 60000 * 60 * 24 * this.state.newPollTimeDays
+        + 60000 * 60 * 24 * 30 * this.state.newPollTimeMonths + 60000 * 60 * 24 * 30 * 12 * this.state.newPollTimeYears; 
+        this.setState({newEndTime: EndTime})
+    }
 
     // checkTime = (pollID, EndTime) => {
     //     if (Date.now() >= EndTime) {
@@ -172,24 +171,15 @@ class PollBoard extends Component {
     //     this.setState({TimeLeft: timeLeft})
     // }
 
-    // addPollFunction = (event) => {
-    //     var x = document.getElementById("addPoll");
-    //     var y = document.getElementById("poll-input");
-    //     if (x.style.display != "block") {
-    //         x.style.display = "block";
-    //         y.style.backgroundColor = "#5b8c5a";
-    //         y.style.color = "#cfd186";
-    //     } 
-    // }
-
-    // Brian's Attempt at Time Functionality
-    // const then = moment(timeTillDate, timeFormat);
-    // const now = moment();
-    // const countdown = moment(then - now);
-    // const days = countdown.format('D');
-    // const hours = countdown.format('HH');
-    // const minutes = countdown.format('mm');
-    // const seconds = countdown.format('ss');
+    addPollFunction = (event) => {
+        var x = document.getElementById("addPoll");
+        var y = document.getElementById("poll-input");
+        if (x.style.display != "block") {
+            x.style.display = "block";
+            y.style.backgroundColor = "#5b8c5a";
+            y.style.color = "#cfd186";
+        } 
+    
 
     savePollInfo = () => {
         db.addPoll(this.state.newPollQuestion,
