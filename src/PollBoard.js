@@ -52,26 +52,8 @@ class PollBoard extends Component {
 
     componentDidMount(){
         db.fetchPolls(this.fetchedPolls);
-        // ADDING TIME FUNCTIONALITY
-        // this.interval = setInterval(() => {
-        //     const { timeTillDate, timeFormat } = this.props;
-        //     const then = moment(timeTillDate, timeFormat);
-        //     const now = moment();
-        //     const countdown = moment(then - now);
-        //     const days = countdown.format('D');
-        //     const hours = countdown.format('HH');
-        //     const minutes = countdown.format('mm');
-        //     const seconds = countdown.format('ss');
 
-        //     this.setState({ days, hours, minutes, seconds });
-        // }, 1000);
     }
-
-    // componentWillUnmount() {
-    //     if (this.interval) {
-    //         clearInterval(this.interval);
-    //     }
-    // }
 
     logout = () => {
         fire.auth().signOut();
@@ -108,27 +90,27 @@ class PollBoard extends Component {
     // }
 
     newPollTimeLimitFunctionSeconds = (event) => {
-        this.setState({newPollTimeSeconds: parseInt(event.target.value)})
+        this.setState({newPollTimeSeconds: event.target.value})
     }
 
     newPollTimeLimitFunctionMinutes = (event) => {
-        this.setState({newPollTimeMinutes: parseInt(event.target.value)})
+        this.setState({newPollTimeMinutes: event.target.value})
     }
 
     newPollTimeLimitFunctionHours = (event) => {
-        this.setState({newPollTimeHours: parseInt(event.target.value)})
+        this.setState({newPollTimeHours: event.target.value})
     }
 
     newPollTimeLimitFunctionDays = (event) => {
-        this.setState({newPollTimeDays: parseInt(event.target.value)})
+        this.setState({newPollTimeDays: event.target.value})
     }
 
     newPollTimeLimitFunctionMonths = (event) => {
-        this.setState({newPollTimeMonths: parseInt(event.target.value)})
+        this.setState({newPollTimeMonths: event.target.value})
     }
 
     newPollTimeLimitFunctionYears = (event) => {
-        this.setState({newPollTimeYears: parseInt(event.target.value)})
+        this.setState({newPollTimeYears: event.target.value})
     }
 
     incrementPollID = () => {
@@ -168,15 +150,15 @@ class PollBoard extends Component {
     //     this.setState({TimeLeft: timeLeft})
     // }
 
-    // addPollFunction = (event) => {
-    //     var x = document.getElementById("addPoll");
-    //     var y = document.getElementById("poll-input");
-    //     if (x.style.display != "block") {
-    //         x.style.display = "block";
-    //         y.style.backgroundColor = "#5b8c5a";
-    //         y.style.color = "#cfd186";
-    //     } 
-    // }
+    addPollFunction = (event) => {
+        var x = document.getElementById("addPoll");
+        var y = document.getElementById("poll-input");
+        if (x.style.display != "block") {
+            x.style.display = "block";
+            y.style.backgroundColor = "#5b8c5a";
+            y.style.color = "#cfd186";
+        } 
+    }
 
 
     savePollInfo = () => {
@@ -239,6 +221,25 @@ class PollBoard extends Component {
                 allPolls = Object.keys(this.state.polls).map((id) => {
                     const info = this.state.polls[id];
                     console.log(info);
+
+                    //some logic to send a formatted end date
+                    let timearray = [];
+
+                    let year = "";
+                    let month = "";
+                    let day = "";
+                    let hour = "";
+
+                    year = info.PollTimeYears;
+                    month = info.PollTimeMonths;
+                    day = info.PollTimeDays;
+                    hour = info.PollTimeHours;
+
+                    timearray.push(month);
+                    timearray.push(day);
+                    timearray.push(year);
+                    timearray.push(hour);
+
                     return <PollComponent
                         save ={this.save}
                         delete ={this.delete}
@@ -247,7 +248,7 @@ class PollBoard extends Component {
                         PollQuestion={info.PollQuestion} 
                         PollChoices = {info.PollChoices}
                         PollCategory = {info.PollCategory} 
-                        PollTimeLimit = {info.PollTimeLimit} 
+                        PollTimeLimit = {timearray} 
                         PollUser = {info.PollUser} 
                         id = {id}
                         pollID={info.PollID}
@@ -332,18 +333,18 @@ class PollBoard extends Component {
                                 <br></br>
                                 <br></br>
                                                 
-                                <p className="enter-time-length">Enter Time Length</p>
-                                <input className="time-length-input-box" placeholder="Seconds" type = "text" value={this.state.newPollTimeSeconds} onChange={this.newPollTimeLimitFunctionSeconds}/>
+                                <p className="enter-time-length">Enter End Date</p>
+                                <input className="time-length-input-box" placeholder="Second (ss)" type = "text" value={this.state.newPollTimeSeconds} onChange={this.newPollTimeLimitFunctionSeconds}/>
                                 <br></br>
-                                <input className="time-length-input-box" placeholder="Minutes" type = "text" value={this.state.newPollTimeMinutes} onChange={this.newPollTimeLimitFunctionMinutes}/>
+                                <input className="time-length-input-box" placeholder="Minute (mm)" type = "text" value={this.state.newPollTimeMinutes} onChange={this.newPollTimeLimitFunctionMinutes}/>
                                 <br></br>
-                                <input className="time-length-input-box" placeholder="Hours" type = "text" value={this.state.newPollTimeHours} onChange={this.newPollTimeLimitFunctionHours}/>
+                                <input className="time-length-input-box" placeholder="Hour (h [1-12])" type = "text" value={this.state.newPollTimeHours} onChange={this.newPollTimeLimitFunctionHours}/>
                                 <br></br>
-                                <input className="time-length-input-box" placeholder="Days" type = "text" value={this.state.newPollTimeDays} onChange={this.newPollTimeLimitFunctionDays}/>
+                                <input className="time-length-input-box" placeholder="Day (DD)" type = "text" value={this.state.newPollTimeDays} onChange={this.newPollTimeLimitFunctionDays}/>
                                 <br></br>
-                                <input className="time-length-input-box" placeholder="Months" type = "text" value={this.state.newPollTimeMonths} onChange={this.newPollTimeLimitFunctionMonths}/>
+                                <input className="time-length-input-box" placeholder="Month (MM)" type = "text" value={this.state.newPollTimeMonths} onChange={this.newPollTimeLimitFunctionMonths}/>
                                 <br></br>
-                                <input className="time-length-input-box" placeholder="Years" type = "text" value={this.state.newPollTimeYears} onChange={this.newPollTimeLimitFunctionYears}/>
+                                <input className="time-length-input-box" placeholder="Year (YYYY)" type = "text" value={this.state.newPollTimeYears} onChange={this.newPollTimeLimitFunctionYears}/>
 
 
                                 {/* <div className = "post">

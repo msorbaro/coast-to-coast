@@ -45,7 +45,7 @@ class Countdown extends React.Component {
 
         return (
             <div>
-                <h1>Countdown</h1>
+                <h3>Countdown</h3>
                 <div className="countdown-wrapper">
                     {days && (
                         <div className="countdown-item">
