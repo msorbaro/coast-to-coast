@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
 import fire from './config/Fire';
+import {Pie, Doughnut} from 'react-chartjs-2';
 
 class PollComponent extends Component {
     
@@ -116,8 +117,29 @@ checkSingleVote = (pollID, useremail) => {
    }
    return retreivedSet.has(pollID);
 }
+//pie plot functions
+dataFunc = (labelInputs, dataInputs) => {
+    const data = {labels: labelInputs, 
+                datasets: [{backgroundColor: ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', "#8884d8", '#B21F00','#C9DE00','#2FDE00','#00A6B4','#6800B4'], 
+                data: dataInputs}]}
+    return(data)
+}
+
+optionsFunc = (titleInput) => {
+    const options = {title:{display:true, text: titleInput, fontSize: 30, fontColor: '#FFFFFF'},
+        legend: {display:true, position:'right', labels:{fontSize: 15, fontColor: '#FFFFFF'}}
+    }
+    return(options)
+}
+
 
 render() {
+    //we essentially want to display the pie chart if the user has previously voted on this poll
+    let piedisp = null;
+    if(this.checkSingleVote(this.state.pollID, fire.auth().currentUser.email)){
+        piedisp = <Pie data={this.dataFunc(this.props.PollChoices, this.state.stateVoteArray)} options={this.optionsFunc("")}/>
+    }
+    
     var editBoxOrEditButton = null; 
     if(this.state.editing){
       editBoxOrEditButton= (
@@ -170,6 +192,7 @@ render() {
             </div>
             {/* <p id="dispchoice">{this.formatChoices(dispchoices)}</p> */}
             <p> {dispchoices} </p> 
+            {piedisp}
             <p>{this.props.PollTimeLimit}</p>
             <div className="flex-container-poll-edit-or-delete">
                 <div className="flex-child-poll-delete">

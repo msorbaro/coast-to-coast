@@ -30,7 +30,7 @@ class SignUp extends Component{
             console.log(error);
         }).then(() => {
             this.setState({status: "Successfully created account"})
-        })
+        });
         if(fire.auth().currentUser){
             this.props.history.push("/Home");
         }
