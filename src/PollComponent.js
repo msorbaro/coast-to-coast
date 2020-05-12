@@ -147,8 +147,8 @@ dataFunc = (labelInputs, dataInputs) => {
 }
 
 optionsFunc = (titleInput) => {
-    const options = {title:{display:true, text: titleInput, fontSize: 30, fontColor: '#FFFFFF'},
-        legend: {display:true, position:'right', labels:{fontSize: 15, fontColor: '#FFFFFF'}}
+    const options = {title:{display:true, text: titleInput, fontSize: 30, fontColor: '#FFFFFF'}, maintainAspectRatio: false, responsive: false,
+        legend: {display:true, position:'right', boxWidth: 1, labels:{fontSize: 15, fontColor: '#FFFFFF'}}
     }
     return(options)
 }
@@ -158,7 +158,7 @@ render() {
     //we essentially want to display the pie chart if the user has previously voted on this poll
     let piedisp = null;
     if(this.checkSingleVote(this.state.pollID, fire.auth().currentUser.email)){
-        piedisp = <Pie data={this.dataFunc(this.props.PollChoices, this.state.stateVoteArray)} options={this.optionsFunc("")}/>
+        piedisp = <Pie data={this.dataFunc(this.props.PollChoices, this.state.stateVoteArray)} className="pie-chart-on-poll" options={this.optionsFunc("")}/>
     }
 
     var editBoxOrEditButton = null; 
@@ -219,7 +219,11 @@ render() {
             {dispchoices.map((value, index) => {
                 return <div className="answer-choices-div" key={index}>{value}</div>
             })}
-            {piedisp}
+            <div>
+                <div className="constrain-pie">
+                    {piedisp}
+                </div>
+            </div>
             <p>{this.props.PollTimeLimit}</p>
             <h2 className="poll-author">Poll Author: {this.props.PollUser}</h2>
             <div className="flex-container-poll-edit-or-delete">
