@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
 import fire from './config/Fire';
+import {Pie, Doughnut} from 'react-chartjs-2';
 
 class PollComponent extends Component {
     
 constructor(props) { 
     super(props);
-    this.state = {editing: false, newPollCategory: "", pollID: this.props.pollID, currentAnswer: "", currentAnswerIdx: 0, click: false, stateVoteArray: null}; 
+    this.state = {editing: false, newPollCategory: "", pollID: this.props.pollID, currentAnswer: "", currentAnswerIdx: 0, click: false, stateVoteArray: null, sumVotes: 0}; 
 }
 
 componentDidMount = () => {
@@ -85,6 +86,11 @@ createVoteArray = () => {
     console.log(VoteArray);
     // console.log("Vote Array: " + this.state.stateVoteArray);
     console.log(this.props.PollChoices);
+    let sum = 0;
+    for(let i = 0; i < VoteArray.length; i ++){
+        sum += VoteArray[i];
+    }
+    this.setState({sumVotes: sum});
 }
 
 //function that checks if user is allowed to vote
@@ -111,8 +117,29 @@ checkSingleVote = (pollID, useremail) => {
    }
    return retreivedSet.has(pollID);
 }
+//pie plot functions
+dataFunc = (labelInputs, dataInputs) => {
+    const data = {labels: labelInputs, 
+                datasets: [{backgroundColor: ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', "#8884d8", '#B21F00','#C9DE00','#2FDE00','#00A6B4','#6800B4'], 
+                data: dataInputs}]}
+    return(data)
+}
+
+optionsFunc = (titleInput) => {
+    const options = {title:{display:true, text: titleInput, fontSize: 30, fontColor: '#FFFFFF'},
+        legend: {display:true, position:'right', labels:{fontSize: 15, fontColor: '#FFFFFF'}}
+    }
+    return(options)
+}
+
 
 render() {
+    //we essentially want to display the pie chart if the user has previously voted on this poll
+    let piedisp = null;
+    if(this.checkSingleVote(this.state.pollID, fire.auth().currentUser.email)){
+        piedisp = <Pie data={this.dataFunc(this.props.PollChoices, this.state.stateVoteArray)} options={this.optionsFunc("")}/>
+    }
+    
     var editBoxOrEditButton = null; 
     if(this.state.editing){
       editBoxOrEditButton= (
@@ -154,7 +181,7 @@ render() {
             <div className="flex-container-polls">
                 <div className="flex-child-polls1">
                     <div className="respondents">
-                        <p className="respondentsText">54 respondents</p>
+                        <p className="respondentsText">{this.state.sumVotes} respondents</p>
                     </div>
                 </div>
                 <div className="flex-child-polls1">
@@ -168,6 +195,7 @@ render() {
             {dispchoices.map((value, index) => {
                 return <div className="answer-choices-div" key={index}>{value}</div>
             })}
+            {piedisp}
             <p>{this.props.PollTimeLimit}</p>
             <h2 className="poll-author">Poll Author: {this.props.PollUser}</h2>
             <div className="flex-container-poll-edit-or-delete">
