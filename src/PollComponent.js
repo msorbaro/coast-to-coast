@@ -168,7 +168,7 @@ render() {
             //change to span to eliminate error
             //if the choice is clicked, we need to increment the count or number of votes of the choice...
             //{vote[Number(index)]}
-        <button onClick = {() => this.updateVote(choice, index)}> {choice}:{vote[Number(index)]}</button>
+        <button className="answer-choices" onClick = {() => this.updateVote(choice, index)}> {choice}:{vote[Number(index)]}</button>
         )
         );
     }
@@ -191,9 +191,13 @@ render() {
                 </div>
             </div>
             {/* <p id="dispchoice">{this.formatChoices(dispchoices)}</p> */}
-            <p> {dispchoices} </p> 
+            {/* <p> {dispchoices} </p>  */}
+            {dispchoices.map((value, index) => {
+                return <div className="answer-choices-div" key={index}>{value}</div>
+            })}
             {piedisp}
             <p>{this.props.PollTimeLimit}</p>
+            <h2 className="poll-author">Poll Author: {this.props.PollUser}</h2>
             <div className="flex-container-poll-edit-or-delete">
                 <div className="flex-child-poll-delete">
                     <button className="delete-poll-button" onClick= {this.deletePosting}>Delete</button>

@@ -47,7 +47,9 @@ class Listofanswers extends Component {
           {this.state.questions.map((question, index) => (
             <span key={index}>
               <input
+                className="answer-choices-input-bar"
                 type="text"
+                placeholder="Answer Choice"
                 onChange={this.handleText(index)}
                 value={question}
               />
