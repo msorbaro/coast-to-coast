@@ -1,7 +1,6 @@
 import React from 'react';
 import moment from 'moment';
 
-
 class Countdown extends React.Component {
     
     state = {
@@ -47,7 +46,6 @@ class Countdown extends React.Component {
 
         return (
             <div>
-                <h1>Countdown</h1>
                 <div className="countdown-wrapper">
                     {days && (
                         <div className="countdown-item">
@@ -131,3 +129,5 @@ function mapNumber(number, in_min, in_max, out_min, out_max) {
         ((number - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min
     );
 }
+
+export default Countdown; 

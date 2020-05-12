@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import firebase from 'firebase';
 import fire from './config/Fire';
 import {Pie, Doughnut} from 'react-chartjs-2';
+import Countdown from './Countdown'; 
 
 class PollComponent extends Component {
     
@@ -203,6 +204,9 @@ render() {
                     <div className="respondents">
                         <p className="respondentsText">{this.state.sumVotes} respondents</p>
                     </div>
+                </div>
+                <div className = "flex-child-polls1">
+                    <Countdown timeTillDate="05 26 2019, 6:00 am" timeFormat="MM DD YYYY, h:mm a" />
                 </div>
                 <div className="flex-child-polls1">
                     <div className="category-div">
