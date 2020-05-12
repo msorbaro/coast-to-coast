@@ -10,6 +10,7 @@ import {Button} from 'react-bootstrap';
 import {ButtonGroup} from 'react-bootstrap';
 import TopNavBar from './TopNavBar';
 import Listofanswers from './Listofanswers';
+import moment from 'moment';
 
 class PollBoard extends Component {
     constructor(props) {    
@@ -31,6 +32,10 @@ class PollBoard extends Component {
         TimeLeft: [],
         addpollbutton: false,
         answers: []
+        // newDays: undefined, 
+        // newHours: undefined,
+        // newMinutes: undefined, 
+        // newSeconds:undefined
     };
 
 
@@ -50,7 +55,27 @@ class PollBoard extends Component {
     //apologies in advance if it messes something up
     componentDidMount(){
         db.fetchPolls(this.fetchedPolls);
+        // ADDING TIME FUNCTIONALITY
+        // this.interval = setInterval(() => {
+        //     const { timeTillDate, timeFormat } = this.props;
+        //     const then = moment(timeTillDate, timeFormat);
+        //     const now = moment();
+        //     const countdown = moment(then - now);
+        //     const days = countdown.format('D');
+        //     const hours = countdown.format('HH');
+        //     const minutes = countdown.format('mm');
+        //     const seconds = countdown.format('ss');
+
+        //     this.setState({ days, hours, minutes, seconds });
+        // }, 1000);
     }
+
+    // componentWillUnmount() {
+    //     if (this.interval) {
+    //         clearInterval(this.interval);
+    //     }
+    // }
+
     logout = () => {
         fire.auth().signOut();
     }
@@ -117,44 +142,54 @@ class PollBoard extends Component {
         this.setState({answers: answers});
     }
 
-    setStartTime = () => {
-        var startTimeNow = Date.now();
-        this.setState({StartTime: startTimeNow})
-    }
+    // 
+    // setStartTime = () => {
+    //     var startTimeNow = Date.now();
+    //     this.setState({StartTime: startTimeNow})
+    // }
 
-    setEndTime = (PollTimeLimit, StartTime) => {   
-        var EndTime = StartTime + 1000 * this.state.newPollTimeSeconds + 60000 * this.state.newPollTimeMinutes + 60000 * 60 * this.state.newPollTimeHours + 60000 * 60 * 24 * this.state.newPollTimeDays
-        + 60000 * 60 * 24 * 30 * this.state.newPollTimeMonths + 60000 * 60 * 24 * 30 * 12 * this.state.newPollTimeYears; 
-        this.setState({newEndTime: EndTime})
-    }
+    // setEndTime = (PollTimeLimit, StartTime) => {   
+    //     var EndTime = StartTime + 1000 * this.state.newPollTimeSeconds + 60000 * this.state.newPollTimeMinutes + 60000 * 60 * this.state.newPollTimeHours + 60000 * 60 * 24 * this.state.newPollTimeDays
+    //     + 60000 * 60 * 24 * 30 * this.state.newPollTimeMonths + 60000 * 60 * 24 * 30 * 12 * this.state.newPollTimeYears; 
+    //     this.setState({newEndTime: EndTime})
+    // }
 
-    checkTime = (pollID, EndTime) => {
-        if (Date.now() >= EndTime) {
-            this.setState({polls: this.state.polls.delete(pollID)})
-        }
-    }
+    // checkTime = (pollID, EndTime) => {
+    //     if (Date.now() >= EndTime) {
+    //         this.setState({polls: this.state.polls.delete(pollID)})
+    //     }
+    // }
 
-    currentTimeLeft = (EndTime) => {
-        var totalTimeLeft = EndTime - Date.now();
-        var seconds = (totalTimeLeft / 1000) % 60;
-        var minutes = (totalTimeLeft / (1000 * 60)) % 60;
-        var hours = (totalTimeLeft / (1000 * 60 * 60)) % 24;
-        var days = (totalTimeLeft / (1000 * 60 * 60 * 24)) % 30;
-        var months = (totalTimeLeft / (1000 * 60 * 60 * 24 * 30)) % 12;
-        var years = (totalTimeLeft / (1000 * 60 * 60 * 24 * 30 * 12));
-        var timeLeft = [seconds, minutes, hours, days, months, years];
-        this.setState({TimeLeft: timeLeft})
-    }
+    // currentTimeLeft = (EndTime) => {
+    //     var totalTimeLeft = EndTime - Date.now();
+    //     var seconds = (totalTimeLeft / 1000) % 60;
+    //     var minutes = (totalTimeLeft / (1000 * 60)) % 60;
+    //     var hours = (totalTimeLeft / (1000 * 60 * 60)) % 24;
+    //     var days = (totalTimeLeft / (1000 * 60 * 60 * 24)) % 30;
+    //     var months = (totalTimeLeft / (1000 * 60 * 60 * 24 * 30)) % 12;
+    //     var years = (totalTimeLeft / (1000 * 60 * 60 * 24 * 30 * 12));
+    //     var timeLeft = [seconds, minutes, hours, days, months, years];
+    //     this.setState({TimeLeft: timeLeft})
+    // }
 
-    addPollFunction = (event) => {
-        var x = document.getElementById("addPoll");
-        var y = document.getElementById("poll-input");
-        if (x.style.display != "block") {
-            x.style.display = "block";
-            y.style.backgroundColor = "#5b8c5a";
-            y.style.color = "#cfd186";
-        } 
-    }
+    // addPollFunction = (event) => {
+    //     var x = document.getElementById("addPoll");
+    //     var y = document.getElementById("poll-input");
+    //     if (x.style.display != "block") {
+    //         x.style.display = "block";
+    //         y.style.backgroundColor = "#5b8c5a";
+    //         y.style.color = "#cfd186";
+    //     } 
+    // }
+
+    // Brian's Attempt at Time Functionality
+    // const then = moment(timeTillDate, timeFormat);
+    // const now = moment();
+    // const countdown = moment(then - now);
+    // const days = countdown.format('D');
+    // const hours = countdown.format('HH');
+    // const minutes = countdown.format('mm');
+    // const seconds = countdown.format('ss');
 
     savePollInfo = () => {
         db.addPoll(this.state.newPollQuestion,
