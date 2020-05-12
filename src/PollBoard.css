@@ -656,3 +656,27 @@ html {
     height: 1.6em;
     padding-left: 0.5em;
 }
+
+.pie-chart-on-poll {
+    height: 10em;
+    width: 10em;
+    align-items: center;
+}
+
+.constrain-pie-container {
+    text-align: center;
+    justify-content: center;
+}
+
+.constrain-pie {
+    position: relative;
+    width: 10em;
+    align-items: center;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.constrain-pie-child {
+    flex: auto;
+}

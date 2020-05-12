@@ -30,7 +30,7 @@ class PollBoard extends Component {
         StartTime: 0, 
         TimeLeft: [],
         addpollbutton: false,
-        answers: []
+        answers: [],
     };
 
 
@@ -48,6 +48,7 @@ class PollBoard extends Component {
     }
     //I am adding a logout function here
     //apologies in advance if it messes something up
+
     componentDidMount(){
         db.fetchPolls(this.fetchedPolls);
     }
@@ -180,7 +181,7 @@ class PollBoard extends Component {
             newPollTimeDays: "", 
             newPollTimeMonths: "", 
             newPollTimeYears: "", 
-            newPollUser: "", 
+            newPollUser: ""
         });
         db.fetchPolls(this.fetchedPolls);
         this.incrementPollID();
@@ -245,7 +246,7 @@ class PollBoard extends Component {
                     </div>
                     <div className="flex-child-topBar">
                         <h1 className="dartPollTitle"> DartPoll</h1>
-                        <input type="text" className="myInput center-block" onkeyup="myFunction()" placeholder="Filter Polls" title="Type in a name"/>
+                        <input type="text" className="myInput center-block" value={this.state.searchValue} onChange={event => this.handleOnChange(event)} placeholder="Filter Polls" title="Type in a name"/>
                     </div>
                     <div className="flex-child-topBar">
                         <div className="signedInAs">
