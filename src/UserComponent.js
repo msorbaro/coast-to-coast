@@ -234,39 +234,8 @@ class UserComponent extends Component{
                     </div>
                 </div>
                 <div style={{display: 'flex', justifyContent:'center', flexWrap: 'wrap', height: '100vh'}}>
-                {/* <Pie data={this.dataFunc(['Hop', 'Collis', 'KAF','Foco', 'Novak'], [140, 33, 27, 21, 6])} options={this.optionsFunc('Best Place to Eat on Campus')}/> */}
                 {displayedCharts}
             </div>
-
-            {/* Pass in Labels and Pass in Voting Numbers into Data Func; Pass in Title into Options Func  */}
-            {/* <Pie data={this.dataFunc(['Hop', 'Collis', 'KAF','Foco', 'Novak'], [140, 33, 27, 21, 6])} options={this.optionsFunc('Best Place to Eat on Campus')}/> */}
-
-                {/* <div className = "pollBackground">
-                        <h1> Question 1: Who is the best professor at Dartmouth? </h1>
-                        <div style={{ justifyContent: 'center'}}> 
-                        <PieChart width={500} height={500}>
-                        <Pie dataKey="value" isAnimationActive={false} data={data01} cx={200} cy={200} outerRadius={200} label = {renderCustomizedLabel}>
-                        {data01.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} label/>)}
-                        </Pie>
-                        <Tooltip />
-                        </PieChart>
-                        </div>
-
-                        <h1> Question 2: When do you think we will return to campus? </h1>
-                        <PieChart width={500} height={500}>
-                        <Pie dataKey="value" isAnimationActive={false} data={data02} cx={200} cy={200} outerRadius={200}>
-                        {data02.map((entry, index) => <Cell key={`cell-${"hello"}`} fill={COLORS[index % COLORS.length]} label = {renderCustomizedLabel}/>)}
-                        </Pie>
-                        <Tooltip />
-                        </PieChart>
-
-                        <h1> We aren't using this chart anymore </h1>
-                        <PieChart width={500} height={500}>
-                        <Pie data={data} cx={200} cy={200} labelLine={false} label={renderCustomizedLabel}  outerRadius={200} fill="#8884d8" dataKey="value">
-                        {data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)}
-                        </Pie>
-                        </PieChart>
-                </div> */}
             </div>
         );
     }
