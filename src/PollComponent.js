@@ -206,7 +206,7 @@ render() {
                     </div>
                 </div>
                 <div className = "flex-child-polls1">
-                    <Countdown timeTillDate="05 26 2019, 6:00 am" timeFormat="MM DD YYYY, h:mm a" />
+                    <Countdown timeTillDate="05 28 2019, 6:00 am" timeFormat="MM DD YYYY, h:mm a" />
                 </div>
                 <div className="flex-child-polls1">
                     <div className="category-div">
