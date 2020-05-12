@@ -6,25 +6,35 @@ html {
 
 .loginButton {
     background-color: white;
-    width: 100px;
-    height: 40px;
     color: black;
     font-weight: bold;
     border: black;
     text-align: center;
-    padding: 4px 28px;
+    padding-left: 2em;
+    padding-right: 2em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
     font-size: 16px;
     outline: none;
+    transition: all .2s ease-in-out;
 }
 
 .loginButton:hover {
-    background-color: #5b8c5a;
+    background-color: #065713;
     color: ghostwhite;
+    transform: scale(1.1);
+    border-color: ghostwhite;
+    border-width: medium;
+    border-style: solid;
 }
 
 .createANewAccountButton:hover {
-    background-color: #5b8c5a;
+    background-color: #065713;
     color: ghostwhite;
+    transform: scale(1.1);
+    border-color: ghostwhite;
+    border-width: medium;
+    border-style: solid;
 }
 
 .showDiv {
@@ -60,12 +70,16 @@ html {
 .createANewAccountButton {
     background-color: white;
     color: black;
-    border: black;
-    padding: 4px 28px;
-    font-size: 16px;
-    height: 40px;
-    outline: none;
     font-weight: bold;
+    border: black;
+    text-align: center;
+    padding-left: 2em;
+    padding-right: 2em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    font-size: 16px;
+    outline: none;
+    transition: all .2s ease-in-out;
 }
 
 .createANewAccountText {
@@ -107,7 +121,7 @@ html {
 .respondents {
     width: 8em;
     height: 20px;
-    background-color: lightslategray;
+    background-color: #cfd186;
     border-color: black;
     border-width: thin;
     border-style: solid;
@@ -115,7 +129,7 @@ html {
 
 .category-div {
     height: 20px;
-    background-color: lightslategray;
+    background-color: #cfd186;
     border-color: black;
     border-width: thin;
     border-style: solid;
@@ -142,6 +156,7 @@ html {
 .flex-child-icons {
     padding-top: 25px;
     flex: 1;
+    transition: all .2s ease-in-out;
 }
 
 .flex-child-topBar {
@@ -311,7 +326,6 @@ html {
 }
 
 .userInfo {
-    padding-top: 5em;
     padding-bottom: 1em;
     padding-left: 5em;
     padding-right: 5em;
@@ -320,12 +334,14 @@ html {
 
 .flex-child-icons:hover {
     background-color: rgb(73, 185, 29);
+    transform: scale(1.1);
 }
 
 .userInfoBox {
     background-color: #596157;
-    height: 18em;
-    width: 30em;
+    padding-bottom: 1em;
+    padding-left: 1em;
+    padding-right: 1em;
     border-radius: 30px;
     align-items: center;
 }
@@ -345,17 +361,15 @@ html {
 
 .userInfoLineLeft {
     margin-top: -1em;
-    margin-left: 1em;
-    padding-left: 0.5em;
+    margin-left: 0.25em;
 }
 
 .userInfoLineRight {
     margin-top: -1em;
-    margin-right: 1em;
     padding-right: 0.5em;
 }
 
-  .pollBackground{
+.pollBackground{
     background-color: white;
     display: 'flex';
     justify-content:'center'; 
@@ -364,7 +378,7 @@ html {
     height: '100vh'
   }
 
-  .toggleButtons {
+.toggleButtons {
     background-color: white;
     color: white;
     border: black;
@@ -392,11 +406,15 @@ html {
     font-weight: bold;
     font-size: medium;
     outline: none;
+    transition: all .2s ease-in-out;
+    background-color: #065713;
+    color: ghostwhite;
 }
 
 .edit-poll-category-button:hover {
     background-color: rgb(73, 185, 29);
     color: ghostwhite;
+    transform: scale(1.1);
 }
 
 .delete-poll-button {
@@ -406,11 +424,14 @@ html {
     font-weight: bold;
     font-size: medium;
     outline: none;
+    background-color: rgb(236, 82, 82);
+    transition: all .2s ease-in-out;
 }
 
 .delete-poll-button:hover {
-    background-color: rgb(73, 185, 29);
+    background-color: crimson;
     color: ghostwhite;
+    transform: scale(1.1);
 }
 
 .enter-question {
@@ -463,11 +484,13 @@ html {
     border-color: black;
     font-weight: bold;
     outline: none;
+    transition: all .2s ease-in-out;
 }
 
 .delete-answer-choice-button:hover {
     background-color: crimson;
     color: ghostwhite;
+    transform: scale(1.1);
 }
 
 .add-answer-choice-button {
@@ -479,11 +502,13 @@ html {
     border-width: medium;
     border-style: solid;
     font-size: 0.75em;
+    transition: all .2s ease-in-out;
 }
 
 .add-answer-choice-button:hover {
     background-color: rgb(52, 52, 52);
     color: ghostwhite;
+    transform: scale(1.1);
 }
 
 .category-button {
@@ -501,6 +526,7 @@ html {
 .select-another-category-button:hover {
     color: black;
     background-color: rgb(73, 185, 29);
+    transform: scale(1.1);
 }
 
 .select-another-category-button {
@@ -513,6 +539,7 @@ html {
     border-style: solid;
     border-width: thin;
     outline: none;
+    transition: all .2s ease-in-out;
 }
 
 
@@ -532,4 +559,186 @@ html {
     padding-left: 0.5em;
     padding-right: 0.5em;
     display: flex;
+}
+
+.your-info {
+    color: #cfd186;
+    text-decoration: underline;
+    font-size: 3em;
+
+}
+
+.your-info-box {
+    margin-bottom: -2em;
+}
+
+.userInfoLineLeftTop {
+    margin-top: 1em;
+    margin-left: 0.25em;
+}
+
+.userInfoLineRightTop {
+    margin-top: 1em;
+    margin-right: 0.25em;
+}
+
+.top-info {
+    margin-top: -1em;
+}
+
+.polls-in-profile-container {
+    padding-right: 2em;
+    padding-left: 2em;
+    align-items: center;
+}
+
+.polls-in-profile-box {
+    background-color: #596157;
+    border-radius: 5em;
+    padding-bottom: 2.5em;
+}
+
+.polls-in-profile {
+    margin-bottom: 2em;
+    padding-bottom: 2.5em;
+    border-bottom: 0.2em;
+    border-top: 0em;
+    border-left: 0em;
+    border-right: 0em;
+    border-style: solid;
+    border-color: ghostwhite;
+}
+
+.my-polls {
+    font-size: 3em;
+    text-decoration: underline;
+}
+
+.my-polls-box {
+    padding-top: 0.25em;
+    color: #cfd186;
+    margin-bottom: 1em;
+    border-bottom: 0.2em;
+    border-top: 0em;
+    border-left: 0em;
+    border-right: 0em;
+    border-style: solid;
+    border-color: ghostwhite;
+}
+
+.answer-choices {
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    transition: all .2s ease-in-out;
+    outline: none;
+    font-size: 0.9em;
+    font-weight: bolder;
+    background-color: lightslategray;
+    border-width: thin;
+    border-color: black;
+    border-style: solid;
+}
+
+.answer-choices:hover {
+    background-color: #065713;
+    color: ghostwhite;
+    transform: scale(1.1); 
+}
+
+.answer-choices-div {
+    margin-top: 1em;
+}
+
+.answer-choices-input-bar {
+    width: 12em;
+    height: 1.6em;
+    padding-left: 0.5em;
+}
+
+/* Countdown styling  */
+* {
+	box-sizing: border-box;
+}
+
+body {
+	background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+	
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+
+	min-height: 100vh;
+	font-family: 'Lato', sans-serif;
+	margin: 0;
+}
+
+h1 {
+	letter-spacing: 2px;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.countdown-wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+.countdown-item {
+	color: #111;
+	font-size: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+    line-height: 30px;
+	margin: 10px;
+    padding-top: 10px;
+	position: relative;
+	width: 100px;
+	height: 100px;
+}
+
+.countdown-item span {
+	color: #333;
+	font-size: 12px;
+	font-weight: 600;
+	text-transform: uppercase;
+}
+
+.countdown-svg {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100px;
+	height: 100px;
+}
+
+footer {
+    background-color: #222;
+    color: #fff;
+    font-size: 14px;
+    bottom: 0;
+    position: fixed;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 999;
+}
+
+footer p {
+    margin: 10px 0;
+}
+
+footer i {
+    color: red;
+}
+
+footer a {
+    color: #3c97bf;
+    text-decoration: none;
 }

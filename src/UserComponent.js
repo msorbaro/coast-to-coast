@@ -118,6 +118,8 @@ class UserComponent extends Component{
     this.setState({pollQuestionArray: pollNameArray});
     //now turn it into a display
     let displayedCharts = null;
+
+
     displayedCharts  = dataArray.map((choice, index) => (
         <Pie data={this.dataFunc(dataArray[index][0], dataArray[index][1])} options={this.optionsFunc(pollNameArray[index])}/>
     ));
@@ -179,7 +181,7 @@ class UserComponent extends Component{
                     </div>
                     <div className="flex-child-topBar">
                         <div className="signedInAs">
-                            <p className="signedInAsText">Signed in as</p>
+                            <p className="signedInAsText">Signed in as: {fire.auth().currentUser.email}</p>
                         </div>
                         <div className="flex-container">
                             <div id="homeIconDiv" onClick={this.sendToHome} className="flex-child-icons iconDivs">
@@ -205,37 +207,88 @@ class UserComponent extends Component{
                 </div>
                 <div className="userInfo">
                     <div className="userInfoBox">
+                        <div className="your-info-box">
+                            <h1 className="your-info">My Profile</h1>
+                        </div>
                         <div className="flex-container">
                             <div className="flex-child-profile">
                                 <div>
-                                    <p className="userInfoText">Email:</p>
+                                    <hr className="userInfoLineLeftTop"></hr>
+                                    <div className="top-info">
+                                        <p className="userInfoText">Email:</p>
+                                    </div>
                                     <hr className="userInfoLineLeft"></hr>
-                                    <p className="userInfoText">Password:</p>
+                                    <div className="top-info">
+                                        <p className="userInfoText">Password:</p>
+                                    </div>
                                     <hr className="userInfoLineLeft"></hr>
-                                    {/* <p className="userInfoText">Email:</p>
-                                    <hr className="userInfoLineLeft"></hr> */}
-                                    <p className="userInfoText">Other Stuff:</p>
+                                    <div className="top-info">
+                                        <p className="userInfoText">Other Stuff:</p>
+                                    </div>
                                     <hr className="userInfoLineLeft"></hr>
                                 </div>
                             </div>
                             <div className="flex-child-profile">
                                 <div>
-                                    <p className="userInfoText">{fire.auth().currentUser.email}</p>
+                                    <hr className="userInfoLineRightTop"></hr>
+                                    <div className="top-info">
+                                        <p className="userInfoText">{fire.auth().currentUser.email}</p>
+                                    </div>
                                     <hr className="userInfoLineRight"></hr>
-                                    <p className="userInfoText">hello123</p>
+                                    <div className="top-info">
+                                        <p className="userInfoText">hello123</p>
+                                    </div>
                                     <hr className="userInfoLineRight"></hr>
-                                    {/* <p className="userInfoText"></p>
-                                    <hr className="userInfoLineRight"></hr> */}
-                                    <p className="userInfoText">Corresponding info</p>
+                                    <div className="top-info">
+                                        <p className="userInfoText">Corresponding info</p>
+                                    </div>
                                     <hr className="userInfoLineRight"></hr>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div style={{display: 'flex', justifyContent:'center', flexWrap: 'wrap', height: '100vh'}}>
-                {displayedCharts}
-            </div>
+                {/* <div style={{display: 'flex', justifyContent:'center', flexWrap: 'wrap', height: '100vh'}}> */}
+                {/* </div> */}
+                <div className="polls-in-profile-container">
+                    <div className="polls-in-profile-box">
+                        <div className="my-polls-box">
+                            <h1 className="my-polls">My Polls</h1>
+                        </div>
+                        {displayedCharts.map((value, index) => {
+                            return <div className="polls-in-profile" key={index}>{value}</div>
+                        })}
+                    </div>
+                </div>
+            {/* Pass in Labels and Pass in Voting Numbers into Data Func; Pass in Title into Options Func  */}
+            {/* <Pie data={this.dataFunc(['Hop', 'Collis', 'KAF','Foco', 'Novak'], [140, 33, 27, 21, 6])} options={this.optionsFunc('Best Place to Eat on Campus')}/> */}
+
+                {/* <div className = "pollBackground">
+                        <h1> Question 1: Who is the best professor at Dartmouth? </h1>
+                        <div style={{ justifyContent: 'center'}}> 
+                        <PieChart width={500} height={500}>
+                        <Pie dataKey="value" isAnimationActive={false} data={data01} cx={200} cy={200} outerRadius={200} label = {renderCustomizedLabel}>
+                        {data01.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} label/>)}
+                        </Pie>
+                        <Tooltip />
+                        </PieChart>
+                        </div>
+
+                        <h1> Question 2: When do you think we will return to campus? </h1>
+                        <PieChart width={500} height={500}>
+                        <Pie dataKey="value" isAnimationActive={false} data={data02} cx={200} cy={200} outerRadius={200}>
+                        {data02.map((entry, index) => <Cell key={`cell-${"hello"}`} fill={COLORS[index % COLORS.length]} label = {renderCustomizedLabel}/>)}
+                        </Pie>
+                        <Tooltip />
+                        </PieChart>
+
+                        <h1> We aren't using this chart anymore </h1>
+                        <PieChart width={500} height={500}>
+                        <Pie data={data} cx={200} cy={200} labelLine={false} label={renderCustomizedLabel}  outerRadius={200} fill="#8884d8" dataKey="value">
+                        {data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)}
+                        </Pie>
+                        </PieChart>
+                </div> */}
             </div>
         );
     }
