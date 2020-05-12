@@ -181,7 +181,7 @@ class UserComponent extends Component{
                     </div>
                     <div className="flex-child-topBar">
                         <div className="signedInAs">
-                            <p className="signedInAsText">Signed in as</p>
+                            <p className="signedInAsText">Signed in as: {fire.auth().currentUser.email}</p>
                         </div>
                         <div className="flex-container">
                             <div id="homeIconDiv" onClick={this.sendToHome} className="flex-child-icons iconDivs">

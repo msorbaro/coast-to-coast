@@ -7,15 +7,35 @@ class PollComponent extends Component {
     
 constructor(props) { 
     super(props);
-    this.state = {editing: false, newPollCategory: "", pollID: this.props.pollID, currentAnswer: "", currentAnswerIdx: 0, click: false, stateVoteArray: null, sumVotes: 0}; 
+    this.state = {editing: false, newPollCategory: "", pollID: this.props.pollID, currentAnswer: "", currentAnswerIdx: 0, click: false, stateVoteArray: null, sumVotes: 0, deleteStatus: ""}; 
 }
 
 componentDidMount = () => {
     this.createVoteArray();
 }
 deletePosting = () => { 
-    //im sending both the firebase pollID as well as the local pollID
-    this.props.delete(this.props.id, this.state.pollID)
+    //I essentially want to check if the user deleting the poll is the same as the user who posted it 
+    let ourDB = firebase.database();
+    let PollDir = null;
+    ourDB.ref('PollBoard/').on('value', (snapshot) => {
+        PollDir = snapshot.val();
+    });
+    
+   if(PollDir != null){
+        Object.keys(PollDir).map((id1) => {
+            const info = PollDir[id1];
+            //check if we have indexed into the right poll, and check then if this poll has the same user
+            if((info.PollID == this.state.pollID) && (fire.auth().currentUser.email == info.PollUser)){
+                //if this is true, we can allow delete
+                //im sending both the firebase pollID as well as the local pollID
+                this.props.delete(this.props.id, this.state.pollID)
+            }
+            else{
+                this.setState({deleteStatus: "Only the poll author can remove this poll."})
+            }
+        });
+   }
+    
 }
 
 editPollCategory = () => { 
@@ -139,7 +159,7 @@ render() {
     if(this.checkSingleVote(this.state.pollID, fire.auth().currentUser.email)){
         piedisp = <Pie data={this.dataFunc(this.props.PollChoices, this.state.stateVoteArray)} className="pie-chart-on-poll" options={this.optionsFunc("")}/>
     }
-    
+
     var editBoxOrEditButton = null; 
     if(this.state.editing){
       editBoxOrEditButton= (
@@ -172,7 +192,7 @@ render() {
         )
         );
     }
-
+    //s
     return (
         <div className="polls">
             <div className="poll-title-container">
@@ -205,6 +225,7 @@ render() {
             <div className="flex-container-poll-edit-or-delete">
                 <div className="flex-child-poll-delete">
                     <button className="delete-poll-button" onClick= {this.deletePosting}>Delete</button>
+                    <p>{this.state.deleteStatus}</p>
                 </div>
                 <div className="flex-child-poll-edit">
                     {editBoxOrEditButton}  
