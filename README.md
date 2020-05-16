@@ -10,24 +10,24 @@ The primary components of the project and their delegations will be listed below
 
 Gokul Srinvasan: 
 
-Creation and integration of backend with polling app
-Development and implementation of routing system 
-Primary project scaffolding 
-Poll creation and integration with backend
-Voting feature and integration with backend
-Integration of data visualization with backend
-Creation and implementation of authentication
-Interation of timing feature with backend
+*Creation and integration of backend with polling app
+*Development and implementation of routing system 
+*Primary project scaffolding 
+*Poll creation and integration with backend
+*Voting feature and integration with backend
+*Integration of data visualization with backend
+*Creation and implementation of authentication
+*Interation of timing feature with backend
 
 
 Dev Kapadia:
 
-Implementation of all styling
+*Implementation of all styling
 
 Brian Wang: 
 
-Creation and implementation of timing feature
-Creation and implementation of voting visualization 
+*Creation and implementation of timing feature
+*Creation and implementation of voting visualization 
 
 
 
