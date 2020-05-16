@@ -20,9 +20,9 @@ Gokul Srinvasan:
 Brian Wang: 
 
 * Development of basic scaffolding of posting and deleting polls 
-* Creation and implementation of time limit feature and visiualization of time limits
-* Creation and implementation of voting visualization 
- * Assistance in implementing voting visualizations with backend
+* Creation and implementation of time limit feature and visiualization of time limits using Moment.JS and SVG 
+* Creation and implementation of voting visualization using Chart.JS
+* Assistance in implementing voting visualizations with backend
 
 Dev Kapadia:
 
