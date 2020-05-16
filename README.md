@@ -19,15 +19,16 @@ Gokul Srinvasan:
 * Creation and implementation of authentication
 * Interation of timing feature with backend
 
+Brian Wang: 
+
+* 
+* Creation and implementation of timing feature
+* Creation and implementation of voting visualization 
+* Assistance in implementing voting visualizations with backend
 
 Dev Kapadia:
 
 * Implementation of all styling
-
-Brian Wang: 
-
-* Creation and implementation of timing feature
-* Creation and implementation of voting visualization 
 
 
 
