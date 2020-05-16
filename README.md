@@ -21,7 +21,7 @@ Gokul Srinvasan:
 
 Brian Wang: 
 
-* 
+* Development of basic scaffolding of posting and deleting polls (@ Gokul this was the skeleton code I did in the beginning if its chill)
 * Creation and implementation of timing feature
 * Creation and implementation of voting visualization 
 * Assistance in implementing voting visualizations with backend
