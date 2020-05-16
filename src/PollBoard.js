@@ -168,15 +168,15 @@ class PollBoard extends Component {
     //     this.setState({TimeLeft: timeLeft})
     // }
 
-    // addPollFunction = (event) => {
-    //     var x = document.getElementById("addPoll");
-    //     var y = document.getElementById("poll-input");
-    //     if (x.style.display != "block") {
-    //         x.style.display = "block";
-    //         y.style.backgroundColor = "#5b8c5a";
-    //         y.style.color = "#cfd186";
-    //     } 
-    // }
+    addPollFunction = (event) => {
+        var x = document.getElementById("addPoll");
+        var y = document.getElementById("poll-input");
+        if (x.style.display != "block") {
+            x.style.display = "block";
+            y.style.backgroundColor = "#5b8c5a";
+            y.style.color = "#cfd186";
+        } 
+    }
 
 
     savePollInfo = () => {
