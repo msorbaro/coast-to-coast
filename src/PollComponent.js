@@ -193,7 +193,9 @@ render() {
         )
         );
     }
-    //s
+    //create time till var 
+    var timeTill = "05 26 2019, 6:00 am"
+    timeTill = String(this.props.PollTimeLimit[0]) + " " + String(this.props.PollTimeLimit[1]) + " " + String(this.props.PollTimeLimit[2]) + ", " + String(this.props.PollTimeLimit[3]) +":00 am";
     return (
         <div className="polls">
             <div className="poll-title-container">
@@ -206,7 +208,7 @@ render() {
                     </div>
                 </div>
                 <div className = "flex-child-polls1">
-                    <Countdown timeTillDate="05 26 2020, 6:00 am" timeFormat="MM DD YYYY, h:mm a" />
+                    <Countdown timeTillDate = {timeTill} timeFormat="MM DD YYYY, h:mm a" />
                 </div>
                 <div className="flex-child-polls1">
                     <div className="category-div">
@@ -224,7 +226,6 @@ render() {
                     {piedisp}
                 </div>
             </div>
-            <p>{this.props.PollTimeLimit}</p>
             <h2 className="poll-author">Poll Author: {this.props.PollUser}</h2>
             <div className="flex-container-poll-edit-or-delete">
                 <div className="flex-child-poll-delete">
