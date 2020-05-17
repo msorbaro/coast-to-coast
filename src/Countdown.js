@@ -1,6 +1,8 @@
 import React from 'react';
 import moment from 'moment';
 
+// For the countdown clocks
+
 class Countdown extends React.Component {
     state = {
         days: undefined,
@@ -10,12 +12,13 @@ class Countdown extends React.Component {
     };
 
     componentDidMount() {
-        this.interval = setInterval(() => {
+        this.interval = setInterval(() => { // Show much time our poll has left until it expires
             const { timeTillDate, timeFormat } = this.props;
             const then = moment(timeTillDate, timeFormat);
             const now = moment();
             const countdown = moment(then - now);
-            const days = countdown.format('D');
+            // Regex for the format we want our inputs to be 
+            const days = countdown.format('D'); 
             const hours = countdown.format('HH');
             const minutes = countdown.format('mm');
             const seconds = countdown.format('ss');
@@ -34,7 +37,7 @@ class Countdown extends React.Component {
         const { days, hours, minutes, seconds } = this.state;
 
         // Mapping the date values to radius values
-        const daysRadius = mapNumber(days, 30, 0, 0, 360);
+        const daysRadius = mapNumber(days, 30, 0, 0, 360); 
         const hoursRadius = mapNumber(hours, 24, 0, 0, 360);
         const minutesRadius = mapNumber(minutes, 60, 0, 0, 360);
         const secondsRadius = mapNumber(seconds, 60, 0, 0, 360);
@@ -81,7 +84,7 @@ class Countdown extends React.Component {
     }
 }
 
-const SVGCircle = ({ radius }) => (
+const SVGCircle = ({ radius }) => ( // Use SVG to display circular clocks 
     <svg className="countdown-svg">
         <path
             fill="none"
@@ -92,7 +95,7 @@ const SVGCircle = ({ radius }) => (
     </svg>
 );
 
-// From StackOverflow: https://stackoverflow.com/questions/5736398/how-to-calculate-the-svg-path-for-an-arc-of-a-circle
+// Use polarToCartesian conversions to specify the arc of our circles in our countdown clocks
 function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
     var angleInRadians = ((angleInDegrees - 90) * Math.PI) / 180.0;
 
@@ -102,7 +105,8 @@ function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
     };
 }
 
-function describeArc(x, y, radius, startAngle, endAngle) {
+function describeArc(x, y, radius, startAngle, endAngle) { 
+    // Form an arc given radius of circle and how much of the circumference we should be shading in 
     var start = polarToCartesian(x, y, radius, endAngle);
     var end = polarToCartesian(x, y, radius, startAngle);
 
@@ -125,7 +129,7 @@ function describeArc(x, y, radius, startAngle, endAngle) {
     return d;
 }
 
-// From StackOverflow: https://stackoverflow.com/questions/10756313/javascript-jquery-map-a-range-of-numbers-to-another-range-of-numbers
+// Map a given time to corresponding clocks of days, hours, minutes, seconds
 function mapNumber(number, in_min, in_max, out_min, out_max) {
     return (
         ((number - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min

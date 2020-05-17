@@ -125,7 +125,7 @@ class UserComponent extends Component{
     ));
     }
 
-
+    // takes in answer choices and data and spits out a corresponding data set we will use for our data visualization
     dataFunc = (labelInputs, dataInputs) => {
         const data = {labels: labelInputs, 
                     datasets: [{backgroundColor: ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', "#8884d8", '#B21F00','#C9DE00','#2FDE00','#00A6B4','#6800B4'], 
@@ -133,6 +133,7 @@ class UserComponent extends Component{
         return(data)
     }
 
+    // takes in a title and creates and options set that we will use for our data visualization 
     optionsFunc = (titleInput) => {
         const options = {title:{display:true, text: titleInput, fontSize: 30, fontColor: '#FFFFFF'},
             legend: {display:true, position:'right', labels:{fontSize: 15, fontColor: '#FFFFFF'}}
