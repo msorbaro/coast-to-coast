@@ -1,6 +1,5 @@
 ## Project Overview
-This project was created under the cooperation of Gokul Srinivasan, Brian Wang, and Dev Kapadia. Our project, 
-DartPoll, was designed to be used by Dartmouth students as a polling service where students could post and respond to polls. Our project focuses around the administration of polls, and the vizualization of the subsequent poll results. 
+This project was created under the cooperation of Gokul Srinivasan, Brian Wang, and Dev Kapadia as part of DALI's Mini Web Development Course. Our project, DartPoll, was designed to be used by Dartmouth students as a polling service where students could post and respond to polls. Our project focuses around the administration of polls, and the vizualization of the subsequent poll results. 
 
 ## Project Responsibilities
 
@@ -65,5 +64,25 @@ If the user clicks the "Profile" button in our top navigation bar, they are brou
 This is the data visualization of a specific poll. To analyze the results between different categories, users can click specific answer choices in the legend to temporarily remove the answer choice from the data visualization. In this case, the "5'9" answer choice has been ruled out and we are looking at the comparison between the votes of "5'10" and "5'". 
 
 <img src = "screenshots/visualization.png" width = "400"> 
+
+## How to use DartPoll (on your local machine) 
+
+We have not set-up a website to host DartPoll yet. For now, you can follow these steps to run DartPoll on your local machine. But stay tuned because we will have a working website soon!
+
+**STEP 1**
+
+Open your terminal and change the current working directory to the location where you want your cloned directory. Then type git clone ```https://github.com/msorbaro/coast-to-coast.git``` and hit enter.
+
+**STEP 2**
+
+Once cloned, type in ```yarn``` to build the proper depdencies in our project. Then, type in ```yarn start``` to launch the site locally. 
+
+**STEP 3**
+
+Once at the user page, you can use the username "hello@gmail.com" and the password "hello123" to login. You can also make a new account if you wish. 
+
+**STEP 4**
+
+You're in! Thanks for using DartPoll!
 
 
