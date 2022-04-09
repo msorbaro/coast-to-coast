@@ -10,7 +10,7 @@
     "chart.js": "^2.9.3",
     "firebase": "^7.14.2",
     "immutable": "^4.0.0-rc.12",
-    "moment": "^2.25.3",
+    "moment": "^2.29.2",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
     "react-chartjs-2": "^2.9.0",
